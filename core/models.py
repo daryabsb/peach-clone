@@ -1,10 +1,16 @@
 from django.db import models
 
+ACCOUNT_TYPE = (
+    ('accrual', 'ACCRUAL'),
+    ('cash', 'CASH'),
+)
 
 class Company(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     owners = models.ManyToManyField('Owner')
+    address = models.CharField(max_length=200)
+    account_type = models.CharField(max_length=200, choices=ACCOUNT_TYPE)
 
     """
     1 IK    -
