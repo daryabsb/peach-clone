@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -36,6 +37,8 @@ class User(PermissionsMixin, AbstractBaseUser):
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
 
@@ -58,6 +61,8 @@ class Company(models.Model):
     address = models.CharField(max_length=200)
     account_type = models.CharField(
         max_length=20,  default='accrual', choices=ACCOUNT_TYPE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     """
     1 IK    -
@@ -72,6 +77,8 @@ class Company(models.Model):
 class Owner(models.Model):
     name = models.CharField(max_length=200)
     share = models.DecimalField(max_digits=2, decimal_places=2)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -80,15 +87,17 @@ class Owner(models.Model):
 class Account(models.Model):
     pass
     """
-    1 Balance Sheet 
+    1 Balance Sheet
     """
 
 
 class AccountTemplate(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    dr = models.DecimalField(max_digits=9, decimal_places=2)
-    cr = models.DecimalField(max_digits=9, decimal_places=2)
+    dr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    cr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.title} - dr: {self.dr}'
@@ -142,8 +151,10 @@ class CVbase(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     address = models.CharField(max_length=200, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
-    balance = models.DecimalField(max_digits=9, decimal_places=2)
+    balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     note = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class Customer(CVbase):
@@ -185,12 +196,18 @@ class Purchase(models.Model):
     # credit_account
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    unit_price = models.DecimalField(max_digits=9, decimal_places=2)
-    total = models.DecimalField(max_digits=9, decimal_places=2)
+    unit_price = models.DecimalField(
+        max_digits=9, decimal_places=2, default=0.00)
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     note = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     # def save(self):
     #     return self.unit_price * self.quantity
+    def save(self, *args, **kwargs):
+        self.total = self.unit_price * self.quantity
+        super(Purchase, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.item} - {self.total}'
@@ -199,8 +216,6 @@ class Purchase(models.Model):
         total = self.objects.all().aggregate(Sum('total'))
         # tot Purchase.objects.filter(
         #     credit_account=vendor).aggregate(Sum('total'))
-        print('CALLED')
-        print(total)
         return total
 
 
@@ -211,12 +226,16 @@ class Sale(models.Model):
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    unit_price = models.DecimalField(max_digits=9, decimal_places=2)
-    total = models.DecimalField(max_digits=9, decimal_places=2)
+    unit_price = models.DecimalField(
+        max_digits=9, decimal_places=2, default=0.00)
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     note = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-    # def save(self):
-    #     return self.unit_price * self.quantity
+    def save(self, *args, **kwargs):
+        self.total = self.unit_price * self.quantity
+        super(Sale, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.item} - {self.total} to {self.customer}'
@@ -225,11 +244,41 @@ class Sale(models.Model):
         total = self.objects.all().aggregate(Sum('total'))
         # tot Purchase.objects.filter(
         #     credit_account=vendor).aggregate(Sum('total'))
-        print(total)
         return total
 
 
+class Payment(models.Model):
+
+    from_account = models.ForeignKey(
+        'Company', on_delete=models.CASCADE, default=1)
+    to_account = models.ForeignKey('Vendor', on_delete=models.CASCADE)
+    invoice = models.CharField(max_length=60, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    amount = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.amount} to {self.to_account}'
+
+
+class Receive(models.Model):
+
+    to_account = models.ForeignKey(
+        'Company', on_delete=models.CASCADE, default=1)
+    from_account = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    invoice = models.CharField(max_length=60, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    amount = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.amount} from {self.from_account}'
+
 # REPORTS
+
+
 class BalanceSheet(models.Model):
     """
     account_name = models.CharField(max_length=200)
