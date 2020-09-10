@@ -10,7 +10,9 @@ from core.models import (
     Purchase,
     Customer,
     Vendor,
-    Sale)
+    Sale,
+    Payment,
+    Receive)
 
 from django.views.generic import ListView, DetailView
 
@@ -56,7 +58,7 @@ class ItemList(ListView):
 
 class PurchaseList(ListView):
     model = Purchase
-    template_name = "company/transactions_list.html"
+    template_name = "transactions/purchases_list.html"
 
     def get_queryset(self):
         # vendor = Vendor.objects.filter()
@@ -79,7 +81,7 @@ class PurchaseList(ListView):
 
 class SaleList(ListView):
     model = Sale
-    template_name = "company/transactions_list.html"
+    template_name = "transactions/sales_list.html"
 
     def get_queryset(self):
         # vendor = 'Sham Computer'
@@ -98,3 +100,48 @@ class SaleList(ListView):
         context = super(SaleList, self).get_context_data()
         context['total_price'] = self.total_price()
         return context
+
+class PaymentList(ListView):
+    model = Payment
+    template_name = "transactions/payments_list.html"
+
+    def get_queryset(self):
+        # vendor = 'Sham Computer'
+        payment_list = Payment.objects.all()
+        return payment_list
+
+    def total_price(self):
+        # vendor = 'Sham Computer'
+        sub = Payment.objects.all()
+        total = sub.aggregate(Sum('amount'))
+        print(total)
+        return total
+
+    def get_context_data(self, **kwargs):
+        # vendor = 'Sham Computer'
+        context = super(PaymentList, self).get_context_data()
+        context['total_price'] = self.total_price()
+        return context
+
+class ReceiveList(ListView):
+    model = Receive
+    template_name = "transactions/receives_list.html"
+
+    def get_queryset(self):
+        # vendor = 'Sham Computer'
+        receive_list = Receive.objects.all()
+        return receive_list
+
+    def total_price(self):
+        # vendor = 'Sham Computer'
+        sub = Receive.objects.all()
+        total = sub.aggregate(Sum('amount'))
+        print(total)
+        return total
+
+    def get_context_data(self, **kwargs):
+        # vendor = 'Sham Computer'
+        context = super(ReceiveList, self).get_context_data()
+        context['total_price'] = self.total_price()
+        return context
+

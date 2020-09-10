@@ -11,7 +11,7 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h5 class="header-title">List of {% if purchase_list %}Purchasing{% elif sale_list %}Sales{% endif%}</h5>
+                        <h5 class="header-title">List of Purchasing</h5>
                         <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
                         <div class="table-rep-plugin">
                             <div class="table-responsive" data-pattern="priority-columns">
@@ -21,19 +21,11 @@
                                             <th>ID</th>
                                             <th data-priority="1">Item Name</th>
                                             <th data-priority="3">Description</th>
-
-                                            {% if purchase_list %}
                                             <th data-priority="3">Vendor Name</th>
-                                            {% endif %} {% if sale_list %}
-                                            <th data-priority="3">Customer Name</th>
-                                            {% endif %}
-
-
-
-
                                             <th data-priority="1"> Quantity</th>
                                             <th data-priority="3">Unit Price</th>
                                             <th data-priority="3">Sub Total</th>
+
 
                                         </tr>
                                     </thead>
@@ -45,11 +37,7 @@
                                             <td>
                                                 {{item.description}}
                                             </td>
-                                            {% if sale_list %}
-                                            <td>{{item.customer}}</td>
-                                            {% endif %} {% if purchase_list %}
                                             <td>{{item.vendor}}</td>
-                                            {% endif %}
                                             <td>{{item.quantity}}</td>
                                             <td>{{item.unit_price}}</td>
                                             <td>{{item.total}}</td>

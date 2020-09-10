@@ -6,7 +6,9 @@ from .views import (
     AccountSubList,
     ItemList,
     PurchaseList,
-    SaleList
+    SaleList,
+    PaymentList,
+    ReceiveList
 )
 
 app_name = "companies"
@@ -18,6 +20,8 @@ urlpatterns = [
     path("items", ItemList.as_view(), name="items-list"),
     path("purchases", PurchaseList.as_view(), name="purchase-list"),
     path("sales", SaleList.as_view(), name="sale-list"),
+    path("payments", PaymentList.as_view(), name="payment-list"),
+    path("receives", ReceiveList.as_view(), name="receive-list"),
     # path("category/<str:category>", MovieCategory.as_view(), name="movie-category"),
     # path("language/<str:lang>", MovieLanguage.as_view(), name="movie-language"),
     # path("search/", MovieSearch.as_view(), name="movie-search"),

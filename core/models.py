@@ -261,6 +261,11 @@ class Payment(models.Model):
     def __str__(self):
         return f'{self.amount} to {self.to_account}'
 
+    def get_total_list_price(self):
+        total = self.objects.all().aggregate(Sum('amount'))
+        print(total)
+        return total
+
 
 class Receive(models.Model):
 

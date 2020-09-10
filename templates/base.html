@@ -35,7 +35,7 @@
                         <img src="{% static 'assets/images/users/darya-1.jpg' %}" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="text-center text-white mt-2">
-                        <h6>Darya Ibrahim</h6>
+                        <h6>{{user.name}}</h6>
                         <p class="text-muted m-0">Admin</p>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                         <ul class="child-list">
                             <li><a href="{% url 'companies:purchase-list' %}"> Purchases</a></li>
                             <li><a href="{% url 'companies:sale-list' %}"> Sale</a></li>
-                            <li><a href="#"> Payments </a></li>
-                            <li><a href="#"> Receives </a></li>
+                            <li><a href="{% url 'companies:payment-list' %}"> Payments </a></li>
+                            <li><a href="{% url 'companies:receive-list' %}"> Receives </a></li>
                             <li><a href="components-widgets.html"> Salaries </a></li>
                             <li><a href="components-nestable.html"> Other </a></li>
                         </ul>
@@ -160,7 +160,7 @@
                                 <img src="{% static 'assets/images/logo_sm.png' %}" alt="" height="26">
                             </span>
                         <!--<i class="fa fa-maxcdn"></i>-->
-                        <span class="brand-name">Syntra</span>
+                        <span class="brand-name">07 | Accounting</span>
                     </a>
                 </div>
 
@@ -322,6 +322,7 @@
                                     <li>
                                         <a class="text-center bg-light" href="javascript:void(0);"> <strong>See all notifications</strong> </a>
                                     </li>
+                                    {{user.name}}
                                 </ul>
                             </li>
 
@@ -332,8 +333,9 @@
                                 <div class="dropdown-menu dropdown-menu-right profile-menu">
                                     <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                                     <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                                    <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
-                                    <a class="dropdown-item" href="#"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                    <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a> {% if not user.is_authenticated %}
+                                    <a class="dropdown-item" href="{% url 'users:logout' %}"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>{% else %}
+                                    <a class="dropdown-item" href="{% url 'users:login' %}"><i class="mdi mdi-logout m-r-5 text-muted"></i> Login</a> {% endif %}
                                 </div>
                             </li>
 

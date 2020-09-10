@@ -3,7 +3,7 @@ import logging
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 # from django.views.generic.edit import FormView
-from django.views.generic import FormView, RedirectView
+from django.views.generic import FormView, RedirectView, View
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -69,19 +69,23 @@ class RegisterView(FormView):
                 'form': form
             })
 
-
-class LogoutView(RedirectView):
-    # url = '/accounts/login/'
-
-    @method_decorator(never_cache)
-    def dispatch(self, request, *args, **kwargs):
-        return super(LogoutView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        # from DjangoBlog.utils import cache
-        # cache.clear()
+class LogoutView(View):
+    def get(self, request):
         logout(request)
-        return super(LogoutView, self).get(request, *args, **kwargs)
+        return HttpResponseRedirect('/')
+
+# class LogoutView(RedirectView):
+#     url = '/'
+
+#     @method_decorator(never_cache)
+#     def dispatch(self, request, *args, **kwargs):
+#         return super(LogoutView, self).dispatch(request, *args, **kwargs)
+
+#     def get(self, request, *args, **kwargs):
+#         # from DjangoBlog.utils import cache
+#         # cache.clear()
+#         logout(request)
+#         return super(LogoutView, self).get(request, *args, **kwargs)
 
 
 class LoginView(FormView):
