@@ -1,1 +1,1 @@
-default_app_config = "profiles.apps.CoreConfig"
+default_app_config = "core.apps.CoreConfig"
