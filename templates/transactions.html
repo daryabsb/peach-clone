@@ -27,13 +27,14 @@
                                 <a class="btn btn-primary mr-1" href="./{{model_name.lower}}s/add/">Back</a>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="table-rep-plugin">
                                     <div class="table-responsive" data-pattern="priority-columns">
                                         {% if purchase_list %} {% include 'transactions/transaction_partials/_purchase_list.html' %} {% elif sale_list %} {% include 'transactions/transaction_partials/_sale_list.html' %} {% elif sale_list %} {% include 'transactions/transaction_partials/_payment_list.html'
-                                        %} {% elif payment_list %} {% include 'transactions/transaction_partials/_payment_list.html' %} {% elif receive_list %} {% include 'transactions/transaction_partials/_receive_list.html' %}{% endif %}
+                                        %} {% elif payment_list %} {% include 'transactions/transaction_partials/_payment_list.html' %} {% elif receive_list %} {% include 'transactions/transaction_partials/_receive_list.html' %} {% elif invoice_list %}
+                                        {% include 'transactions/transaction_partials/_invoice_list.html' %}{% endif %}
+
                                     </div>
                                 </div>
                             </div>

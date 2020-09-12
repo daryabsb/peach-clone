@@ -7,17 +7,9 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .forms import PurchaseForm, SaleForm, PaymentForm, ReceiveForm
 
 from core.models import (
-    Company,
-    Owner,
-    AccountMain,
-    AccountSub,
-    Item,
-    Purchase,
-    Customer,
-    Vendor,
-    Sale,
-    Payment,
-    Receive)
+    Company, Owner, AccountMain, Item, Customer,
+    Vendor, Purchase, Sale, Payment,
+    Receive, Invoice,)
 
 from django.views.generic import ListView, DetailView
 
@@ -118,15 +110,13 @@ class ReceiveList(ListView):
         return context
 
 
-
-
-
 class CreatePurchase(CreateView):
     model = Purchase
     form_class = PurchaseForm
     # fields = 'department'
     template_name = 'transactions/create_transaction.html'
     success_url = '/transactions/purchases'
+
 
 class CreateSale(CreateView):
     model = Sale
@@ -135,6 +125,7 @@ class CreateSale(CreateView):
     template_name = 'transactions/create_transaction.html'
     success_url = '/transactions/sales'
 
+
 class CreatePayment(CreateView):
     model = Payment
     form_class = PaymentForm
@@ -142,10 +133,50 @@ class CreatePayment(CreateView):
     template_name = 'transactions/create_transaction.html'
     success_url = '/transactions/payments'
 
+
 class CreateReceive(CreateView):
     model = Receive
     form_class = ReceiveForm
     # fields = 'department'
     template_name = 'transactions/create_transaction.html'
     success_url = '/transactions/receives'
-    
+
+
+class InvoiceList(ListView):
+    title = 'Invoice List'
+    model = Invoice      # shorthand for setting queryset = models.Car.objects.all()
+    template_name = 'transactions.html'
+
+    # def get_queryset(self):
+    #     # vendor = 'Sham Computer'
+    #     invoice_list = Invoice.objects.all()
+    #     return invoice_list
+
+    # def invoice_total(self):
+    #     # vendor = 'Sham Computer'
+    #     invoices = Invoice.objects.all()
+    #     for invoice in invoices:
+    #         invoice.calculate_total()
+    #         invoice.save
+    #     return invoices
+
+    # def invoice_items(self):
+    #     items = []
+    #     invoices = Invoice.objects.all()
+    #     # print(invoices.sale_items.all())
+    #     for invoice in invoices:
+    #         # print(invoice.sale_items)
+    #         items.append(invoice.sale_items.all())
+    #         # for item in invoice.sale_items.all():
+    #         # items.append(item)
+    #         # items = invoices.sale_items.all()
+    #     print(items)
+    #     return items
+
+    # def get_context_data(self, **kwargs):
+    #     # vendor = 'Sham Computer'
+    #     context = super(InvoiceList, self).get_context_data()
+    #     self.invoice_total()
+    #     # context['items'] = self.invoice_items()
+    #     context['model_name'] = 'Invoice'
+    #     return context

@@ -1,0 +1,155 @@
+{% extends 'base.html' %} {% load static %} {% block main %}
+
+<div class="container-fluid">
+    <div class="page-head">
+
+        <h4 class="mt-1 mb-1">List of {{model_name}}</h4>
+
+    </div>
+
+    <div class="responsive-table">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="col-sm-2 mt-1 ml-auto">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 m-b-30">
+                            <div class="card">
+                                <div class="card-body invoice">
+                                    <div class="clearfix">
+                                        <div class="pull-left">
+                                            <h4 class="text-right"><img src="{% static 'assets/images/logo_sm_2.png' %}" alt="s"></h4>
+                                        </div>
+                                        <div class="pull-right">
+                                            <h6>Invoice : #
+                                                <strong>23654789</strong>
+                                            </h6>
+                                            <h6 class="pull-right">Date : 11/01/2018</h6>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="pull-left mt-4">
+                                                <address>
+                                                  <strong>Twitter, Inc.</strong><br>
+                                                  795 Folsom Ave, Suite 600<br>
+                                                  San Francisco, CA 94107<br>
+                                                  <abbr title="Phone">P:</abbr> (123) 456-7890
+                                                  </address>
+                                            </div>
+                                            <div class="pull-right mt-4">
+                                                <p><strong>Order Date: </strong> March 15, 2015</p>
+                                                <p><strong>Order Status: </strong> <span class="badge badge-warning">Pending</span></p>
+                                                <p><strong>Order ID: </strong> #123456</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+
+                                    <div class="h-50"></div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table mt-4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Item</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Unit Cost</th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>LCD</td>
+                                                            <td>Lorem ipsum dolor sit amet.</td>
+                                                            <td>1</td>
+                                                            <td>$380</td>
+                                                            <td>$380</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Mobile</td>
+                                                            <td>Lorem ipsum dolor sit amet.</td>
+                                                            <td>5</td>
+                                                            <td>$50</td>
+                                                            <td>$250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>LED</td>
+                                                            <td>Lorem ipsum dolor sit amet.</td>
+                                                            <td>2</td>
+                                                            <td>$500</td>
+                                                            <td>$1000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>LCD</td>
+                                                            <td>Lorem ipsum dolor sit amet.</td>
+                                                            <td>3</td>
+                                                            <td>$300</td>
+                                                            <td>$900</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td>Mobile</td>
+                                                            <td>Lorem ipsum dolor sit amet.</td>
+                                                            <td>5</td>
+                                                            <td>$80</td>
+                                                            <td>$400</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+
+                                    <div class="row" style="border-radius: 0px;">
+                                        <div class="col-md-9">
+                                            <p><strong>Terms And Condition : </strong></p>
+                                            <ul>
+                                                <li><small>All accounts are to be paid within 7 days from receipt of invoice. </small></li>
+                                                <li><small>To be paid by cheque or credit card or direct payment online.</small></li>
+                                                <li><small> If account is not paid within 7 days the credits details supplied as confirmation<br> of work undertaken will be charged the agreed quoted fee noted above.</small></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="text-right"><strong>Sub-total:</strong> 2930.00</p>
+                                            <p class="text-right">Discout: 12.9%</p>
+                                            <p class="text-right">VAT: 12.9%</p>
+                                            <hr>
+                                            <h4 class="text-right">$ 2930.00</h4>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+
+                                    <hr>
+                                    <div class="hidden-print">
+                                        <div class="text-center text-muted"><small>Thank you very much for doing business with us. Thanks !</small></div>
+                                        <div class="pull-right">
+                                            <a href="#" class="btn btn-dark"><i class="fa fa-print"></i></a>
+                                            <a href="#" class="btn btn-primary">Submit</a>
+                                            <a href="#" class="btn btn-primary">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row-->
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+    </div>
+    {% endblock %}

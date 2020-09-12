@@ -143,6 +143,8 @@ class AccountSub(AccountTemplate):
 
 class Item(AccountTemplate):
     account_sub = models.ForeignKey('AccountSub', on_delete=models.CASCADE)
+    ite_depretiation = models.DecimalField(
+        max_digits=2, decimal_places=2, default=0.00)
     unit = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
@@ -319,27 +321,41 @@ class Receive(models.Model):
 
 # REPORTS
 
+
 class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
 
     sale_items = models.ManyToManyField(Sale)
-    sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
-    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    
+    # sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
+    # total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+
     note = models.TextField(null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.customer}'
+        return f'{self.created}'
 
-    def save(self, *args, **kwargs):
-        self.total = self.sale_items.aggregate(Sum('total'))
-        super(Invoice, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.total = self.calculate_total()
+    #     super(Invoice, self).save(*args, **kwargs)
 
-    
+    # def calculate_total(self):
+    #     return sum(item.total for item in self.sale_items.all())
+
+
+class Depretiation(models.Model):
+    item = models.OneToOneField('Item', on_delete=models.CASCADE)
+    rate = models.DecimalField(max_digits=2, decimal_places=2, default=0.00)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.item} - {self.rate}'
+
 
 class BalanceSheet(models.Model):
     """

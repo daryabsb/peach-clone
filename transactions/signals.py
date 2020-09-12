@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from core.models import Purchase, Sale, Vendor, Customer, Payment, Receive
+from core.models import Item, Purchase, Sale, Vendor, Customer, Payment, Receive, Depretiation
 # Payment,
 # Receive
 
@@ -46,5 +46,15 @@ def update_customer_balance_on_receive(sender, instance, created, **kwargs):
         print('created - Receive')
         print(customer.balance)
         print(instance.amount)
-        customer.balance += instance.amount
+        customer.balance -= instance.amount
         customer.save()
+
+
+@receiver(post_save, sender=Item)
+def update_customer_balance_on_receive(sender, instance, created, **kwargs):
+    if created:
+        item_dep = Depretiation.objects.create(
+            item=instance.item,
+            rate=instance.ite_depretiation)
+        print('created - Item')
+        item_dep.save()

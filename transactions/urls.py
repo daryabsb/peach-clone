@@ -7,7 +7,8 @@ from .views import (
     CreatePurchase,
     CreateSale,
     CreatePayment,
-    CreateReceive
+    CreateReceive,
+    InvoiceList
 )
 
 app_name = "transactions"
@@ -20,4 +21,5 @@ urlpatterns = [
     path("sales/add/", CreateSale.as_view(), name="sale-add"),
     path("payments/add/", CreatePayment.as_view(), name="payment-add"),
     path("receives/add/", CreateReceive.as_view(), name="receive-add"),
+    path("invoices/", InvoiceList.as_view(), name="invoice-list"),
 ]
