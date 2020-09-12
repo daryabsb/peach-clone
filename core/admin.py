@@ -2,7 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
 
-from .models import User, Company, Owner, AccountMain, AccountSub, Item, Purchase, Sale, Customer, Vendor, Payment, Receive
+from .models import (
+    User, Company, Owner, AccountMain, AccountSub, 
+    Item, Purchase, Sale, Customer, Vendor, Payment, Receive,
+    Invoice,)
 
 
 class UserAdmin(BaseUserAdmin):
@@ -49,3 +52,4 @@ admin.site.register(Customer)
 admin.site.register(Vendor)
 admin.site.register(Payment)
 admin.site.register(Receive)
+admin.site.register(Invoice)

@@ -1,0 +1,43 @@
+{% load static %}
+
+<table id="tech-companies-1" class="table  table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th data-priority="1">Item Name</th>
+            <th data-priority="3">Description</th>
+            <th data-priority="3">Vendor Name</th>
+            <th data-priority="1"> Quantity</th>
+            <th data-priority="3">Unit Price</th>
+            <th data-priority="3">Sub Total</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{item.id}}</td>
+            <th><span class="co-name">{{item.item.title}}</span></th>
+            <td>
+                {{item.description}}
+            </td>
+            <td>{{item.vendor}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.unit_price}}</td>
+            <td>{{item.total}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Total Amount:</th>
+            <td>{{total_price.total__sum}}</td>
+        </tr>
+    </tfoot>
+</table>

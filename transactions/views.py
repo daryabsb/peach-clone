@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.db.models import Sum
 
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from .forms import PurchaseForm, SaleForm, PaymentForm, ReceiveForm
+
 from core.models import (
     Company,
     Owner,
@@ -19,7 +24,7 @@ from django.views.generic import ListView, DetailView
 
 class PurchaseList(ListView):
     model = Purchase
-    template_name = "transactions/purchases_list.html"
+    template_name = "transactions.html"
 
     def get_queryset(self):
         # vendor = Vendor.objects.filter()
@@ -37,12 +42,13 @@ class PurchaseList(ListView):
         # vendor = 'Sham Computer'
         context = super(PurchaseList, self).get_context_data()
         context['total_price'] = self.total_price()
+        context['model_name'] = 'Purchase'
         return context
 
 
 class SaleList(ListView):
     model = Sale
-    template_name = "transactions/sales_list.html"
+    template_name = "transactions.html"
 
     def get_queryset(self):
         # vendor = 'Sham Computer'
@@ -60,12 +66,13 @@ class SaleList(ListView):
         # vendor = 'Sham Computer'
         context = super(SaleList, self).get_context_data()
         context['total_price'] = self.total_price()
+        context['model_name'] = 'Sale'
         return context
 
 
 class PaymentList(ListView):
     model = Payment
-    template_name = "transactions/payments_list.html"
+    template_name = "transactions.html"
 
     def get_queryset(self):
         # vendor = 'Sham Computer'
@@ -83,12 +90,13 @@ class PaymentList(ListView):
         # vendor = 'Sham Computer'
         context = super(PaymentList, self).get_context_data()
         context['total_price'] = self.total_price()
+        context['model_name'] = 'Payment'
         return context
 
 
 class ReceiveList(ListView):
     model = Receive
-    template_name = "transactions/receives_list.html"
+    template_name = "transactions.html"
 
     def get_queryset(self):
         # vendor = 'Sham Computer'
@@ -106,4 +114,38 @@ class ReceiveList(ListView):
         # vendor = 'Sham Computer'
         context = super(ReceiveList, self).get_context_data()
         context['total_price'] = self.total_price()
+        context['model_name'] = 'Receive'
         return context
+
+
+
+
+
+class CreatePurchase(CreateView):
+    model = Purchase
+    form_class = PurchaseForm
+    # fields = 'department'
+    template_name = 'transactions/create_transaction.html'
+    success_url = '/transactions/purchases'
+
+class CreateSale(CreateView):
+    model = Sale
+    form_class = SaleForm
+    # fields = 'department'
+    template_name = 'transactions/create_transaction.html'
+    success_url = '/transactions/sales'
+
+class CreatePayment(CreateView):
+    model = Payment
+    form_class = PaymentForm
+    # fields = 'department'
+    template_name = 'transactions/create_transaction.html'
+    success_url = '/transactions/payments'
+
+class CreateReceive(CreateView):
+    model = Receive
+    form_class = ReceiveForm
+    # fields = 'department'
+    template_name = 'transactions/create_transaction.html'
+    success_url = '/transactions/receives'
+    

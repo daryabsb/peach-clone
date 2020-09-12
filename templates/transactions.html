@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% load static %} {% block main %}
+
+<div class="container-fluid">
+    <div class="page-head">
+
+        <h4 class="mt-1 mb-1">List of {{model_name}}</h4>
+
+    </div>
+    <div class="responsive-table">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="col-sm-2 mt-1 ml-auto">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h5 class="header-title">List of {{model_name}}</h5>
+
+                                <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
+                            </div>
+                            <div class="col-sm-3 ml-auto">
+                                <a class="btn btn-primary mr-1" href="./{{model_name.lower}}s/add/">Add</a>
+                                <a class="btn btn-primary mr-1" href="./{{model_name.lower}}s/add/">Print</a>
+                                <a class="btn btn-primary mr-1" href="./{{model_name.lower}}s/add/">Back</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive" data-pattern="priority-columns">
+                                        {% if purchase_list %} {% include 'transactions/transaction_partials/_purchase_list.html' %} {% elif sale_list %} {% include 'transactions/transaction_partials/_sale_list.html' %} {% elif sale_list %} {% include 'transactions/transaction_partials/_payment_list.html'
+                                        %} {% elif payment_list %} {% include 'transactions/transaction_partials/_payment_list.html' %} {% elif receive_list %} {% include 'transactions/transaction_partials/_receive_list.html' %}{% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+    </div>
+    {% endblock %}

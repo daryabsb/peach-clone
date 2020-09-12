@@ -1,5 +1,7 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
+
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -73,6 +75,9 @@ class Company(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Owner(models.Model):
     name = models.CharField(max_length=200)
@@ -82,6 +87,9 @@ class Owner(models.Model):
 
     def __str__(self):
         return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 class Account(models.Model):
@@ -119,12 +127,18 @@ class AccountMain(AccountTemplate):
     def __str__(self):
         return self.title
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class AccountSub(AccountTemplate):
     main = models.ForeignKey('AccountMain', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 class Item(AccountTemplate):
@@ -133,6 +147,9 @@ class Item(AccountTemplate):
 
     def __str__(self):
         return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 # TANSACTION_CATEGORY = (
@@ -162,11 +179,17 @@ class Customer(CVbase):
     def __str__(self):
         return self.name
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Vendor(CVbase):
 
     def __str__(self):
         return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 """ END """
@@ -218,12 +241,16 @@ class Purchase(models.Model):
         #     credit_account=vendor).aggregate(Sum('total'))
         return total
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Sale(models.Model):
 
     department = models.ForeignKey(
         'Company', on_delete=models.CASCADE, default=1)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(
@@ -246,6 +273,9 @@ class Sale(models.Model):
         #     credit_account=vendor).aggregate(Sum('total'))
         return total
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Payment(models.Model):
 
@@ -266,6 +296,9 @@ class Payment(models.Model):
         print(total)
         return total
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Receive(models.Model):
 
@@ -281,8 +314,32 @@ class Receive(models.Model):
     def __str__(self):
         return f'{self.amount} from {self.from_account}'
 
+    # def get_absolute_url(self):
+    #     return reverse('company-detail', kwargs={'pk': self.pk})
+
 # REPORTS
 
+class Invoice(models.Model):
+    account = models.ForeignKey('Company', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+
+    sale_items = models.ManyToManyField(Sale)
+    sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    
+    note = models.TextField(null=True, blank=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.customer}'
+
+    def save(self, *args, **kwargs):
+        self.total = self.sale_items.aggregate(Sum('total'))
+        super(Invoice, self).save(*args, **kwargs)
+
+    
 
 class BalanceSheet(models.Model):
     """

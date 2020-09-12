@@ -43,7 +43,7 @@ def update_vendor_balance_on_pay(sender, instance, created, **kwargs):
 def update_customer_balance_on_receive(sender, instance, created, **kwargs):
     if created:
         customer = Customer.objects.get(name=instance.from_account)
-        print('created - Payment')
+        print('created - Receive')
         print(customer.balance)
         print(instance.amount)
         customer.balance += instance.amount

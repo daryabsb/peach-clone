@@ -2,9 +2,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from core.models import Purchase, Sale, Vendor, Customer, Payment, Receive
-# Payment,
-# Receive
-
 
 @receiver(post_save, sender=Purchase)
 def update_vendor_balance(sender, instance, created, **kwargs):
