@@ -12,7 +12,8 @@ from core.models import (
     Vendor,
     Sale,
     Payment,
-    Receive)
+    Receive,
+    Invoice)
 
 class PurchaseForm(forms.ModelForm):
     department = forms.ModelChoiceField(queryset=Company.objects.all(), empty_label="Select your department")
@@ -114,3 +115,27 @@ class ReceiveForm(forms.ModelForm):
             })
         self.fields['invoice'].widget.attrs.update({'class': 'form-control'})
         self.fields['amount'].widget.attrs.update({'class': 'form-control'})
+
+class InvoiceForm(forms.ModelForm):
+    
+    account = forms.ModelChoiceField(queryset=Company.objects.all(), empty_label="Select your department")
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all(), empty_label="Select a Customer")
+
+    sale_items = forms.ModelMultipleChoiceField(queryset=Sale.objects.all())
+
+    class Meta:
+        model = Invoice
+        fields = (
+            'account','customer','sale_items'
+             )
+
+    def __init__(self, *args,**kwargs):
+        super(InvoiceForm, self).__init__(*args,**kwargs)
+        self.fields['account'].widget.attrs.update({'class': 'form-control'})
+        self.fields['customer'].widget.attrs.update({'class': 'form-control'})
+        self.fields['sale_items'].widget.attrs.update({'class': 'form-control multi-select', 'multiple':''})
+        # self.fields['note'].widget.attrs.update({
+        #     'class': 'form-control', 
+        #     'rows':5, 
+        #     'placeholder':'Please add some notes!'
+        #     })

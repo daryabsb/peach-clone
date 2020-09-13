@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .forms import PurchaseForm, SaleForm, PaymentForm, ReceiveForm
+from .forms import PurchaseForm, SaleForm, PaymentForm, ReceiveForm, InvoiceForm
 
 from core.models import (
     Company, Owner, AccountMain, Item, Customer,
@@ -147,36 +147,18 @@ class InvoiceList(ListView):
     model = Invoice      # shorthand for setting queryset = models.Car.objects.all()
     template_name = 'transactions.html'
 
-    # def get_queryset(self):
-    #     # vendor = 'Sham Computer'
-    #     invoice_list = Invoice.objects.all()
-    #     return invoice_list
+    def get_context_data(self, **kwargs):
+        # vendor = 'Sham Computer'
+        context = super(InvoiceList, self).get_context_data()
+        context['model_name'] = 'Invoice'
+        return context
+    
 
-    # def invoice_total(self):
-    #     # vendor = 'Sham Computer'
-    #     invoices = Invoice.objects.all()
-    #     for invoice in invoices:
-    #         invoice.calculate_total()
-    #         invoice.save
-    #     return invoices
+class CreateInvoice(CreateView):
+    model = Invoice
+    form_class = InvoiceForm
+    # fields = 'department'
+    template_name = 'transactions/create_invoice.html'
+    success_url = '/transactions/invoices'
 
-    # def invoice_items(self):
-    #     items = []
-    #     invoices = Invoice.objects.all()
-    #     # print(invoices.sale_items.all())
-    #     for invoice in invoices:
-    #         # print(invoice.sale_items)
-    #         items.append(invoice.sale_items.all())
-    #         # for item in invoice.sale_items.all():
-    #         # items.append(item)
-    #         # items = invoices.sale_items.all()
-    #     print(items)
-    #     return items
-
-    # def get_context_data(self, **kwargs):
-    #     # vendor = 'Sham Computer'
-    #     context = super(InvoiceList, self).get_context_data()
-    #     self.invoice_total()
-    #     # context['items'] = self.invoice_items()
-    #     context['model_name'] = 'Invoice'
-    #     return context
+    
