@@ -26,7 +26,7 @@ SECRET_KEY = 's%ur6m9zh59%#k#6kgtb4aqe&1#l$e)71zv8d9(095ft00&7^l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1","172.16.10.49", "62.201.232.212"]
+ALLOWED_HOSTS = ["127.0.0.1", "172.16.10.49", "62.201.232.212"]
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'transactions.apps.TransactionsConfig',
+    'statement.apps.StatementConfig',
     'company',
     'users',
 ]
