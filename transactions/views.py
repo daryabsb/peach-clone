@@ -152,7 +152,7 @@ class InvoiceList(ListView):
         context = super(InvoiceList, self).get_context_data()
         context['model_name'] = 'Invoice'
         return context
-    
+
 
 class CreateInvoice(CreateView):
     model = Invoice
@@ -161,4 +161,7 @@ class CreateInvoice(CreateView):
     template_name = 'transactions/create_invoice.html'
     success_url = '/transactions/invoices'
 
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(*kwargs)
+        context['urlr'] = f"url 'transactions:invoice-add'"
+        return context

@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block main %}
-
+{% extends 'base.html' %} {% load static %} {% block main %} {% load crispy_forms_tags %}
 <div class="container-fluid">
     <div class="page-head">
 
@@ -22,7 +21,7 @@
 
                         <!-- <h1>Submit your form here!</h1> -->
                         <form action="." method="post">
-                            {% csrf_token %} {{form.as_p}}
+                            {% csrf_token %} {{form|crispy}}
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 

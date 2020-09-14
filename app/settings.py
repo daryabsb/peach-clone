@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
+
+
     'core.apps.CoreConfig',
     'transactions.apps.TransactionsConfig',
     'statement.apps.StatementConfig',
@@ -130,3 +134,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'

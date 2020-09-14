@@ -1,5 +1,15 @@
-{% extends 'base.html' %} {% load static %} {% block main %}
+{% extends 'base.html' %} {% load static %} {% block customcss %}
 
+<link href="{% static 'assets/plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/tagsinput/jquery.tagsinput.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/clockpicker/jquery-clockpicker.min.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/toggles/toggles.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/timepicker/tempusdominus-bootstrap-4.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/timepicker/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<link href="{% static 'assets/plugins/bootstrap-select/bootstrap-select.min.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/plugins/colorpicker/asColorPicker.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/plugins/jquery-multi-select/multi-select.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/plugins/select2/select2.min.css' %}" rel="stylesheet" type="text/css" /> {% endblock %} {% block main %}
 <div class="container-fluid">
     <div class="page-head">
 
@@ -24,7 +34,490 @@
                         <form action="." method="post">
                             {% csrf_token %} {{form.as_p}}
 
+                            <div class="col-lg-4 mx-auto">
+                                <h6 class="light-dark mb-2">Searchable</h6>
 
+                                <div class="ms-container" id="ms-my_multi_select3">
+                                    <div class="ms-selectable"><input type="text" class="form-control search-input" autocomplete="off" placeholder="search...">
+                                        <ul class="ms-list" tabindex="-1">
+                                            <li class="ms-elem-selectable ms-selected" id="AF-selectable" style="display: none;"><span>Afghanistan</span></li>
+                                            <li class="ms-elem-selectable" id="AL-selectable"><span>Albania</span></li>
+                                            <li class="ms-elem-selectable ms-selected" id="DZ-selectable" style="display: none;"><span>Algeria</span></li>
+                                            <li class="ms-elem-selectable" id="AS-selectable"><span>American Samoa</span></li>
+                                            <li class="ms-elem-selectable" id="AD-selectable"><span>Andorra</span></li>
+                                            <li class="ms-elem-selectable ms-selected" id="AO-selectable" style="display: none;"><span>Angola</span></li>
+                                            <li class="ms-elem-selectable" id="AI-selectable"><span>Anguilla</span></li>
+                                            <li class="ms-elem-selectable" id="AQ-selectable"><span>Antarctica</span></li>
+                                            <li class="ms-elem-selectable" id="AR-selectable"><span>Argentina</span></li>
+                                            <li class="ms-elem-selectable" id="AM-selectable"><span>Armenia</span></li>
+                                            <li class="ms-elem-selectable ms-hover" id="AW-selectable"><span>Aruba</span></li>
+                                            <li class="ms-elem-selectable" id="AU-selectable"><span>Australia</span></li>
+                                            <li class="ms-elem-selectable" id="AT-selectable"><span>Austria</span></li>
+                                            <li class="ms-elem-selectable" id="AZ-selectable"><span>Azerbaijan</span></li>
+                                            <li class="ms-elem-selectable" id="BS-selectable"><span>Bahamas</span></li>
+                                            <li class="ms-elem-selectable" id="BH-selectable"><span>Bahrain</span></li>
+                                            <li class="ms-elem-selectable" id="BD-selectable"><span>Bangladesh</span></li>
+                                            <li class="ms-elem-selectable" id="BB-selectable"><span>Barbados</span></li>
+                                            <li class="ms-elem-selectable" id="BY-selectable"><span>Belarus</span></li>
+                                            <li class="ms-elem-selectable" id="BE-selectable"><span>Belgium</span></li>
+                                            <li class="ms-elem-selectable" id="BZ-selectable"><span>Belize</span></li>
+                                            <li class="ms-elem-selectable" id="BJ-selectable"><span>Benin</span></li>
+                                            <li class="ms-elem-selectable" id="BM-selectable"><span>Bermuda</span></li>
+                                            <li class="ms-elem-selectable" id="BT-selectable"><span>Bhutan</span></li>
+                                            <li class="ms-elem-selectable" id="BO-selectable"><span>Bolivia</span></li>
+                                            <li class="ms-elem-selectable" id="BA-selectable"><span>Bosnia and Herzegowina</span></li>
+                                            <li class="ms-elem-selectable" id="BW-selectable"><span>Botswana</span></li>
+                                            <li class="ms-elem-selectable" id="BV-selectable"><span>Bouvet Island</span></li>
+                                            <li class="ms-elem-selectable" id="BR-selectable"><span>Brazil</span></li>
+                                            <li class="ms-elem-selectable" id="IO-selectable"><span>British Indian Ocean Territory</span></li>
+                                            <li class="ms-elem-selectable" id="BN-selectable"><span>Brunei Darussalam</span></li>
+                                            <li class="ms-elem-selectable" id="BG-selectable"><span>Bulgaria</span></li>
+                                            <li class="ms-elem-selectable" id="BF-selectable"><span>Burkina Faso</span></li>
+                                            <li class="ms-elem-selectable" id="BI-selectable"><span>Burundi</span></li>
+                                            <li class="ms-elem-selectable" id="KH-selectable"><span>Cambodia</span></li>
+                                            <li class="ms-elem-selectable" id="CM-selectable"><span>Cameroon</span></li>
+                                            <li class="ms-elem-selectable" id="CA-selectable"><span>Canada</span></li>
+                                            <li class="ms-elem-selectable" id="CV-selectable"><span>Cape Verde</span></li>
+                                            <li class="ms-elem-selectable" id="KY-selectable"><span>Cayman Islands</span></li>
+                                            <li class="ms-elem-selectable" id="CF-selectable"><span>Central African Republic</span></li>
+                                            <li class="ms-elem-selectable" id="TD-selectable"><span>Chad</span></li>
+                                            <li class="ms-elem-selectable" id="CL-selectable"><span>Chile</span></li>
+                                            <li class="ms-elem-selectable" id="CN-selectable"><span>China</span></li>
+                                            <li class="ms-elem-selectable" id="CX-selectable"><span>Christmas Island</span></li>
+                                            <li class="ms-elem-selectable" id="CC-selectable"><span>Cocos (Keeling) Islands</span></li>
+                                            <li class="ms-elem-selectable" id="CO-selectable"><span>Colombia</span></li>
+                                            <li class="ms-elem-selectable" id="KM-selectable"><span>Comoros</span></li>
+                                            <li class="ms-elem-selectable" id="CG-selectable"><span>Congo</span></li>
+                                            <li class="ms-elem-selectable" id="CD-selectable"><span>Congo, the Democratic Republic of the</span></li>
+                                            <li class="ms-elem-selectable" id="CK-selectable"><span>Cook Islands</span></li>
+                                            <li class="ms-elem-selectable" id="CR-selectable"><span>Costa Rica</span></li>
+                                            <li class="ms-elem-selectable" id="CI-selectable"><span>Cote d'Ivoire</span></li>
+                                            <li class="ms-elem-selectable" id="HR-selectable"><span>Croatia (Hrvatska)</span></li>
+                                            <li class="ms-elem-selectable" id="CU-selectable"><span>Cuba</span></li>
+                                            <li class="ms-elem-selectable" id="CY-selectable"><span>Cyprus</span></li>
+                                            <li class="ms-elem-selectable" id="CZ-selectable"><span>Czech Republic</span></li>
+                                            <li class="ms-elem-selectable" id="DK-selectable"><span>Denmark</span></li>
+                                            <li class="ms-elem-selectable" id="DJ-selectable"><span>Djibouti</span></li>
+                                            <li class="ms-elem-selectable" id="DM-selectable"><span>Dominica</span></li>
+                                            <li class="ms-elem-selectable" id="DO-selectable"><span>Dominican Republic</span></li>
+                                            <li class="ms-elem-selectable" id="EC-selectable"><span>Ecuador</span></li>
+                                            <li class="ms-elem-selectable" id="EG-selectable"><span>Egypt</span></li>
+                                            <li class="ms-elem-selectable" id="SV-selectable"><span>El Salvador</span></li>
+                                            <li class="ms-elem-selectable" id="GQ-selectable"><span>Equatorial Guinea</span></li>
+                                            <li class="ms-elem-selectable" id="ER-selectable"><span>Eritrea</span></li>
+                                            <li class="ms-elem-selectable" id="EE-selectable"><span>Estonia</span></li>
+                                            <li class="ms-elem-selectable" id="ET-selectable"><span>Ethiopia</span></li>
+                                            <li class="ms-elem-selectable" id="FK-selectable"><span>Falkland Islands (Malvinas)</span></li>
+                                            <li class="ms-elem-selectable" id="FO-selectable"><span>Faroe Islands</span></li>
+                                            <li class="ms-elem-selectable" id="FJ-selectable"><span>Fiji</span></li>
+                                            <li class="ms-elem-selectable" id="FI-selectable"><span>Finland</span></li>
+                                            <li class="ms-elem-selectable" id="FR-selectable"><span>France</span></li>
+                                            <li class="ms-elem-selectable" id="GF-selectable"><span>French Guiana</span></li>
+                                            <li class="ms-elem-selectable" id="PF-selectable"><span>French Polynesia</span></li>
+                                            <li class="ms-elem-selectable" id="TF-selectable"><span>French Southern Territories</span></li>
+                                            <li class="ms-elem-selectable" id="GA-selectable"><span>Gabon</span></li>
+                                            <li class="ms-elem-selectable" id="GM-selectable"><span>Gambia</span></li>
+                                            <li class="ms-elem-selectable" id="GE-selectable"><span>Georgia</span></li>
+                                            <li class="ms-elem-selectable" id="DE-selectable"><span>Germany</span></li>
+                                            <li class="ms-elem-selectable" id="GH-selectable"><span>Ghana</span></li>
+                                            <li class="ms-elem-selectable" id="GI-selectable"><span>Gibraltar</span></li>
+                                            <li class="ms-elem-selectable" id="GR-selectable"><span>Greece</span></li>
+                                            <li class="ms-elem-selectable" id="GL-selectable"><span>Greenland</span></li>
+                                            <li class="ms-elem-selectable" id="GD-selectable"><span>Grenada</span></li>
+                                            <li class="ms-elem-selectable" id="GP-selectable"><span>Guadeloupe</span></li>
+                                            <li class="ms-elem-selectable" id="GU-selectable"><span>Guam</span></li>
+                                            <li class="ms-elem-selectable" id="GT-selectable"><span>Guatemala</span></li>
+                                            <li class="ms-elem-selectable" id="GN-selectable"><span>Guinea</span></li>
+                                            <li class="ms-elem-selectable" id="GW-selectable"><span>Guinea-Bissau</span></li>
+                                            <li class="ms-elem-selectable" id="GY-selectable"><span>Guyana</span></li>
+                                            <li class="ms-elem-selectable" id="HT-selectable"><span>Haiti</span></li>
+                                            <li class="ms-elem-selectable" id="HM-selectable"><span>Heard and Mc Donald Islands</span></li>
+                                            <li class="ms-elem-selectable" id="VA-selectable"><span>Holy See (Vatican City State)</span></li>
+                                            <li class="ms-elem-selectable" id="HN-selectable"><span>Honduras</span></li>
+                                            <li class="ms-elem-selectable" id="HK-selectable"><span>Hong Kong</span></li>
+                                            <li class="ms-elem-selectable" id="HU-selectable"><span>Hungary</span></li>
+                                            <li class="ms-elem-selectable" id="IS-selectable"><span>Iceland</span></li>
+                                            <li class="ms-elem-selectable" id="IN-selectable"><span>India</span></li>
+                                            <li class="ms-elem-selectable" id="ID-selectable"><span>Indonesia</span></li>
+                                            <li class="ms-elem-selectable" id="IR-selectable"><span>Iran (Islamic Republic of)</span></li>
+                                            <li class="ms-elem-selectable" id="IQ-selectable"><span>Iraq</span></li>
+                                            <li class="ms-elem-selectable" id="IE-selectable"><span>Ireland</span></li>
+                                            <li class="ms-elem-selectable" id="IL-selectable"><span>Israel</span></li>
+                                            <li class="ms-elem-selectable" id="IT-selectable"><span>Italy</span></li>
+                                            <li class="ms-elem-selectable" id="JM-selectable"><span>Jamaica</span></li>
+                                            <li class="ms-elem-selectable" id="JP-selectable"><span>Japan</span></li>
+                                            <li class="ms-elem-selectable" id="JO-selectable"><span>Jordan</span></li>
+                                            <li class="ms-elem-selectable" id="KZ-selectable"><span>Kazakhstan</span></li>
+                                            <li class="ms-elem-selectable" id="KE-selectable"><span>Kenya</span></li>
+                                            <li class="ms-elem-selectable" id="KI-selectable"><span>Kiribati</span></li>
+                                            <li class="ms-elem-selectable" id="KP-selectable"><span>Korea, Democratic People's Republic of</span></li>
+                                            <li class="ms-elem-selectable" id="KR-selectable"><span>Korea, Republic of</span></li>
+                                            <li class="ms-elem-selectable" id="KW-selectable"><span>Kuwait</span></li>
+                                            <li class="ms-elem-selectable" id="KG-selectable"><span>Kyrgyzstan</span></li>
+                                            <li class="ms-elem-selectable" id="LA-selectable"><span>Lao People's Democratic Republic</span></li>
+                                            <li class="ms-elem-selectable" id="LV-selectable"><span>Latvia</span></li>
+                                            <li class="ms-elem-selectable" id="LB-selectable"><span>Lebanon</span></li>
+                                            <li class="ms-elem-selectable" id="LS-selectable"><span>Lesotho</span></li>
+                                            <li class="ms-elem-selectable" id="LR-selectable"><span>Liberia</span></li>
+                                            <li class="ms-elem-selectable" id="LY-selectable"><span>Libyan Arab Jamahiriya</span></li>
+                                            <li class="ms-elem-selectable" id="LI-selectable"><span>Liechtenstein</span></li>
+                                            <li class="ms-elem-selectable" id="LT-selectable"><span>Lithuania</span></li>
+                                            <li class="ms-elem-selectable" id="LU-selectable"><span>Luxembourg</span></li>
+                                            <li class="ms-elem-selectable" id="MO-selectable"><span>Macau</span></li>
+                                            <li class="ms-elem-selectable" id="MK-selectable"><span>Macedonia, The Former Yugoslav Republic of</span></li>
+                                            <li class="ms-elem-selectable" id="MG-selectable"><span>Madagascar</span></li>
+                                            <li class="ms-elem-selectable" id="MW-selectable"><span>Malawi</span></li>
+                                            <li class="ms-elem-selectable" id="MY-selectable"><span>Malaysia</span></li>
+                                            <li class="ms-elem-selectable" id="MV-selectable"><span>Maldives</span></li>
+                                            <li class="ms-elem-selectable" id="ML-selectable"><span>Mali</span></li>
+                                            <li class="ms-elem-selectable" id="MT-selectable"><span>Malta</span></li>
+                                            <li class="ms-elem-selectable" id="MH-selectable"><span>Marshall Islands</span></li>
+                                            <li class="ms-elem-selectable" id="MQ-selectable"><span>Martinique</span></li>
+                                            <li class="ms-elem-selectable" id="MR-selectable"><span>Mauritania</span></li>
+                                            <li class="ms-elem-selectable" id="MU-selectable"><span>Mauritius</span></li>
+                                            <li class="ms-elem-selectable" id="YT-selectable"><span>Mayotte</span></li>
+                                            <li class="ms-elem-selectable" id="MX-selectable"><span>Mexico</span></li>
+                                            <li class="ms-elem-selectable" id="FM-selectable"><span>Micronesia, Federated States of</span></li>
+                                            <li class="ms-elem-selectable" id="MD-selectable"><span>Moldova, Republic of</span></li>
+                                            <li class="ms-elem-selectable" id="MC-selectable"><span>Monaco</span></li>
+                                            <li class="ms-elem-selectable" id="MN-selectable"><span>Mongolia</span></li>
+                                            <li class="ms-elem-selectable" id="MS-selectable"><span>Montserrat</span></li>
+                                            <li class="ms-elem-selectable" id="MA-selectable"><span>Morocco</span></li>
+                                            <li class="ms-elem-selectable" id="MZ-selectable"><span>Mozambique</span></li>
+                                            <li class="ms-elem-selectable" id="MM-selectable"><span>Myanmar</span></li>
+                                            <li class="ms-elem-selectable" id="NA-selectable"><span>Namibia</span></li>
+                                            <li class="ms-elem-selectable" id="NR-selectable"><span>Nauru</span></li>
+                                            <li class="ms-elem-selectable" id="NP-selectable"><span>Nepal</span></li>
+                                            <li class="ms-elem-selectable" id="NL-selectable"><span>Netherlands</span></li>
+                                            <li class="ms-elem-selectable" id="AN-selectable"><span>Netherlands Antilles</span></li>
+                                            <li class="ms-elem-selectable" id="NC-selectable"><span>New Caledonia</span></li>
+                                            <li class="ms-elem-selectable" id="NZ-selectable"><span>New Zealand</span></li>
+                                            <li class="ms-elem-selectable" id="NI-selectable"><span>Nicaragua</span></li>
+                                            <li class="ms-elem-selectable" id="NE-selectable"><span>Niger</span></li>
+                                            <li class="ms-elem-selectable" id="NG-selectable"><span>Nigeria</span></li>
+                                            <li class="ms-elem-selectable" id="NU-selectable"><span>Niue</span></li>
+                                            <li class="ms-elem-selectable" id="NF-selectable"><span>Norfolk Island</span></li>
+                                            <li class="ms-elem-selectable" id="MP-selectable"><span>Northern Mariana Islands</span></li>
+                                            <li class="ms-elem-selectable" id="NO-selectable"><span>Norway</span></li>
+                                            <li class="ms-elem-selectable" id="OM-selectable"><span>Oman</span></li>
+                                            <li class="ms-elem-selectable" id="PK-selectable"><span>Pakistan</span></li>
+                                            <li class="ms-elem-selectable" id="PW-selectable"><span>Palau</span></li>
+                                            <li class="ms-elem-selectable" id="PA-selectable"><span>Panama</span></li>
+                                            <li class="ms-elem-selectable" id="PG-selectable"><span>Papua New Guinea</span></li>
+                                            <li class="ms-elem-selectable" id="PY-selectable"><span>Paraguay</span></li>
+                                            <li class="ms-elem-selectable" id="PE-selectable"><span>Peru</span></li>
+                                            <li class="ms-elem-selectable" id="PH-selectable"><span>Philippines</span></li>
+                                            <li class="ms-elem-selectable" id="PN-selectable"><span>Pitcairn</span></li>
+                                            <li class="ms-elem-selectable" id="PL-selectable"><span>Poland</span></li>
+                                            <li class="ms-elem-selectable" id="PT-selectable"><span>Portugal</span></li>
+                                            <li class="ms-elem-selectable" id="PR-selectable"><span>Puerto Rico</span></li>
+                                            <li class="ms-elem-selectable" id="QA-selectable"><span>Qatar</span></li>
+                                            <li class="ms-elem-selectable" id="RE-selectable"><span>Reunion</span></li>
+                                            <li class="ms-elem-selectable" id="RO-selectable"><span>Romania</span></li>
+                                            <li class="ms-elem-selectable" id="RU-selectable"><span>Russian Federation</span></li>
+                                            <li class="ms-elem-selectable" id="RW-selectable"><span>Rwanda</span></li>
+                                            <li class="ms-elem-selectable" id="KN-selectable"><span>Saint Kitts and Nevis</span></li>
+                                            <li class="ms-elem-selectable" id="LC-selectable"><span>Saint LUCIA</span></li>
+                                            <li class="ms-elem-selectable" id="VC-selectable"><span>Saint Vincent and the Grenadines</span></li>
+                                            <li class="ms-elem-selectable" id="WS-selectable"><span>Samoa</span></li>
+                                            <li class="ms-elem-selectable" id="SM-selectable"><span>San Marino</span></li>
+                                            <li class="ms-elem-selectable" id="ST-selectable"><span>Sao Tome and Principe</span></li>
+                                            <li class="ms-elem-selectable" id="SA-selectable"><span>Saudi Arabia</span></li>
+                                            <li class="ms-elem-selectable" id="SN-selectable"><span>Senegal</span></li>
+                                            <li class="ms-elem-selectable" id="SC-selectable"><span>Seychelles</span></li>
+                                            <li class="ms-elem-selectable" id="SL-selectable"><span>Sierra Leone</span></li>
+                                            <li class="ms-elem-selectable" id="SG-selectable"><span>Singapore</span></li>
+                                            <li class="ms-elem-selectable" id="SK-selectable"><span>Slovakia (Slovak Republic)</span></li>
+                                            <li class="ms-elem-selectable" id="SI-selectable"><span>Slovenia</span></li>
+                                            <li class="ms-elem-selectable" id="SB-selectable"><span>Solomon Islands</span></li>
+                                            <li class="ms-elem-selectable" id="SO-selectable"><span>Somalia</span></li>
+                                            <li class="ms-elem-selectable" id="ZA-selectable"><span>South Africa</span></li>
+                                            <li class="ms-elem-selectable" id="GS-selectable"><span>South Georgia and the South Sandwich Islands</span></li>
+                                            <li class="ms-elem-selectable" id="ES-selectable"><span>Spain</span></li>
+                                            <li class="ms-elem-selectable" id="LK-selectable"><span>Sri Lanka</span></li>
+                                            <li class="ms-elem-selectable" id="SH-selectable"><span>St. Helena</span></li>
+                                            <li class="ms-elem-selectable" id="PM-selectable"><span>St. Pierre and Miquelon</span></li>
+                                            <li class="ms-elem-selectable" id="SD-selectable"><span>Sudan</span></li>
+                                            <li class="ms-elem-selectable" id="SR-selectable"><span>Suriname</span></li>
+                                            <li class="ms-elem-selectable" id="SJ-selectable"><span>Svalbard and Jan Mayen Islands</span></li>
+                                            <li class="ms-elem-selectable" id="SZ-selectable"><span>Swaziland</span></li>
+                                            <li class="ms-elem-selectable" id="SE-selectable"><span>Sweden</span></li>
+                                            <li class="ms-elem-selectable" id="CH-selectable"><span>Switzerland</span></li>
+                                            <li class="ms-elem-selectable" id="SY-selectable"><span>Syrian Arab Republic</span></li>
+                                            <li class="ms-elem-selectable" id="TW-selectable"><span>Taiwan, Province of China</span></li>
+                                            <li class="ms-elem-selectable" id="TJ-selectable"><span>Tajikistan</span></li>
+                                            <li class="ms-elem-selectable" id="TZ-selectable"><span>Tanzania, United Republic of</span></li>
+                                            <li class="ms-elem-selectable" id="TH-selectable"><span>Thailand</span></li>
+                                            <li class="ms-elem-selectable" id="TG-selectable"><span>Togo</span></li>
+                                            <li class="ms-elem-selectable" id="TK-selectable"><span>Tokelau</span></li>
+                                            <li class="ms-elem-selectable" id="TO-selectable"><span>Tonga</span></li>
+                                            <li class="ms-elem-selectable" id="TT-selectable"><span>Trinidad and Tobago</span></li>
+                                            <li class="ms-elem-selectable" id="TN-selectable"><span>Tunisia</span></li>
+                                            <li class="ms-elem-selectable" id="TR-selectable"><span>Turkey</span></li>
+                                            <li class="ms-elem-selectable" id="TM-selectable"><span>Turkmenistan</span></li>
+                                            <li class="ms-elem-selectable" id="TC-selectable"><span>Turks and Caicos Islands</span></li>
+                                            <li class="ms-elem-selectable" id="TV-selectable"><span>Tuvalu</span></li>
+                                            <li class="ms-elem-selectable" id="UG-selectable"><span>Uganda</span></li>
+                                            <li class="ms-elem-selectable" id="UA-selectable"><span>Ukraine</span></li>
+                                            <li class="ms-elem-selectable" id="AE-selectable"><span>United Arab Emirates</span></li>
+                                            <li class="ms-elem-selectable" id="GB-selectable"><span>United Kingdom</span></li>
+                                            <li class="ms-elem-selectable" id="US-selectable"><span>United States</span></li>
+                                            <li class="ms-elem-selectable" id="UM-selectable"><span>United States Minor Outlying Islands</span></li>
+                                            <li class="ms-elem-selectable" id="UY-selectable"><span>Uruguay</span></li>
+                                            <li class="ms-elem-selectable" id="UZ-selectable"><span>Uzbekistan</span></li>
+                                            <li class="ms-elem-selectable" id="VU-selectable"><span>Vanuatu</span></li>
+                                            <li class="ms-elem-selectable" id="VE-selectable"><span>Venezuela</span></li>
+                                            <li class="ms-elem-selectable" id="VN-selectable"><span>Viet Nam</span></li>
+                                            <li class="ms-elem-selectable" id="VG-selectable"><span>Virgin Islands (British)</span></li>
+                                            <li class="ms-elem-selectable" id="VI-selectable"><span>Virgin Islands (U.S.)</span></li>
+                                            <li class="ms-elem-selectable" id="WF-selectable"><span>Wallis and Futuna Islands</span></li>
+                                            <li class="ms-elem-selectable" id="EH-selectable"><span>Western Sahara</span></li>
+                                            <li class="ms-elem-selectable" id="YE-selectable"><span>Yemen</span></li>
+                                            <li class="ms-elem-selectable" id="ZM-selectable"><span>Zambia</span></li>
+                                            <li class="ms-elem-selectable" id="ZW-selectable"><span>Zimbabwe</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="ms-selection"><input type="text" class="form-control search-input" autocomplete="off" placeholder="search...">
+                                        <ul class="ms-list" tabindex="-1">
+                                            <li class="ms-elem-selection ms-selected" id="AF-selection" style=""><span>Afghanistan</span></li>
+                                            <li class="ms-elem-selection" id="AL-selection" style="display: none;"><span>Albania</span></li>
+                                            <li class="ms-elem-selection ms-selected" id="DZ-selection" style=""><span>Algeria</span></li>
+                                            <li class="ms-elem-selection" id="AS-selection" style="display: none;"><span>American Samoa</span></li>
+                                            <li class="ms-elem-selection" id="AD-selection" style="display: none;"><span>Andorra</span></li>
+                                            <li class="ms-elem-selection ms-selected" id="AO-selection" style=""><span>Angola</span></li>
+                                            <li class="ms-elem-selection" id="AI-selection" style="display: none;"><span>Anguilla</span></li>
+                                            <li class="ms-elem-selection" id="AQ-selection" style="display: none;"><span>Antarctica</span></li>
+                                            <li class="ms-elem-selection" id="AR-selection" style="display: none;"><span>Argentina</span></li>
+                                            <li class="ms-elem-selection" id="AM-selection" style="display: none;"><span>Armenia</span></li>
+                                            <li class="ms-elem-selection" id="AW-selection" style="display: none;"><span>Aruba</span></li>
+                                            <li class="ms-elem-selection" id="AU-selection" style="display: none;"><span>Australia</span></li>
+                                            <li class="ms-elem-selection" id="AT-selection" style="display: none;"><span>Austria</span></li>
+                                            <li class="ms-elem-selection" id="AZ-selection" style="display: none;"><span>Azerbaijan</span></li>
+                                            <li class="ms-elem-selection" id="BS-selection" style="display: none;"><span>Bahamas</span></li>
+                                            <li class="ms-elem-selection" id="BH-selection" style="display: none;"><span>Bahrain</span></li>
+                                            <li class="ms-elem-selection" id="BD-selection" style="display: none;"><span>Bangladesh</span></li>
+                                            <li class="ms-elem-selection" id="BB-selection" style="display: none;"><span>Barbados</span></li>
+                                            <li class="ms-elem-selection" id="BY-selection" style="display: none;"><span>Belarus</span></li>
+                                            <li class="ms-elem-selection" id="BE-selection" style="display: none;"><span>Belgium</span></li>
+                                            <li class="ms-elem-selection" id="BZ-selection" style="display: none;"><span>Belize</span></li>
+                                            <li class="ms-elem-selection" id="BJ-selection" style="display: none;"><span>Benin</span></li>
+                                            <li class="ms-elem-selection" id="BM-selection" style="display: none;"><span>Bermuda</span></li>
+                                            <li class="ms-elem-selection" id="BT-selection" style="display: none;"><span>Bhutan</span></li>
+                                            <li class="ms-elem-selection" id="BO-selection" style="display: none;"><span>Bolivia</span></li>
+                                            <li class="ms-elem-selection" id="BA-selection" style="display: none;"><span>Bosnia and Herzegowina</span></li>
+                                            <li class="ms-elem-selection" id="BW-selection" style="display: none;"><span>Botswana</span></li>
+                                            <li class="ms-elem-selection" id="BV-selection" style="display: none;"><span>Bouvet Island</span></li>
+                                            <li class="ms-elem-selection" id="BR-selection" style="display: none;"><span>Brazil</span></li>
+                                            <li class="ms-elem-selection" id="IO-selection" style="display: none;"><span>British Indian Ocean Territory</span></li>
+                                            <li class="ms-elem-selection" id="BN-selection" style="display: none;"><span>Brunei Darussalam</span></li>
+                                            <li class="ms-elem-selection" id="BG-selection" style="display: none;"><span>Bulgaria</span></li>
+                                            <li class="ms-elem-selection" id="BF-selection" style="display: none;"><span>Burkina Faso</span></li>
+                                            <li class="ms-elem-selection" id="BI-selection" style="display: none;"><span>Burundi</span></li>
+                                            <li class="ms-elem-selection" id="KH-selection" style="display: none;"><span>Cambodia</span></li>
+                                            <li class="ms-elem-selection" id="CM-selection" style="display: none;"><span>Cameroon</span></li>
+                                            <li class="ms-elem-selection" id="CA-selection" style="display: none;"><span>Canada</span></li>
+                                            <li class="ms-elem-selection" id="CV-selection" style="display: none;"><span>Cape Verde</span></li>
+                                            <li class="ms-elem-selection" id="KY-selection" style="display: none;"><span>Cayman Islands</span></li>
+                                            <li class="ms-elem-selection" id="CF-selection" style="display: none;"><span>Central African Republic</span></li>
+                                            <li class="ms-elem-selection" id="TD-selection" style="display: none;"><span>Chad</span></li>
+                                            <li class="ms-elem-selection" id="CL-selection" style="display: none;"><span>Chile</span></li>
+                                            <li class="ms-elem-selection" id="CN-selection" style="display: none;"><span>China</span></li>
+                                            <li class="ms-elem-selection" id="CX-selection" style="display: none;"><span>Christmas Island</span></li>
+                                            <li class="ms-elem-selection" id="CC-selection" style="display: none;"><span>Cocos (Keeling) Islands</span></li>
+                                            <li class="ms-elem-selection" id="CO-selection" style="display: none;"><span>Colombia</span></li>
+                                            <li class="ms-elem-selection" id="KM-selection" style="display: none;"><span>Comoros</span></li>
+                                            <li class="ms-elem-selection" id="CG-selection" style="display: none;"><span>Congo</span></li>
+                                            <li class="ms-elem-selection" id="CD-selection" style="display: none;"><span>Congo, the Democratic Republic of the</span></li>
+                                            <li class="ms-elem-selection" id="CK-selection" style="display: none;"><span>Cook Islands</span></li>
+                                            <li class="ms-elem-selection" id="CR-selection" style="display: none;"><span>Costa Rica</span></li>
+                                            <li class="ms-elem-selection" id="CI-selection" style="display: none;"><span>Cote d'Ivoire</span></li>
+                                            <li class="ms-elem-selection" id="HR-selection" style="display: none;"><span>Croatia (Hrvatska)</span></li>
+                                            <li class="ms-elem-selection" id="CU-selection" style="display: none;"><span>Cuba</span></li>
+                                            <li class="ms-elem-selection" id="CY-selection" style="display: none;"><span>Cyprus</span></li>
+                                            <li class="ms-elem-selection" id="CZ-selection" style="display: none;"><span>Czech Republic</span></li>
+                                            <li class="ms-elem-selection" id="DK-selection" style="display: none;"><span>Denmark</span></li>
+                                            <li class="ms-elem-selection" id="DJ-selection" style="display: none;"><span>Djibouti</span></li>
+                                            <li class="ms-elem-selection" id="DM-selection" style="display: none;"><span>Dominica</span></li>
+                                            <li class="ms-elem-selection" id="DO-selection" style="display: none;"><span>Dominican Republic</span></li>
+                                            <li class="ms-elem-selection" id="EC-selection" style="display: none;"><span>Ecuador</span></li>
+                                            <li class="ms-elem-selection" id="EG-selection" style="display: none;"><span>Egypt</span></li>
+                                            <li class="ms-elem-selection" id="SV-selection" style="display: none;"><span>El Salvador</span></li>
+                                            <li class="ms-elem-selection" id="GQ-selection" style="display: none;"><span>Equatorial Guinea</span></li>
+                                            <li class="ms-elem-selection" id="ER-selection" style="display: none;"><span>Eritrea</span></li>
+                                            <li class="ms-elem-selection" id="EE-selection" style="display: none;"><span>Estonia</span></li>
+                                            <li class="ms-elem-selection" id="ET-selection" style="display: none;"><span>Ethiopia</span></li>
+                                            <li class="ms-elem-selection" id="FK-selection" style="display: none;"><span>Falkland Islands (Malvinas)</span></li>
+                                            <li class="ms-elem-selection" id="FO-selection" style="display: none;"><span>Faroe Islands</span></li>
+                                            <li class="ms-elem-selection" id="FJ-selection" style="display: none;"><span>Fiji</span></li>
+                                            <li class="ms-elem-selection" id="FI-selection" style="display: none;"><span>Finland</span></li>
+                                            <li class="ms-elem-selection" id="FR-selection" style="display: none;"><span>France</span></li>
+                                            <li class="ms-elem-selection" id="GF-selection" style="display: none;"><span>French Guiana</span></li>
+                                            <li class="ms-elem-selection" id="PF-selection" style="display: none;"><span>French Polynesia</span></li>
+                                            <li class="ms-elem-selection" id="TF-selection" style="display: none;"><span>French Southern Territories</span></li>
+                                            <li class="ms-elem-selection" id="GA-selection" style="display: none;"><span>Gabon</span></li>
+                                            <li class="ms-elem-selection" id="GM-selection" style="display: none;"><span>Gambia</span></li>
+                                            <li class="ms-elem-selection" id="GE-selection" style="display: none;"><span>Georgia</span></li>
+                                            <li class="ms-elem-selection" id="DE-selection" style="display: none;"><span>Germany</span></li>
+                                            <li class="ms-elem-selection" id="GH-selection" style="display: none;"><span>Ghana</span></li>
+                                            <li class="ms-elem-selection" id="GI-selection" style="display: none;"><span>Gibraltar</span></li>
+                                            <li class="ms-elem-selection" id="GR-selection" style="display: none;"><span>Greece</span></li>
+                                            <li class="ms-elem-selection" id="GL-selection" style="display: none;"><span>Greenland</span></li>
+                                            <li class="ms-elem-selection" id="GD-selection" style="display: none;"><span>Grenada</span></li>
+                                            <li class="ms-elem-selection" id="GP-selection" style="display: none;"><span>Guadeloupe</span></li>
+                                            <li class="ms-elem-selection" id="GU-selection" style="display: none;"><span>Guam</span></li>
+                                            <li class="ms-elem-selection" id="GT-selection" style="display: none;"><span>Guatemala</span></li>
+                                            <li class="ms-elem-selection" id="GN-selection" style="display: none;"><span>Guinea</span></li>
+                                            <li class="ms-elem-selection" id="GW-selection" style="display: none;"><span>Guinea-Bissau</span></li>
+                                            <li class="ms-elem-selection" id="GY-selection" style="display: none;"><span>Guyana</span></li>
+                                            <li class="ms-elem-selection" id="HT-selection" style="display: none;"><span>Haiti</span></li>
+                                            <li class="ms-elem-selection" id="HM-selection" style="display: none;"><span>Heard and Mc Donald Islands</span></li>
+                                            <li class="ms-elem-selection" id="VA-selection" style="display: none;"><span>Holy See (Vatican City State)</span></li>
+                                            <li class="ms-elem-selection" id="HN-selection" style="display: none;"><span>Honduras</span></li>
+                                            <li class="ms-elem-selection" id="HK-selection" style="display: none;"><span>Hong Kong</span></li>
+                                            <li class="ms-elem-selection" id="HU-selection" style="display: none;"><span>Hungary</span></li>
+                                            <li class="ms-elem-selection" id="IS-selection" style="display: none;"><span>Iceland</span></li>
+                                            <li class="ms-elem-selection" id="IN-selection" style="display: none;"><span>India</span></li>
+                                            <li class="ms-elem-selection" id="ID-selection" style="display: none;"><span>Indonesia</span></li>
+                                            <li class="ms-elem-selection" id="IR-selection" style="display: none;"><span>Iran (Islamic Republic of)</span></li>
+                                            <li class="ms-elem-selection" id="IQ-selection" style="display: none;"><span>Iraq</span></li>
+                                            <li class="ms-elem-selection" id="IE-selection" style="display: none;"><span>Ireland</span></li>
+                                            <li class="ms-elem-selection" id="IL-selection" style="display: none;"><span>Israel</span></li>
+                                            <li class="ms-elem-selection" id="IT-selection" style="display: none;"><span>Italy</span></li>
+                                            <li class="ms-elem-selection" id="JM-selection" style="display: none;"><span>Jamaica</span></li>
+                                            <li class="ms-elem-selection" id="JP-selection" style="display: none;"><span>Japan</span></li>
+                                            <li class="ms-elem-selection" id="JO-selection" style="display: none;"><span>Jordan</span></li>
+                                            <li class="ms-elem-selection" id="KZ-selection" style="display: none;"><span>Kazakhstan</span></li>
+                                            <li class="ms-elem-selection" id="KE-selection" style="display: none;"><span>Kenya</span></li>
+                                            <li class="ms-elem-selection" id="KI-selection" style="display: none;"><span>Kiribati</span></li>
+                                            <li class="ms-elem-selection" id="KP-selection" style="display: none;"><span>Korea, Democratic People's Republic of</span></li>
+                                            <li class="ms-elem-selection" id="KR-selection" style="display: none;"><span>Korea, Republic of</span></li>
+                                            <li class="ms-elem-selection" id="KW-selection" style="display: none;"><span>Kuwait</span></li>
+                                            <li class="ms-elem-selection" id="KG-selection" style="display: none;"><span>Kyrgyzstan</span></li>
+                                            <li class="ms-elem-selection" id="LA-selection" style="display: none;"><span>Lao People's Democratic Republic</span></li>
+                                            <li class="ms-elem-selection" id="LV-selection" style="display: none;"><span>Latvia</span></li>
+                                            <li class="ms-elem-selection" id="LB-selection" style="display: none;"><span>Lebanon</span></li>
+                                            <li class="ms-elem-selection" id="LS-selection" style="display: none;"><span>Lesotho</span></li>
+                                            <li class="ms-elem-selection" id="LR-selection" style="display: none;"><span>Liberia</span></li>
+                                            <li class="ms-elem-selection" id="LY-selection" style="display: none;"><span>Libyan Arab Jamahiriya</span></li>
+                                            <li class="ms-elem-selection" id="LI-selection" style="display: none;"><span>Liechtenstein</span></li>
+                                            <li class="ms-elem-selection" id="LT-selection" style="display: none;"><span>Lithuania</span></li>
+                                            <li class="ms-elem-selection" id="LU-selection" style="display: none;"><span>Luxembourg</span></li>
+                                            <li class="ms-elem-selection" id="MO-selection" style="display: none;"><span>Macau</span></li>
+                                            <li class="ms-elem-selection" id="MK-selection" style="display: none;"><span>Macedonia, The Former Yugoslav Republic of</span></li>
+                                            <li class="ms-elem-selection" id="MG-selection" style="display: none;"><span>Madagascar</span></li>
+                                            <li class="ms-elem-selection" id="MW-selection" style="display: none;"><span>Malawi</span></li>
+                                            <li class="ms-elem-selection" id="MY-selection" style="display: none;"><span>Malaysia</span></li>
+                                            <li class="ms-elem-selection" id="MV-selection" style="display: none;"><span>Maldives</span></li>
+                                            <li class="ms-elem-selection" id="ML-selection" style="display: none;"><span>Mali</span></li>
+                                            <li class="ms-elem-selection" id="MT-selection" style="display: none;"><span>Malta</span></li>
+                                            <li class="ms-elem-selection" id="MH-selection" style="display: none;"><span>Marshall Islands</span></li>
+                                            <li class="ms-elem-selection" id="MQ-selection" style="display: none;"><span>Martinique</span></li>
+                                            <li class="ms-elem-selection" id="MR-selection" style="display: none;"><span>Mauritania</span></li>
+                                            <li class="ms-elem-selection" id="MU-selection" style="display: none;"><span>Mauritius</span></li>
+                                            <li class="ms-elem-selection" id="YT-selection" style="display: none;"><span>Mayotte</span></li>
+                                            <li class="ms-elem-selection" id="MX-selection" style="display: none;"><span>Mexico</span></li>
+                                            <li class="ms-elem-selection" id="FM-selection" style="display: none;"><span>Micronesia, Federated States of</span></li>
+                                            <li class="ms-elem-selection" id="MD-selection" style="display: none;"><span>Moldova, Republic of</span></li>
+                                            <li class="ms-elem-selection" id="MC-selection" style="display: none;"><span>Monaco</span></li>
+                                            <li class="ms-elem-selection" id="MN-selection" style="display: none;"><span>Mongolia</span></li>
+                                            <li class="ms-elem-selection" id="MS-selection" style="display: none;"><span>Montserrat</span></li>
+                                            <li class="ms-elem-selection" id="MA-selection" style="display: none;"><span>Morocco</span></li>
+                                            <li class="ms-elem-selection" id="MZ-selection" style="display: none;"><span>Mozambique</span></li>
+                                            <li class="ms-elem-selection" id="MM-selection" style="display: none;"><span>Myanmar</span></li>
+                                            <li class="ms-elem-selection" id="NA-selection" style="display: none;"><span>Namibia</span></li>
+                                            <li class="ms-elem-selection" id="NR-selection" style="display: none;"><span>Nauru</span></li>
+                                            <li class="ms-elem-selection" id="NP-selection" style="display: none;"><span>Nepal</span></li>
+                                            <li class="ms-elem-selection" id="NL-selection" style="display: none;"><span>Netherlands</span></li>
+                                            <li class="ms-elem-selection" id="AN-selection" style="display: none;"><span>Netherlands Antilles</span></li>
+                                            <li class="ms-elem-selection" id="NC-selection" style="display: none;"><span>New Caledonia</span></li>
+                                            <li class="ms-elem-selection" id="NZ-selection" style="display: none;"><span>New Zealand</span></li>
+                                            <li class="ms-elem-selection" id="NI-selection" style="display: none;"><span>Nicaragua</span></li>
+                                            <li class="ms-elem-selection" id="NE-selection" style="display: none;"><span>Niger</span></li>
+                                            <li class="ms-elem-selection" id="NG-selection" style="display: none;"><span>Nigeria</span></li>
+                                            <li class="ms-elem-selection" id="NU-selection" style="display: none;"><span>Niue</span></li>
+                                            <li class="ms-elem-selection" id="NF-selection" style="display: none;"><span>Norfolk Island</span></li>
+                                            <li class="ms-elem-selection" id="MP-selection" style="display: none;"><span>Northern Mariana Islands</span></li>
+                                            <li class="ms-elem-selection" id="NO-selection" style="display: none;"><span>Norway</span></li>
+                                            <li class="ms-elem-selection" id="OM-selection" style="display: none;"><span>Oman</span></li>
+                                            <li class="ms-elem-selection" id="PK-selection" style="display: none;"><span>Pakistan</span></li>
+                                            <li class="ms-elem-selection" id="PW-selection" style="display: none;"><span>Palau</span></li>
+                                            <li class="ms-elem-selection" id="PA-selection" style="display: none;"><span>Panama</span></li>
+                                            <li class="ms-elem-selection" id="PG-selection" style="display: none;"><span>Papua New Guinea</span></li>
+                                            <li class="ms-elem-selection" id="PY-selection" style="display: none;"><span>Paraguay</span></li>
+                                            <li class="ms-elem-selection" id="PE-selection" style="display: none;"><span>Peru</span></li>
+                                            <li class="ms-elem-selection" id="PH-selection" style="display: none;"><span>Philippines</span></li>
+                                            <li class="ms-elem-selection" id="PN-selection" style="display: none;"><span>Pitcairn</span></li>
+                                            <li class="ms-elem-selection" id="PL-selection" style="display: none;"><span>Poland</span></li>
+                                            <li class="ms-elem-selection" id="PT-selection" style="display: none;"><span>Portugal</span></li>
+                                            <li class="ms-elem-selection" id="PR-selection" style="display: none;"><span>Puerto Rico</span></li>
+                                            <li class="ms-elem-selection" id="QA-selection" style="display: none;"><span>Qatar</span></li>
+                                            <li class="ms-elem-selection" id="RE-selection" style="display: none;"><span>Reunion</span></li>
+                                            <li class="ms-elem-selection" id="RO-selection" style="display: none;"><span>Romania</span></li>
+                                            <li class="ms-elem-selection" id="RU-selection" style="display: none;"><span>Russian Federation</span></li>
+                                            <li class="ms-elem-selection" id="RW-selection" style="display: none;"><span>Rwanda</span></li>
+                                            <li class="ms-elem-selection" id="KN-selection" style="display: none;"><span>Saint Kitts and Nevis</span></li>
+                                            <li class="ms-elem-selection" id="LC-selection" style="display: none;"><span>Saint LUCIA</span></li>
+                                            <li class="ms-elem-selection" id="VC-selection" style="display: none;"><span>Saint Vincent and the Grenadines</span></li>
+                                            <li class="ms-elem-selection" id="WS-selection" style="display: none;"><span>Samoa</span></li>
+                                            <li class="ms-elem-selection" id="SM-selection" style="display: none;"><span>San Marino</span></li>
+                                            <li class="ms-elem-selection" id="ST-selection" style="display: none;"><span>Sao Tome and Principe</span></li>
+                                            <li class="ms-elem-selection" id="SA-selection" style="display: none;"><span>Saudi Arabia</span></li>
+                                            <li class="ms-elem-selection" id="SN-selection" style="display: none;"><span>Senegal</span></li>
+                                            <li class="ms-elem-selection" id="SC-selection" style="display: none;"><span>Seychelles</span></li>
+                                            <li class="ms-elem-selection" id="SL-selection" style="display: none;"><span>Sierra Leone</span></li>
+                                            <li class="ms-elem-selection" id="SG-selection" style="display: none;"><span>Singapore</span></li>
+                                            <li class="ms-elem-selection" id="SK-selection" style="display: none;"><span>Slovakia (Slovak Republic)</span></li>
+                                            <li class="ms-elem-selection" id="SI-selection" style="display: none;"><span>Slovenia</span></li>
+                                            <li class="ms-elem-selection" id="SB-selection" style="display: none;"><span>Solomon Islands</span></li>
+                                            <li class="ms-elem-selection" id="SO-selection" style="display: none;"><span>Somalia</span></li>
+                                            <li class="ms-elem-selection" id="ZA-selection" style="display: none;"><span>South Africa</span></li>
+                                            <li class="ms-elem-selection" id="GS-selection" style="display: none;"><span>South Georgia and the South Sandwich Islands</span></li>
+                                            <li class="ms-elem-selection" id="ES-selection" style="display: none;"><span>Spain</span></li>
+                                            <li class="ms-elem-selection" id="LK-selection" style="display: none;"><span>Sri Lanka</span></li>
+                                            <li class="ms-elem-selection" id="SH-selection" style="display: none;"><span>St. Helena</span></li>
+                                            <li class="ms-elem-selection" id="PM-selection" style="display: none;"><span>St. Pierre and Miquelon</span></li>
+                                            <li class="ms-elem-selection" id="SD-selection" style="display: none;"><span>Sudan</span></li>
+                                            <li class="ms-elem-selection" id="SR-selection" style="display: none;"><span>Suriname</span></li>
+                                            <li class="ms-elem-selection" id="SJ-selection" style="display: none;"><span>Svalbard and Jan Mayen Islands</span></li>
+                                            <li class="ms-elem-selection" id="SZ-selection" style="display: none;"><span>Swaziland</span></li>
+                                            <li class="ms-elem-selection" id="SE-selection" style="display: none;"><span>Sweden</span></li>
+                                            <li class="ms-elem-selection" id="CH-selection" style="display: none;"><span>Switzerland</span></li>
+                                            <li class="ms-elem-selection" id="SY-selection" style="display: none;"><span>Syrian Arab Republic</span></li>
+                                            <li class="ms-elem-selection" id="TW-selection" style="display: none;"><span>Taiwan, Province of China</span></li>
+                                            <li class="ms-elem-selection" id="TJ-selection" style="display: none;"><span>Tajikistan</span></li>
+                                            <li class="ms-elem-selection" id="TZ-selection" style="display: none;"><span>Tanzania, United Republic of</span></li>
+                                            <li class="ms-elem-selection" id="TH-selection" style="display: none;"><span>Thailand</span></li>
+                                            <li class="ms-elem-selection" id="TG-selection" style="display: none;"><span>Togo</span></li>
+                                            <li class="ms-elem-selection" id="TK-selection" style="display: none;"><span>Tokelau</span></li>
+                                            <li class="ms-elem-selection" id="TO-selection" style="display: none;"><span>Tonga</span></li>
+                                            <li class="ms-elem-selection" id="TT-selection" style="display: none;"><span>Trinidad and Tobago</span></li>
+                                            <li class="ms-elem-selection" id="TN-selection" style="display: none;"><span>Tunisia</span></li>
+                                            <li class="ms-elem-selection" id="TR-selection" style="display: none;"><span>Turkey</span></li>
+                                            <li class="ms-elem-selection" id="TM-selection" style="display: none;"><span>Turkmenistan</span></li>
+                                            <li class="ms-elem-selection" id="TC-selection" style="display: none;"><span>Turks and Caicos Islands</span></li>
+                                            <li class="ms-elem-selection" id="TV-selection" style="display: none;"><span>Tuvalu</span></li>
+                                            <li class="ms-elem-selection" id="UG-selection" style="display: none;"><span>Uganda</span></li>
+                                            <li class="ms-elem-selection" id="UA-selection" style="display: none;"><span>Ukraine</span></li>
+                                            <li class="ms-elem-selection" id="AE-selection" style="display: none;"><span>United Arab Emirates</span></li>
+                                            <li class="ms-elem-selection" id="GB-selection" style="display: none;"><span>United Kingdom</span></li>
+                                            <li class="ms-elem-selection" id="US-selection" style="display: none;"><span>United States</span></li>
+                                            <li class="ms-elem-selection" id="UM-selection" style="display: none;"><span>United States Minor Outlying Islands</span></li>
+                                            <li class="ms-elem-selection" id="UY-selection" style="display: none;"><span>Uruguay</span></li>
+                                            <li class="ms-elem-selection" id="UZ-selection" style="display: none;"><span>Uzbekistan</span></li>
+                                            <li class="ms-elem-selection" id="VU-selection" style="display: none;"><span>Vanuatu</span></li>
+                                            <li class="ms-elem-selection" id="VE-selection" style="display: none;"><span>Venezuela</span></li>
+                                            <li class="ms-elem-selection" id="VN-selection" style="display: none;"><span>Viet Nam</span></li>
+                                            <li class="ms-elem-selection" id="VG-selection" style="display: none;"><span>Virgin Islands (British)</span></li>
+                                            <li class="ms-elem-selection" id="VI-selection" style="display: none;"><span>Virgin Islands (U.S.)</span></li>
+                                            <li class="ms-elem-selection" id="WF-selection" style="display: none;"><span>Wallis and Futuna Islands</span></li>
+                                            <li class="ms-elem-selection" id="EH-selection" style="display: none;"><span>Western Sahara</span></li>
+                                            <li class="ms-elem-selection" id="YE-selection" style="display: none;"><span>Yemen</span></li>
+                                            <li class="ms-elem-selection" id="ZM-selection" style="display: none;"><span>Zambia</span></li>
+                                            <li class="ms-elem-selection" id="ZW-selection" style="display: none;"><span>Zimbabwe</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
@@ -38,4 +531,12 @@
     </div>
     {% endblock %} {% block customjs %}
     <script src="{% static 'assets/plugins/jquery-multi-select/jquery.multi-select.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/jquery-multi-select/jquery.multi-select.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/jquery-multi-select/jquery.quicksearch.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/bootstrap-select/bootstrap-select.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/spinner/spinner.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/plugins/select2/select2.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/pages/jquery.form-advance.init.js' %}" type="text/javascript"></script>
+
     {% endblock %}
