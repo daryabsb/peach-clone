@@ -125,7 +125,7 @@ class AccountMain(AccountTemplate):
     account_section = models.CharField(max_length=30, choices=ACCOUNT_SECTIONS)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.account_section})'
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -135,7 +135,7 @@ class AccountSub(AccountTemplate):
     main = models.ForeignKey('AccountMain', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.main})'
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -322,6 +322,14 @@ class Receive(models.Model):
 # REPORTS
 
 
+class Expense(models.Model):
+    pass
+
+
+class Revenue(models.Model):
+    pass
+
+
 class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
@@ -365,4 +373,16 @@ class BalanceSheet(models.Model):
 
 
 class IncomeStatement(models.Model):
-    pass
+    MODEL_CHOICES = (
+        ('Purchase', 'PURCHASE'),
+        ('Sale', 'SALE'),
+        ('Payment', 'PAYMENT'),
+        ('Receive', 'RECEIVE'),
+    )
+
+    model = models.CharField(max_length=10, choices=MODEL_CHOICES)
+    model_id = models.PositiveIntegerField()
+    account = models.ForeignKey('AccountSub', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.model} - {self.model_id} ({self.account})'
