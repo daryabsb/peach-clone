@@ -168,6 +168,7 @@ MODELS: CUSTOMER,   VENDOR, SUPPLIER
 
 class CVbase(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
+
     address = models.CharField(max_length=200, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
     balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
@@ -177,18 +178,30 @@ class CVbase(models.Model):
 
 
 class Customer(CVbase):
+    account_type = models.ForeignKey(
+        'AccountSub', on_delete=models.CASCADE, default=16)
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_account_sub(self):
+        return self.account_type
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
 
 
 class Vendor(CVbase):
+    account_type = models.ForeignKey(
+        'AccountSub', on_delete=models.CASCADE, default=15)
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_account_sub(self):
+        return self.account_type
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -236,6 +249,13 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f'{self.item} - {self.total}'
+
+    @property
+    def get_account_sub(self):
+        return self.item.account_sub
+
+    def get_account_sub(self):
+        return self.item.account_sub
 
     def get_total_list_price(self):
         total = self.objects.all().aggregate(Sum('total'))
@@ -379,25 +399,34 @@ For IncomeStatement:
 rent    $500    [operating expense]bv
 """
 
+MODEL_CHOICES = (
+    ('Purchase', 'PURCHASE'),
+    ('Sale', 'SALE'),
+    ('Payment', 'PAYMENT'),
+    ('Receive', 'RECEIVE'),
+)
+
 
 class Journal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    account = models.ForeignKey('AccountSub', on_delete=models.CASCADE)
+    dr_account = models.ForeignKey(
+        'AccountSub', on_delete=models.CASCADE, related_name='debit_account')
+    cr_account = models.ForeignKey(
+        'AccountSub', on_delete=models.CASCADE, related_name='credit_account')
+
+    sender_model = models.CharField(max_length=10, choices=MODEL_CHOICES)
+    model_id = models.PositiveIntegerField()
 
     description = models.TextField(blank=True, null=True)
-    dr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    cr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    amount = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
 
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'Dr\ {self.dr_account}-{self.amount} --- Cr\{self.cr_account}-{self.amount}'
+
 
 class IncomeStatement(models.Model):
-    MODEL_CHOICES = (
-        ('Purchase', 'PURCHASE'),
-        ('Sale', 'SALE'),
-        ('Payment', 'PAYMENT'),
-        ('Receive', 'RECEIVE'),
-    )
 
     model = models.CharField(max_length=10, choices=MODEL_CHOICES)
     model_id = models.PositiveIntegerField()

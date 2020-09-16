@@ -31,10 +31,11 @@ class PurchaseList(ListView):
         return total
 
     def get_context_data(self, **kwargs):
-        # vendor = 'Sham Computer'
+
         context = super(PurchaseList, self).get_context_data()
         context['total_price'] = self.total_price()
         context['model_name'] = 'Purchase'
+
         return context
 
 
@@ -56,9 +57,12 @@ class SaleList(ListView):
 
     def get_context_data(self, **kwargs):
         # vendor = 'Sham Computer'
+        invoices = Invoice.objects.filter(customer__name='Kogay Shar')
+        print(invoices)
         context = super(SaleList, self).get_context_data()
         context['total_price'] = self.total_price()
         context['model_name'] = 'Sale'
+        context['invoices'] = invoices
         return context
 
 
