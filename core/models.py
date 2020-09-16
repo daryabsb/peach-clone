@@ -372,6 +372,25 @@ class BalanceSheet(models.Model):
     pass
 
 
+"""
+For IncomeStatement:
+1. If a payment transaction  is done for an expense the account of the expense
+    will be recorded to the income statement
+rent    $500    [operating expense]bv
+"""
+
+
+class Journal(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    account = models.ForeignKey('AccountSub', on_delete=models.CASCADE)
+
+    description = models.TextField(blank=True, null=True)
+    dr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    cr = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+
+    updated = models.DateTimeField(auto_now=True)
+
+
 class IncomeStatement(models.Model):
     MODEL_CHOICES = (
         ('Purchase', 'PURCHASE'),
