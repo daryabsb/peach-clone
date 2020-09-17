@@ -11,6 +11,7 @@ django = "*"
 flake8 = "*"
 autopep8 = "*"
 django-blog = "*"
+django-crispy-forms = "*"
 
 [requires]
 python_version = "3.8"

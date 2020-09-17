@@ -179,7 +179,7 @@ class CVbase(models.Model):
 
 class Customer(CVbase):
     account_type = models.ForeignKey(
-        'AccountSub', on_delete=models.CASCADE, default=16)
+        'AccountSub', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -187,6 +187,14 @@ class Customer(CVbase):
     @property
     def get_account_sub(self):
         return self.account_type
+
+    def save(self, *args, **kwargs):
+        if not self.account_type:
+            a_sub = AccountSub.objects.get(title='Account Receivable')
+            self.account_type = a_sub
+            print(self.account_type)
+            # self.total = self.unit_price * self.quantity
+        super(Customer, self).save(*args, **kwargs)
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -194,7 +202,7 @@ class Customer(CVbase):
 
 class Vendor(CVbase):
     account_type = models.ForeignKey(
-        'AccountSub', on_delete=models.CASCADE, default=15)
+        'AccountSub', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -202,6 +210,15 @@ class Vendor(CVbase):
     @property
     def get_account_sub(self):
         return self.account_type
+
+    def save(self, *args, **kwargs):
+        if not self.account_type:
+            a_sub = AccountSub.objects.get(title='Account Payable')
+            self.account_type = a_sub
+            print(self.account_type)
+            # self.total = self.unit_price * self.quantity
+        super(Vendor, self).save(*args, **kwargs)
+
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -251,9 +268,6 @@ class Purchase(models.Model):
         return f'{self.item} - {self.total}'
 
     @property
-    def get_account_sub(self):
-        return self.item.account_sub
-
     def get_account_sub(self):
         return self.item.account_sub
 
@@ -423,7 +437,7 @@ class Journal(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Dr\ {self.dr_account}-{self.amount} --- Cr\{self.cr_account}-{self.amount}'
+        return f'Dr: {self.dr_account}-{self.amount} --- Cr: {self.cr_account}-{self.amount}'
 
 
 class IncomeStatement(models.Model):

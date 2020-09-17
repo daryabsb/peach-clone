@@ -64,20 +64,17 @@ def update_customer_balance_on_depretiation(sender, instance, created, **kwargs)
 def add_journal_purchase(sender, instance, created, **kwargs):
     if created:
         debit_account = instance.get_account_sub
-        print(instance.get_account_sub)
-        ap = instance.get_account_sub
-        print(ap)
-        credit_account = ap
+        credit_account = instance.vendor.get_account_sub
         model_name = 'Purchase'
         model_id = instance.pk
 
-        # journal = Journal.objects.create(
-        #     dr_account=debit_account,
-        #     cr_account=credit_account,
-        #     sender_model=model_name,
-        #     model_id=model_id,
-        #     amount=instance.total
-        # )
+        journal = Journal.objects.create(
+            dr_account=debit_account,
+            cr_account=credit_account,
+            sender_model=model_name,
+            model_id=model_id,
+            amount=instance.total
+        )
 
-        # print('created - Journal')
-        # journal.save()
+        print('created - Journal')
+        journal.save()
