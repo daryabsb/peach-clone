@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.apps import apps
 
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -219,7 +220,6 @@ class Vendor(CVbase):
             # self.total = self.unit_price * self.quantity
         super(Vendor, self).save(*args, **kwargs)
 
-
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
 
@@ -303,6 +303,10 @@ class Sale(models.Model):
     def __str__(self):
         return f'{self.item} - {self.total} to {self.customer}'
 
+    @property
+    def get_account_sub(self):
+        return self.item.account_sub
+
     def get_total_list_price(self):
         total = self.objects.all().aggregate(Sum('total'))
         # tot Purchase.objects.filter(
@@ -311,6 +315,11 @@ class Sale(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
+PAYMENT_METHOD = (
+    ('cash', 'CASH'),
+    ('Credit Card', 'CREDIT CARD'),
+    ('Cheque', 'CHEQUE')
+)
 
 
 class Payment(models.Model):
@@ -319,6 +328,8 @@ class Payment(models.Model):
         'Company', on_delete=models.CASCADE, default=1)
     to_account = models.ForeignKey('Vendor', on_delete=models.CASCADE)
     invoice = models.CharField(max_length=60, null=True, blank=True)
+    payment_method = models.CharField(
+        max_length=20, choices=PAYMENT_METHOD, default='cash')
     description = models.TextField(null=True, blank=True)
     amount = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     created = models.DateTimeField(auto_now_add=True)
@@ -326,6 +337,10 @@ class Payment(models.Model):
 
     def __str__(self):
         return f'{self.amount} to {self.to_account}'
+
+    @property
+    def get_account_sub(self):
+        return self.to_account.account_type
 
     def get_total_list_price(self):
         total = self.objects.all().aggregate(Sum('amount'))
@@ -342,6 +357,8 @@ class Receive(models.Model):
         'Company', on_delete=models.CASCADE, default=1)
     from_account = models.ForeignKey('Customer', on_delete=models.CASCADE)
     invoice = models.CharField(max_length=60, null=True, blank=True)
+    payment_method = models.CharField(
+        max_length=20, choices=PAYMENT_METHOD, default='cash')
     description = models.TextField(null=True, blank=True)
     amount = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     created = models.DateTimeField(auto_now_add=True)
@@ -349,6 +366,10 @@ class Receive(models.Model):
 
     def __str__(self):
         return f'{self.amount} from {self.from_account}'
+
+    @property
+    def get_account_sub(self):
+        return self.from_account.account_type
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -428,7 +449,8 @@ class Journal(models.Model):
     cr_account = models.ForeignKey(
         'AccountSub', on_delete=models.CASCADE, related_name='credit_account')
 
-    sender_model = models.CharField(max_length=10, choices=MODEL_CHOICES)
+    sender_model = models.CharField(max_length=10)
+
     model_id = models.PositiveIntegerField()
 
     description = models.TextField(blank=True, null=True)
@@ -438,6 +460,21 @@ class Journal(models.Model):
 
     def __str__(self):
         return f'Dr: {self.dr_account}-{self.amount} --- Cr: {self.cr_account}-{self.amount}'
+
+    @property
+    def get_transaction(self):
+        transaction_model = apps.get_model('core', self.sender_model)
+        transaction = transaction_model.objects.get(id=self.model_id)
+        return transaction
+
+    @property
+    def get_output(self):
+        output = self.dr_account.main.account_section
+        if output == 'Assets' or output == 'Liability' or output == 'Equity':
+            print(self.dr_account.main.account_section)
+            return 'balance'
+        else:
+            return 'income'
 
 
 class IncomeStatement(models.Model):

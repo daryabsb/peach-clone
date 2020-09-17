@@ -76,5 +76,69 @@ def add_journal_purchase(sender, instance, created, **kwargs):
             amount=instance.total
         )
 
-        print('created - Journal')
+        print('created - Purchase - Journal')
+        journal.save()
+
+
+@receiver(post_save, sender=Sale)
+def add_journal_sale(sender, instance, created, **kwargs):
+    if created:
+        debit_account = instance.get_account_sub
+        credit_account = instance.customer.get_account_sub
+        model_name = 'Sale'
+        model_id = instance.pk
+
+        journal = Journal.objects.create(
+            dr_account=debit_account,
+            cr_account=credit_account,
+            sender_model=model_name,
+            model_id=model_id,
+            amount=instance.total
+        )
+
+        print('created - Sale - Journal')
+        journal.save()
+
+
+@receiver(post_save, sender=Payment)
+def add_journal_payment(sender, instance, created, **kwargs):
+    if created:
+        if instance.payment_method == 'cash':
+            cash = AccountSub.objects.get(title='Cash')
+            debit_account = instance.to_account.get_account_sub
+            credit_account = cash
+            model_name = 'Payment'
+            model_id = instance.pk
+
+            journal = Journal.objects.create(
+                dr_account=debit_account,
+                cr_account=credit_account,
+                sender_model=model_name,
+                model_id=model_id,
+                amount=instance.amount
+            )
+
+            print('created - Payment - Journal')
+            journal.save()
+
+
+@receiver(post_save, sender=Receive)
+def add_journal_receive(sender, instance, created, **kwargs):
+    if created:
+        if instance.payment_method == 'cash':
+            cash = AccountSub.objects.get(title='Cash')
+            debit_account = cash
+            credit_account = instance.from_account.get_account_sub
+            model_name = 'Receive'
+            model_id = instance.pk
+
+        journal = Journal.objects.create(
+            dr_account=debit_account,
+            cr_account=credit_account,
+            sender_model=model_name,
+            model_id=model_id,
+            amount=instance.amount
+        )
+
+        print('created - Receive - Journal')
         journal.save()
