@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 from .models import (
     User, Company, Owner, AccountMain, AccountSub,
     Item, Purchase, Sale, Customer, Vendor, Payment, Receive,
-    Invoice, Depretiation, BalanceSheet, IncomeStatement, Journal)
+    Invoice, DSP, BalanceSheet, IncomeStatement, Journal)
 
 
 class UserAdmin(BaseUserAdmin):
@@ -53,7 +53,7 @@ admin.site.register(Vendor)
 admin.site.register(Payment)
 admin.site.register(Receive)
 admin.site.register(Invoice)
-admin.site.register(Depretiation)
+admin.site.register(DSP)
 admin.site.register(BalanceSheet)
 admin.site.register(IncomeStatement)
 admin.site.register(Journal)

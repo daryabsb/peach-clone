@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+import datetime
 from django.apps import apps
 
 
@@ -144,9 +145,7 @@ class AccountSub(AccountTemplate):
 
 class Item(AccountTemplate):
     account_sub = models.ForeignKey('AccountSub', on_delete=models.CASCADE)
-    ite_depretiation = models.DecimalField(
-        max_digits=2, decimal_places=2, default=0.00)
-    unit = models.CharField(max_length=30, blank=True, null=True)
+    item_depretiation = models.ForeignKey('DSP', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.title} - {self.account_sub}'
@@ -409,15 +408,31 @@ class Invoice(models.Model):
     #     return sum(item.total for item in self.sale_items.all())
 
 
-class Depretiation(models.Model):
-    item = models.OneToOneField('Item', on_delete=models.CASCADE)
-    rate = models.DecimalField(max_digits=2, decimal_places=2, default=0.00)
+DEPRECIATION_CHOICES = [
+    (1, 'Depreciation'),
+    (2, 'Prepaid'),
+    (3, 'Supplies')
+]
 
+# D = Depreciation - S = Supplies - P = Prepaid
+
+
+class DSP(models.Model):
+    title = models.CharField(max_length=60, null=True, blank=True)
+    depreciation_choices = models.PositiveIntegerField(
+        choices=DEPRECIATION_CHOICES)
+    year_of_purchase = models.IntegerField()
+    lifespan = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.item} - {self.rate}'
+        return f'{self.title} - {self.year_of_purchase}'
+
+    # def save(self, *args, **kwargs):
+    #     now = datetime.datetime.now()
+    #     self.year_of_purchase = now.year
+    #     super(Sale, self).save(*args, **kwargs)
 
 
 class BalanceSheet(models.Model):

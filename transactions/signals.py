@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from core.models import Item, Purchase, Sale, Vendor, Customer, Payment, Receive, Depretiation, Journal, AccountSub
+from core.models import Item, Purchase, Sale, Vendor, Customer, Payment, Receive, DSP, Journal, AccountSub
 # Payment,
 # Receive
 
@@ -63,10 +63,19 @@ def update_customer_balance_on_depretiation(sender, instance, created, **kwargs)
 @receiver(post_save, sender=Purchase)
 def add_journal_purchase(sender, instance, created, **kwargs):
     if created:
+        ap = AccountSub.objects.get(title='Account Payable')
+        item = Item.objects.get(title=instance.item.title)
+        print(item.title)
+
         debit_account = instance.get_account_sub
         credit_account = instance.vendor.get_account_sub
         model_name = 'Purchase'
         model_id = instance.pk
+
+        item.dr += instance.total
+        ap.dr += instance.total
+        item.save()
+        ap.save()
 
         journal = Journal.objects.create(
             dr_account=debit_account,
@@ -89,10 +98,11 @@ def add_journal_sale(sender, instance, created, **kwargs):
         model_id = instance.pk
 
         cash = AccountSub.objects.get(title='Cash')
-        account_receiveable = AccountSub.objects.get(title='Account Receivable')
+        account_receiveable = AccountSub.objects.get(
+            title='Account Receivable')
 
-        account_receiveable.cr += instance.amount
-        account_receiveable.save() 
+        account_receiveable.dr += instance.total
+        account_receiveable.save()
 
         journal = Journal.objects.create(
             dr_account=debit_account,
@@ -111,13 +121,16 @@ def add_journal_payment(sender, instance, created, **kwargs):
     if created:
         if instance.payment_method == 'cash':
             cash = AccountSub.objects.get(title='Cash')
+            ap = AccountSub.objects.get(title='Account Payable')
             debit_account = instance.to_account.get_account_sub
             credit_account = cash
             model_name = 'Payment'
             model_id = instance.pk
 
             cash.dr -= instance.amount
+            ap.dr -= instance.amount
             cash.save()
+            ap.save()
 
             journal = Journal.objects.create(
                 dr_account=debit_account,
@@ -136,15 +149,17 @@ def add_journal_receive(sender, instance, created, **kwargs):
     if created:
         if instance.payment_method == 'cash':
             cash = AccountSub.objects.get(title='Cash')
-            account_receiveable = AccountSub.objects.get(title='Account Receivable')
+            ar = AccountSub.objects.get(title='Account Receivable')
+            account_receiveable = AccountSub.objects.get(
+                title='Account Receivable')
             debit_account = cash
             credit_account = instance.from_account.get_account_sub
             model_name = 'Receive'
             model_id = instance.pk
 
-            cash.cr += instance.amount
+            cash.dr += instance.amount
+            ar.dr -= instance.amount
             cash.save()
-            
 
             account_receiveable.dr -= instance.amount
             account_receiveable.save()
