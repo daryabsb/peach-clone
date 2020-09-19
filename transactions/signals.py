@@ -88,6 +88,12 @@ def add_journal_sale(sender, instance, created, **kwargs):
         model_name = 'Sale'
         model_id = instance.pk
 
+        cash = AccountSub.objects.get(title='Cash')
+        account_receiveable = AccountSub.objects.get(title='Account Receivable')
+
+        account_receiveable.cr += instance.amount
+        account_receiveable.save() 
+
         journal = Journal.objects.create(
             dr_account=debit_account,
             cr_account=credit_account,
@@ -110,6 +116,9 @@ def add_journal_payment(sender, instance, created, **kwargs):
             model_name = 'Payment'
             model_id = instance.pk
 
+            cash.dr -= instance.amount
+            cash.save()
+
             journal = Journal.objects.create(
                 dr_account=debit_account,
                 cr_account=credit_account,
@@ -127,18 +136,26 @@ def add_journal_receive(sender, instance, created, **kwargs):
     if created:
         if instance.payment_method == 'cash':
             cash = AccountSub.objects.get(title='Cash')
+            account_receiveable = AccountSub.objects.get(title='Account Receivable')
             debit_account = cash
             credit_account = instance.from_account.get_account_sub
             model_name = 'Receive'
             model_id = instance.pk
 
-        journal = Journal.objects.create(
-            dr_account=debit_account,
-            cr_account=credit_account,
-            sender_model=model_name,
-            model_id=model_id,
-            amount=instance.amount
-        )
+            cash.cr += instance.amount
+            cash.save()
+            
 
-        print('created - Receive - Journal')
-        journal.save()
+            account_receiveable.dr -= instance.amount
+            account_receiveable.save()
+
+            journal = Journal.objects.create(
+                dr_account=debit_account,
+                cr_account=credit_account,
+                sender_model=model_name,
+                model_id=model_id,
+                amount=instance.amount
+            )
+
+            print('created - Receive - Journal')
+            journal.save()

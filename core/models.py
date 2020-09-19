@@ -149,7 +149,7 @@ class Item(AccountTemplate):
     unit = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - {self.account_sub}'
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
