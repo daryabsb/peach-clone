@@ -421,13 +421,14 @@ class DSP(models.Model):
     title = models.CharField(max_length=60, null=True, blank=True)
     depreciation_choices = models.PositiveIntegerField(
         choices=DEPRECIATION_CHOICES)
-    year_of_purchase = models.IntegerField()
-    lifespan = models.PositiveIntegerField()
+    # year_of_purchase = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
+    lifespan = models.PositiveIntegerField()
+
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.title} - {self.year_of_purchase}'
+        return f'{self.title} - {self.created}'
 
     # def save(self, *args, **kwargs):
     #     now = datetime.datetime.now()
@@ -474,7 +475,8 @@ class Journal(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Dr: {self.dr_account}-{self.amount} --- Cr: {self.cr_account}-{self.amount}'
+        # return f'Dr: {self.dr_account}-{self.amount} --- Cr: {self.cr_account}-{self.amount}'
+        return f'{self.created} - {self.dr_account}'
 
     @property
     def get_transaction(self):

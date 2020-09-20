@@ -21,10 +21,12 @@ def update_vendor_balance_on_purchase(sender, instance, created, **kwargs):
 def update_customer_balance_on_sale(sender, instance, created, **kwargs):
     if created:
         customer = Customer.objects.get(name=instance.customer)
+        sale_revenue = AccountSub.objects.filter(title='Sale Revenue')
         print('created - Sale')
         print(customer.balance)
         print(instance.total)
         customer.balance += instance.total
+        sale_revenue.dr += instance.total
         customer.save()
 
 
