@@ -26,6 +26,7 @@ def update_customer_balance_on_sale(sender, instance, created, **kwargs):
         print(customer.balance)
         print(instance.total)
         customer.balance += instance.total
+        print(sale_revenue.dr)
         sale_revenue.dr += instance.total
         customer.save()
 

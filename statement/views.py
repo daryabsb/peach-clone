@@ -15,11 +15,14 @@ from core.models import (
 
 from django.views.generic import ListView, DetailView
 
+from datetime import timedelta
+
 
 class IncomeStatementView(ListView):
     model = Journal
     form_class = DateForm()
     template_name = 'statements.html'
+    template_name = 'dashgrin/statements2.html'
 
     def get_queryset(self):
 

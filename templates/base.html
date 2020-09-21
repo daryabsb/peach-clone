@@ -1,79 +1,71 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Mannat Themes">
-    <meta name="keyword" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <title>Administration Panel</title>
+    <link media="screen" rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" />
+    <!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
 
-    <title>07 | ACCOUNTING SYSTEM</title>
-
-    <!-- Theme icon -->
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
-
-    <link href="{% static 'assets/plugins/morris-chart/morris.css' %}" rel="stylesheet">
-
-    <!-- Theme Css -->
-    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/slidebars.min.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/menu.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'assets/plugins/jquery-multi-select/multi-select.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'assets/css/statements.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet"> {% block customcss %} {% endblock %}
-
+    <script type="text/javascript" src="{% static 'js/behaviour.js' %}"></script>
 </head>
 
-<body class="sticky-header">
-    <section>
-        {% include 'partials/_left_sidebar.html' %}
-        <!-- body content start-->
-        <div class="body-content">
-            {% include 'partials/_header.html' %}
+<body>
+    <!--[if !IE]>start wrapper<![endif]-->
+    <div id="wrapper">
+        {% include 'partials/_header.html' %}
+        <!--[if !IE]>start head<![endif]-->
 
-            <div class="container-fluid">
-                {% block main %} {% endblock %}
+        <!--[if !IE]>end head<![endif]-->
+        {% block main %} {% endblock main %}
+    </div>
+    <!--[if !IE]>end wrapper<![endif]-->
+
+    <!--[if !IE]>start footer<![endif]-->
+    <div id="footer">
+        <div id="footer_inner">
+
+            <dl class="copy">
+                <dt><strong>HyperAdmin</strong> <em>build 26122008</em></dt>
+                <dd>&copy; 2008 Yourcompany.com All rights reserved.</dd>
+            </dl>
+
+            <dl class="quick_links">
+                <dt><strong>Quick Links :</strong></dt>
+                <dd>
+                    <ul>
+                        <li><a href="#">Dashboard </a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">General Settings</a></li>
+                        <li><a href="#">Static Pages</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li class="last"><a href="#">Log out</a></li>
+                    </ul>
+                </dd>
+            </dl>
 
 
-            </div>
-            <!--end container-->
+            <dl class="help_links">
+                <dt><strong>Need Help ?</strong></dt>
+                <dd>
+                    <ul>
+                        <li><a href="#">Live Help</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li class="last"><a href="#">Knowledgebase</a></li>
+                    </ul>
+                </dd>
+            </dl>
 
-            <!--footer section start-->
-            {% include 'partials/_footer.html' %}
-            <!--footer section end-->
-
-
-            <!-- Right Slidebar start -->
-            {% include 'partials/_right_sidebar.html' %}
-            <!--end Right Slidebar-->
         </div>
-        <!--end body content-->
-    </section>
+    </div>
+    <!--[if !IE]>end footer<![endif]-->
 
-    <!-- jQuery -->
-    <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'assets/js/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery-migrate.js' %}"></script>
-    <script src="{% static 'assets/js/modernizr.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
-    <script src="{% static 'assets/js/slidebars.min.js' %}"></script>
-
-    {% block customjs %} {% endblock %}
-
-    <!--app js-->
-    <script src="{% static 'assets/js/jquery.app.js' %}"></script>
-    <script>
-        jQuery(document).ready(function($) {
-            $('.counter').counterUp({
-                delay: 100,
-                time: 1200
-            });
-        });
-    </script>
 </body>
 
 </html>

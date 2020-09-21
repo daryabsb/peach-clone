@@ -21,28 +21,20 @@
                                 <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
                             </div>
 
-
-
                         </div>
+
                         <div class="row">
-                            {{form}}
                             <div class="col-12">
                                 <div class="card m-b-30">
                                     <div class="card-body">
                                         <h5 class="header-title pb-3">Inline Form</h5>
                                         <div class="general-label">
-                                            <form class="form-inline" method="GET" action="{% url 'statements:income-list' %}" role="form">
+                                            <form class="form-inline" method="GET" action="" role="form">
 
-
-                                                <div class="form-group">
-                                                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4">
-                                                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group m-l-10">
+                                                    <label class="sr-only" for="exampleInputPassword2">End</label>
+                                                    <input class="form-control" name="date-start" type="datetime-local" id="example-datetime-local-input">
                                                 </div>
-
                                                 <div class="form-group m-l-10">
                                                     <label class="sr-only" for="exampleInputPassword2">End</label>
                                                     <input class="form-control" name="date-end" type="datetime-local" id="example-datetime-local-input">
@@ -62,7 +54,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-8 m-auto">
+                            <div class="col-sm-12 m-auto">
                                 <table class="financialbs">
                                     <caption><b>Income Statement for the Year Ended 31<sup>st</sup> December 2013</b></caption>
                                     <tbody>
