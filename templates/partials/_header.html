@@ -63,12 +63,15 @@
 
         <div id="main_menu">
             <ul>
-                <li><a href="#" class="selected"><span><span>Main Controls</span></span></a></li>
-                <li><a href="#"><span><span>Server Settings</span></span></a></li>
-                <li><a href="#"><span><span>Product Management</span></span></a></li>
-                <li><a href="#"><span><span>User Accounts</span></span></a></li>
-                <li><a href="#"><span><span>SEO</span></span></a></li>
-                <li class="last"><a href="#"><span><span>Static Pages</span></span></a></li>
+                <li><a href="/" {% if "/" == request.path %} class="selected" {% endif %}><span><span>Business
+                                Status</span></span></a></li>
+                <li><a href="{% url 'transactions:sale-list' %}" {% if 'sales' in request.path %}class="selected" {% endif %}><span><span>Customers & Sales</span></span></a></li>
+                <li><a href="{% url 'transactions:purchase-list' %}" {% if 'purchases' in request.path %}class="selected" {% endif %}><span><span>Vendors &
+                                Purchases</span></span></a></li>
+                <li><a href="{% url 'transactions:payment-list' %}"><span><span>Inventory & Services</span></span></a>
+                </li>
+                <li><a href="#"><span><span>Employees & Payroll</span></span></a></li>
+                <li class="last"><a href="#"><span><span>Company</span></span></a></li>
             </ul>
         </div>
 

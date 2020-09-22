@@ -9,6 +9,7 @@
     <meta http-equiv="imagetoolbar" content="no" />
     <title>Administration Panel</title>
     <link media="screen" rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
 
     <script type="text/javascript" src="{% static 'js/behaviour.js' %}"></script>
@@ -19,12 +20,17 @@
     <div id="wrapper">
         {% include 'partials/_header.html' %}
         <!--[if !IE]>start head<![endif]-->
+        <div id="content">
+            <div id="page">
+                <div class="inner">
+                    <!--[if !IE]>end head<![endif]-->
+                    {% block main %} {% endblock main %}
+                </div>
+            </div> {% include 'partials/_left_sidebar.html' %}
 
-        <!--[if !IE]>end head<![endif]-->
-        {% block main %} {% endblock main %}
+        </div>
+        <!--[if !IE]>end wrapper<![endif]-->
     </div>
-    <!--[if !IE]>end wrapper<![endif]-->
-
     <!--[if !IE]>start footer<![endif]-->
     <div id="footer">
         <div id="footer_inner">

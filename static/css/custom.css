@@ -1,0 +1,31 @@
+.section_content {
+    position: relative;
+}
+
+.hover-menu {
+	position: absolute;
+	top: 125px;
+	left: 40px;
+	background: #319ecf;
+	margin: 0;
+	padding: 0;
+	border-color: #267fa8;
+	border-width: 1px 4px 1px 1px;
+	border-style: solid;
+	padding: 8px;
+	float: left;
+	width: 120px;
+	display: none;
+}
+.hov:hover .hover-menu {
+	display: block;
+}
+
+.dash-menu{
+	float: left;
+    list-style: none;
+    margin: 0 19px 0 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
