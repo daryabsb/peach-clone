@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mannat Themes">
+    <meta name="keyword" content="">
+
+    <title>07 | ACCOUNTING SYSTEM</title>
+
+    <!-- Theme icon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+
+    <link href="{% static 'assets/plugins/morris-chart/morris.css' %}" rel="stylesheet">
+
+    <!-- Theme Css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/slidebars.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/menu.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets/plugins/jquery-multi-select/multi-select.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/statements.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet"> {% block customcss %} {% endblock %}
+
+</head>
+
+<body class="sticky-header">
+    <section>
+        {% include 'partials/_left_sidebar.html' %}
+        <!-- body content start-->
+        <div class="body-content">
+            {% include 'partials/_header.html' %}
+
+            <div class="container-fluid">
+                {% block main %} {% endblock %}
+
+
+            </div>
+            <!--end container-->
+
+            <!--footer section start-->
+            {% include 'partials/_footer.html' %}
+            <!--footer section end-->
+
+
+            <!-- Right Slidebar start -->
+            {% include 'partials/_right_sidebar.html' %}
+            <!--end Right Slidebar-->
+        </div>
+        <!--end body content-->
+    </section>
+
+    <!-- jQuery -->
+    <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate.js' %}"></script>
+    <script src="{% static 'assets/js/modernizr.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'assets/js/slidebars.min.js' %}"></script>
+
+    {% block customjs %} {% endblock %}
+
+    <!--app js-->
+    <script src="{% static 'assets/js/jquery.app.js' %}"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.counter').counterUp({
+                delay: 100,
+                time: 1200
+            });
+        });
+    </script>
+</body>
+
+</html>
