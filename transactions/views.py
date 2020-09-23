@@ -13,6 +13,23 @@ from core.models import (
 
 from django.views.generic import ListView, DetailView
 
+class CustomerSaleView(ListView):
+    title = 'Customer and Sales'
+    template_name = "revenues.html"
+    model = None
+
+
+    def get_queryset(self):
+        return Sale.objects.all()
+
+    def get_context_data(self):
+        context = super(CustomerSaleView, self).get_context_data()
+        # context['sales'] = Sale.objects.all()
+        context['customers'] = Customer.objects.all()
+        context['model_main'] = 'Sale'
+        context['model_secondary'] = 'Customer'
+        return context
+
 
 class PurchaseList(ListView):
     model = Purchase
