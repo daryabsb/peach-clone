@@ -25,9 +25,26 @@ class CustomerSaleView(ListView):
     def get_context_data(self):
         context = super(CustomerSaleView, self).get_context_data()
         # context['sales'] = Sale.objects.all()
-        context['customers'] = Customer.objects.all()
+        context['secondary'] = Customer.objects.all()
         context['model_main'] = 'Sale'
         context['model_secondary'] = 'Customer'
+        return context
+
+class VendorPurchaseView(ListView):
+    title = 'Vendor and Purchasess'
+    template_name = "revenues.html"
+    model = None
+
+
+    def get_queryset(self):
+        return Purchase.objects.all()
+
+    def get_context_data(self):
+        context = super(VendorPurchaseView, self).get_context_data()
+        # context['sales'] = Sale.objects.all()
+        context['secondary'] = Vendor.objects.all()
+        context['model_main'] = 'Purchase'
+        context['model_secondary'] = 'Vendor'
         return context
 
 

@@ -65,8 +65,8 @@
             <ul>
                 <li><a href="/" {% if "/" == request.path %} class="selected" {% endif %}><span><span>Business
                                 Status</span></span></a></li>
-                <li><a href="{% url 'transactions:sale-list' %}" {% if 'sales' in request.path %}class="selected" {% endif %}><span><span>Customers & Sales</span></span></a></li>
-                <li><a href="{% url 'transactions:purchase-list' %}" {% if 'purchases' in request.path %}class="selected" {% endif %}><span><span>Vendors &
+                <li><a href="{% url 'transactions:revenues-list' %}" {% if 'revenues' in request.path %}class="selected" {% endif %}><span><span>Customers & Sales</span></span></a></li>
+                <li><a href="{% url 'transactions:inventories-list' %}" {% if 'inventories' in request.path %}class="selected" {% endif %}><span><span>Vendors &
                                 Purchases</span></span></a></li>
                 <li><a href="{% url 'transactions:payment-list' %}"><span><span>Inventory & Services</span></span></a>
                 </li>

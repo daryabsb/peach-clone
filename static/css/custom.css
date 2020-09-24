@@ -2,6 +2,46 @@
     position: relative;
 }
 
+.section-container {
+	display:grid;
+	grid-template-rows: auto auto auto auto;
+	grid-template-rows: auto auto;
+}
+/* .section-container {
+	display:grid;
+	grid-template-rows: auto auto auto auto;
+	grid-template-rows: auto auto;
+} */
+
+.container-main {
+	margin: 0;
+	padding: 0;
+	
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+.container-main .container-main__middle {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+.container-main .container-main__middle .container-main__middle--left {
+	margin: 1.5rem;
+}
+.section-container__head {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 2rem;
+}
+
+.mb-0 {
+	margin-bottom: 0 !important;
+}
+.mt-0 {
+	margin-top: 0 !important;
+}
+
 .hover-menu {
 	position: absolute;
 	top: 125px;
