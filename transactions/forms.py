@@ -146,7 +146,8 @@ class InvoiceForm(forms.ModelForm):
     customer = forms.ModelChoiceField(
         queryset=Customer.objects.all(), empty_label="Select a Customer")
 
-    sale_items = forms.ModelMultipleChoiceField(queryset=Sale.objects.all())
+    sale_items = forms.ModelChoiceField(
+        queryset=Item.objects.all(), empty_label="Select an Item")
 
     class Meta:
         model = Invoice
@@ -156,10 +157,9 @@ class InvoiceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(InvoiceForm, self).__init__(*args, **kwargs)
-        self.fields['account'].widget.attrs.update(FOR_CONTROL_CLASS)
-        self.fields['customer'].widget.attrs.update(FOR_CONTROL_CLASS)
-        self.fields['sale_items'].widget.attrs.update(
-            {'class': 'multi-select', 'multiple': ''})
+        self.fields['account'].widget.attrs.update({'name': 'account'})
+        self.fields['customer'].widget.attrs.update({'name': 'customer'})
+        self.fields['sale_items'].widget.attrs.update({'name': 'sale-items', 'style':"width: 15rem;"})
         # self.fields['note'].widget.attrs.update({
         #     'class': 'form-control',
         #     'rows':5,

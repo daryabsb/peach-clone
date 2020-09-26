@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 from .models import Company, Owner, AccountMain
 
@@ -15,3 +15,12 @@ class Home(ListView):
         # Add in a QuerySet of all the books
         context['owners'] = Owner.objects.all()
         return context
+
+def testjs(request):
+    if request.POST:
+        # de = []
+        # for d in request.POST['desc']:
+        print(request.POST)
+        # print('posted')
+        # print(request.POST)
+    return render(request,'testjs.html', {})

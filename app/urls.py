@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import Home
+from core.views import Home, testjs
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,6 +27,7 @@ urlpatterns = [
     path("companies/", include("company.urls", namespace="companies")),
     path("transactions/", include("transactions.urls", namespace="transactions")),
     path("statements/", include("statement.urls", namespace="statements")),
+    path("testjs/", testjs),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
