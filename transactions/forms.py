@@ -141,13 +141,15 @@ class ReceiveForm(forms.ModelForm):
 
 class InvoiceForm(forms.ModelForm):
 
-    account = forms.ModelChoiceField(
-        queryset=Company.objects.all(), empty_label="Select your department")
-    customer = forms.ModelChoiceField(
-        queryset=Customer.objects.all(), empty_label="Select a Customer")
+    # account = forms.ModelChoiceField(
+    #     queryset=Company.objects.all(), empty_label="Select your department")
+    # customer = forms.ModelChoiceField(
+    #     queryset=Customer.objects.all(), empty_label="Select a Customer")
+    # # mychoices = Item.objects.filter(category__name='city')
+    # mychoices = Item.objects.all()
 
-    sale_items = forms.ModelChoiceField(
-        queryset=Item.objects.all(), empty_label="Select an Item")
+    # sale_items = forms.MultipleChoiceField(
+    #     choices=mychoices)
 
     class Meta:
         model = Invoice
@@ -159,7 +161,7 @@ class InvoiceForm(forms.ModelForm):
         super(InvoiceForm, self).__init__(*args, **kwargs)
         self.fields['account'].widget.attrs.update({'name': 'account'})
         self.fields['customer'].widget.attrs.update({'name': 'customer'})
-        self.fields['sale_items'].widget.attrs.update({'name': 'sale-items', 'style':"width: 15rem;"})
+        self.fields['sale_items'].widget.attrs.update({'name': 'sale-items', 'style':'width:100%;'})
         # self.fields['note'].widget.attrs.update({
         #     'class': 'form-control',
         #     'rows':5,

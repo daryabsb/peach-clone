@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'crispy_forms',
+    'widget_tweaks',
 
 
     'core.apps.CoreConfig',

@@ -199,7 +199,25 @@ class CreateInvoice(CreateView):
     template_name = 'transactions/create_invoice.html'
     success_url = '/transactions/invoices'
 
+    def form_valid(self, form):
+
+        # print(form)
+        return super().form_valid(form)
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        print(cleaned_data)
+
+        if cc_myself and subject:
+            # Only do something if both fields are valid so far.
+            if "help" not in subject:
+                raise forms.ValidationError(
+                    "Did not send for 'help' in the subject despite "
+                    "CC'ing yourself."
+                )
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(*kwargs)
+        print(kwargs)
+        context = super().get_context_data(**kwargs)
         context['urlr'] = f"url 'transactions:invoice-add'"
         return context

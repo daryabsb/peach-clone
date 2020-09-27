@@ -388,7 +388,7 @@ class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
 
-    sale_items = models.ManyToManyField(Sale)
+    sale_items = models.ManyToManyField(Item)
     # sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
     # total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
 

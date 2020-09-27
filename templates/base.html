@@ -9,9 +9,9 @@
     <meta http-equiv="imagetoolbar" content="no" />
     <title>Administration Panel</title>
     <link media="screen" rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" />
-    
+    {% block old_base_css %}{% endblock old_base_css %}
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-{% block old_base_css %}{% endblock old_base_css %}
+
     <!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
 
     <script type="text/javascript" src="{% static 'js/behaviour.js' %}"></script>
