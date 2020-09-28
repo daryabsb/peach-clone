@@ -38,7 +38,41 @@
 	grid-template-columns: auto auto;
 	grid-gap: 2rem;
 }
+/*
+.popup_container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+} */
+.popup_wrapper {
+background:url(layout/login/login_wrapper_bg.gif) repeat-x;
+    
+    
+    height: 396px;
+	width: 25vw;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    /*margin-top: -198px;*/
+    z-index: 100;
+}
 
+.popup_wrapper form {
+	margin: 0;
+	padding: 0;
+	width: 336px;
+	margin: 0 auto;
+}
+
+.popup_wrapper fieldset {
+	margin: 0;
+	padding: 80px 0 0;
+	border: 0;
+	position: relative;
+	top: 0;
+	left: 0;
+}
 .mb-0 {
 	margin-bottom: 0 !important;
 }

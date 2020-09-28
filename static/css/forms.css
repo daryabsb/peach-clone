@@ -223,9 +223,18 @@ h3 {
 	
 	
 }
+select {
+	width: 100%;
+	height: 20px;
+	border-color: none;
+	/* background: none; */	
+}
 
 .input_wrapper select {
 	width: 100%;
+	height: 20px;
+	border-color: none;
+	/* background: none; */
 }
 
 .general_form  .blank {

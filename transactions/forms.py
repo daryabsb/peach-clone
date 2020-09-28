@@ -13,7 +13,8 @@ from core.models import (
     Sale,
     Payment,
     Receive,
-    Invoice)
+    Invoice,
+    InvoiceItem)
 
 FOR_CONTROL_CLASS = {'class': 'form-control'}
 
@@ -141,15 +142,16 @@ class ReceiveForm(forms.ModelForm):
 
 class InvoiceForm(forms.ModelForm):
 
-    # account = forms.ModelChoiceField(
-    #     queryset=Company.objects.all(), empty_label="Select your department")
-    # customer = forms.ModelChoiceField(
-    #     queryset=Customer.objects.all(), empty_label="Select a Customer")
+    account = forms.ModelChoiceField(
+        queryset=Company.objects.all(), empty_label="Select your department")
+    customer = forms.ModelChoiceField(
+        queryset=Customer.objects.all(), empty_label="Select a Customer")
     # # mychoices = Item.objects.filter(category__name='city')
     # mychoices = Item.objects.all()
 
-    # sale_items = forms.MultipleChoiceField(
-    #     choices=mychoices)
+    sale_items = forms.ModelChoiceField(
+        queryset=Item.objects.all(), empty_label="Select an Item")
+   
 
     class Meta:
         model = Invoice
@@ -167,3 +169,20 @@ class InvoiceForm(forms.ModelForm):
         #     'rows':5,
         #     'placeholder':'Please add some notes!'
         #     })
+
+class InvoiceCreateForm(forms.ModelForm):
+    
+    account = forms.ModelChoiceField(
+        queryset=Company.objects.all(), empty_label="Select your department")
+    customer = forms.ModelChoiceField(
+        queryset=Customer.objects.all(), empty_label="Select a Customer")
+    # # mychoices = Item.objects.filter(category__name='city')
+    # mychoices = Item.objects.all()
+
+    
+
+    class Meta:
+        model = Invoice
+        fields = (
+            'account', 'customer',
+        )
