@@ -9,10 +9,12 @@ from .views import (
     CreatePayment,
     CreateReceive,
     InvoiceList,
+    InvoiceDetail,
     CreateInvoice,
     CustomerSaleView,
     VendorPurchaseView,
-    create_invoice
+    create_invoice,
+    add_invoice_items
 )
 
 app_name = "transactions"
@@ -28,6 +30,7 @@ urlpatterns = [
     path("payments/add/", CreatePayment.as_view(), name="payment-add"),
     path("receives/add/", CreateReceive.as_view(), name="receive-add"),
     path("invoices/", InvoiceList.as_view(), name="invoice-list"),
-    path("invoices/add/", CreateInvoice.as_view(), name="invoice-add"),
+    path("invoices/<int:pk>/", InvoiceDetail.as_view(), name="invoice-detail"),
+    # path("invoices/<int:pk>/add/", add_invoice_items, name="invoice-item"),
     path("invoices/create/", create_invoice, name="invoice-create"),
 ]

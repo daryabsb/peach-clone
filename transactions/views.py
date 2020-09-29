@@ -1,15 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Sum
 
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.forms import inlineformset_factory
 
-from .forms import PurchaseForm, SaleForm, PaymentForm, ReceiveForm, InvoiceForm
+from .forms import (
+    PurchaseForm, SaleForm, PaymentForm, ReceiveForm, 
+    InvoiceForm, InvoiceCreateForm,)
 
 from core.models import (
     Company, Owner, AccountMain, Item, Customer,
     Vendor, Purchase, Sale, Payment,
-    Receive, Invoice,)
+    Receive, Invoice, InvoiceItem)
 
 from django.views.generic import ListView, DetailView
 
@@ -193,12 +196,20 @@ class InvoiceList(ListView):
 
 class InvoiceDetail(DetailView):
     model = Invoice
+    template_name = 'transactions/invoice_detail.html'
+
+    def get_context_data(self, **kwargs):
+        # vendor = 'Sham Computer'
+        context = super(InvoiceDetail, self).get_context_data()
+        print(context)
+        context['model_name'] = 'Invoice'
+        return context
 
 class CreateInvoice(CreateView):
     model = Invoice
     form_class = InvoiceForm
     # fields = 'department'
-    template_name = 'transactions/create_invoice.html'
+    template_name = 'transactions/create_invoice_item.html'
     success_url = '/transactions/invoices'
 
     def form_valid(self, form):
@@ -233,16 +244,43 @@ def create_invoice(request):
     if request.method == 'POST':
         print(request.POST)
         # create a form instance and populate it with data from the request:
-        form = InvoiceForm(request.POST)
+        form = InvoiceCreateForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            print()
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect('/transactions/invoices')
+            return HttpResponseRedirect('/transactions/invoices/<pk:pk>/add')
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = InvoiceForm()
+        form = InvoiceCreateForm()
 
     return render(request, 'transactions/create_invoice2.html', {'form': form})
+
+
+def add_invoice_items(request, invoice_id):
+    # if this is a POST request we need to process the form data
+    invoice = Invoice.objects.get(pk=invoice_id)
+    invoice_items_formset = inlineformset_factory(Invoice, InvoiceItem, fields='__all__')
+    
+    if request.method == 'POST':
+        formset = invoice_items_formset(request.POST, instance=invoice)
+
+        print(request.POST)
+        # create a form instance and populate it with data from the request:
+        form = InvoiceForm(request.POST)
+        # check whether it's valid:
+        if formset.is_valid():
+            formset.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return redirect('/transactions/invoices/')
+
+    # if a GET (or any other method) we'll create a blank form
+    # else:
+    #     form = InvoiceForm()
+
+    return render(request, 'transactions/create_invoice_item.html', {'form': form})

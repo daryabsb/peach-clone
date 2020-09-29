@@ -4,7 +4,7 @@
 
 {% endblock old_base_css %}
 
-{% load widget_tweaks %} {% block main %}
+ {% block main %}
 
 <div class="section">
   <div class="sct">
@@ -20,20 +20,7 @@
            
               <form action="." method="post">
                 {% csrf_token %}
-<div class="row">
-    <label for="account">Account</label>
-    <div class="inputs">
-         <span>{{form.account}}</span>
-    </div>
-   
-</div>
-<hr>
-<div class="row">
-    <label for="account">Customer</label>
-    <div class="inputs">
-        <span>{% render_field form.customer class="text" selected="1" %}</span>
-    </div>
-    <hr>
+
     <div class="row">
         <div class="section table_section">
             <!--[if !IE]>start title wrapper<![endif]-->
@@ -93,35 +80,11 @@
                                                                   <input  name="unit_price" type="text"  style="width:100%;" />  
                                                                 </div>
                                                                 <div class="hidden_select">
-                                                                   <span>{% render_field form.sale_items  style='width:100%;' %}</span> 
+                                                                   
+                                                                   <!-- <span></span>  -->
                                                                 </div>  
                                                                 </div>
-                                                                <script>
-                                                                const sel_parent = document.querySelector('.multiple_select')
-                                                                const sel_container = document.querySelector('.hidden_select')
-                                                                sel_parent.addEventListener('click', ()=>{
-                                                                    
-                                                                });
-                                                                if (sel_parent != null) {
-                                                                    sel_parent.addEventListener("click", val => {
-
-                                                                    //formElement.insertAdjacentHTML("beforeend", newForm)
-                                                                    console.log('clicked')
-                                                                    sel_container.style.opacity = 1;
-                                                                });
-                                                                }
-                                                              
-                                                                    sel_container.addEventListener("click", val => {
-
-                                                                    //formElement.insertAdjacentHTML("beforeend", newForm)
-                                                                    console.log(val.toElement.value)
-                                                                    sel_parent.textContent = `${sel_parent.textContent}<br> ${val.toElement.value} - ${val.toElement.textContent}`
-                                                                    sel_container.style.opacity = 0;
-                                                                });
-                                                               
                                                                 
-
-                                                                </script>
                                                                 
                                                             </td>
                                                             <td><input  name="unit_price" type="text"  style="width:100%;" /></td>

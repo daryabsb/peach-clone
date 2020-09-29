@@ -62,7 +62,7 @@ class Company(models.Model):
         'Company', related_name='Parent', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     owners = models.ManyToManyField('Owner')
-    address = models.CharField(max_length=200)
+    address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
     account_type = models.CharField(
         max_length=20,  default='accrual', choices=ACCOUNT_TYPE)
     created = models.DateTimeField(auto_now_add=True)
@@ -79,6 +79,21 @@ class Company(models.Model):
 
     def get_absolute_url(self):
         return reverse('company-detail', kwargs={'pk': self.pk})
+
+class Address(models.Model):
+    addr_line1 = models.CharField(max_length=400, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    state = models.CharField(max_length=200, blank=True, null=True)
+    country = models.CharField(max_length=200, blank=True, null=True)
+    zipcode = models.CharField(max_length=10, blank=True, null=True)
+    phone = models.CharField(max_length=200, blank=True, null=True)
+    email = models.EmailField(max_length=200, blank=True, null=True)
+
+    #latitude = models.FloatField(null=True, blank=True);
+    #longitude = models.FloatField(null=True, blank=True);
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class Owner(models.Model):
@@ -169,7 +184,9 @@ MODELS: CUSTOMER,   VENDOR, SUPPLIER
 class CVbase(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
 
-    address = models.CharField(max_length=200, blank=True, null=True)
+    address = models.ForeignKey(
+        'Address', on_delete=models.CASCADE, blank=True, null=True
+        )
     phone = models.CharField(max_length=30, blank=True, null=True)
     balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     note = models.TextField(blank=True, null=True)
@@ -393,6 +410,10 @@ class Invoice(models.Model):
     # total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
 
     note = models.TextField(null=True, blank=True)
+    due_date = models.DateTimeField(null=True, blank=True)
+    payment_term = models.CharField(
+        max_length=60, choices=PAYMENT_METHOD, default='cash'
+        )
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -402,6 +423,9 @@ class Invoice(models.Model):
 
     def __str__(self):
         return f'{self.created}'
+
+    def get_absolute_url(self):
+        return reverse('invoice-detail', kwargs={'pk': self.pk})
 
     
 

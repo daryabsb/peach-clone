@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
 
 from .models import (
-    User, Company, Owner, AccountMain, AccountSub,
+    User, Company, Address, Owner, AccountMain, AccountSub,
     Item, Purchase, Sale, Customer, Vendor, Payment, Receive,
     Invoice, DSP, BalanceSheet, IncomeStatement, Journal, InvoiceItem)
 
@@ -42,6 +42,7 @@ class CompanyAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(User, UserAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(Address)
 admin.site.register(Owner)
 admin.site.register(AccountMain)
 admin.site.register(AccountSub)
