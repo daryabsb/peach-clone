@@ -201,6 +201,7 @@ class InvoiceDetail(DetailView):
     def get_context_data(self, **kwargs):
         # vendor = 'Sham Computer'
         context = super(InvoiceDetail, self).get_context_data()
+        
         print(context)
         context['model_name'] = 'Invoice'
         return context
@@ -262,6 +263,7 @@ def create_invoice(request):
 
 def add_invoice_items(request, invoice_id):
     # if this is a POST request we need to process the form data
+    print(invoice_id)
     invoice = Invoice.objects.get(pk=invoice_id)
     invoice_items_formset = inlineformset_factory(Invoice, InvoiceItem, fields='__all__')
     
@@ -283,4 +285,4 @@ def add_invoice_items(request, invoice_id):
     # else:
     #     form = InvoiceForm()
 
-    return render(request, 'transactions/create_invoice_item.html', {'form': form})
+    return render(request, 'transactions/invoice_detail.html', {'form': form})

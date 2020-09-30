@@ -58,6 +58,11 @@ b, strong, .bold {
   padding: 50px 40px;
   min-height: 1058px;
 }
+/* .popup_container {
+  opacity: 0;
+} */
+
+
 
 .invoice_memo .invoice_memo__company-name {
   background: #8BA09E url("../img/arrows.png") 560px center no-repeat;

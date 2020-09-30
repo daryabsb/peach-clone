@@ -1,5 +1,20 @@
  {% extends 'base.html' %} {% load static %} {% block main %}
 
+<!-- ADD MORE ITEMS POPUP -->
+{% if "add" == request.path %}
+<div class="popup_container">
+    <div class="invoice__add-items">
+        <div class="invoice__add-items--inner-frame">
+            
+            {% include 'transactions/invoice_formset.html' %}
+           
+        </div>
+        
+    </div>
+</div> 
+{% endif %}
+<!-- ADD ITEMS END -->
+
 <div class="invoice_memo">
     <div class="invoice_memo__company-name">
         <span>{{object.account}}</span>
@@ -75,8 +90,10 @@
 <div class="clearfix"></div>
 
 <div class="invoice-items">
-
-    <table cellpadding="0" cellspacing="0">
+<button class="btn btn-primary"><a href="{% url 'transactions:add-items' %}">Add Items</a></button>
+  
+<a href="{% url 'transactions:add-items' object.id %}">Add Items</a>
+<table cellpadding="0" cellspacing="0">
 
         <tr>
             <th>#</th>
@@ -146,12 +163,12 @@
 
 <div class="clearfix"></div>
 
-<section class="invoice-terms">
+<div class="invoice-terms">
 
     <span>{terms_label}</span>
     <div>{terms}</div>
 
-</section>
+</div>
 
 <div class="payment-info">
     <div>{payment_info1}</div>
@@ -160,4 +177,6 @@
     <div>{payment_info4}</div>
     <div>{payment_info5}</div>
 </div>
+
+
 {% endblock main %}

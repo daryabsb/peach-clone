@@ -125,6 +125,24 @@ background:url(layout/login/login_wrapper_bg.gif) repeat-x;
     margin-top: 3rem;
    
 }
+.popup_container .invoice__add-items {
+    display: block;
+    width: 75vw;
+    height: 75vh;
+    background-color: cadetblue;
+    position: fixed;
+    top: 10vh;
+    left: 12vw;
+    z-index: 100;
+    /* color: white; */
+  }
+
+  .popup_container .invoice__add-items .invoice__add-items--inner-frame {
+    width: 98%;
+    height: 90%;
+    background-color: white;
+    margin: 0 1rem;
+  }
 
 
 

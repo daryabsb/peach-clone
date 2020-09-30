@@ -31,6 +31,7 @@ urlpatterns = [
     path("receives/add/", CreateReceive.as_view(), name="receive-add"),
     path("invoices/", InvoiceList.as_view(), name="invoice-list"),
     path("invoices/<int:pk>/", InvoiceDetail.as_view(), name="invoice-detail"),
+    path("invoices/<int:pk>/add/", add_invoice_items, name="add-items"),
     # path("invoices/<int:pk>/add/", add_invoice_items, name="invoice-item"),
     path("invoices/create/", create_invoice, name="invoice-create"),
 ]
