@@ -1,163 +1,163 @@
+ {% extends 'base.html' %} {% load static %} {% block main %}
 
-{% extends 'base.html' %}
-{% load static %}
+<div class="invoice_memo">
+    <div class="invoice_memo__company-name">
+        <span>{{object.account}}</span>
+        <div class="invoice_memo__right-arrow"></div>
+    </div>
 
-{% block main %}
- 
-      <div class="invoice_memo">
-        <div class="invoice_memo__company-name">
-          <span>{{object.account}}</span>
-          <div class="invoice_memo__right-arrow"></div>
-        </div>
+    <div class="invoice_memo__logo">
+        <img data-logo="{company_logo}" />
+    </div>
 
-        <div class="invoice_memo__logo">
-          <img data-logo="{company_logo}" />
-        </div>
-        
-        <div class="company-info">
-          <div>
+    <div class="company-info">
+        <div>
             <span>{{object.account.address.addr_line1}}</span> <span>{{object.account.address.zipcode}}</span>
-          </div>
-          <div>{{object.account.address.email}}</div>
-          <div>{{object.account.address.phone}}</div>
         </div>
+        <div>{{object.account.address.email}}</div>
+        <div>{{object.account.address.phone}}</div>
+    </div>
 
+</div>
+
+<div class="invoice-info">
+    <div>
+        <span>Issued Date:</span>
+        <span>Due Date:</span>
+        <span>Payment Term:</span>
+        <span>Invoice Number</span>
     </div>
-      
-      <div class="invoice-info">
-        <div>
-          <span>Issued Date:</span>
-          <span>Due Date:</span>
-          <span>Payment Term:</span>
-          <span>Invoice Number</span>
-        </div>
-        
-        <div>
-          <span>{{object.created}}</span>
-          <span>{{object.due_date}}</span>
-          <span>{{object.payment_term}}</span>
-          <span>{{object.id}}</span>
-        </div>
+
+    <div>
+        <span>{{object.created}}</span>
+        <span>{{object.due_date}}</span>
+        <span>{{object.payment_term}}</span>
+        <span>{{object.id}}</span>
     </div>
-      
-      <div class="client-info">
-        <span>Customer Name</span>
-        <div>
-          <span class="bold">{{object.customer}}</span>
-        </div>
-        
-        <div>
-          <span>{{object.customer.address.addr_line1}}</span>
-        </div>
-        
-        <div>
-          <span>{{object.customer.address.zipcode}}</span>
-        </div>
-        
-        <div>
-          <span>{{object.customer.address.phone}}</span>
-        </div>
-        
-        <div>
-          <span>{{object.customer.address.email}}</span>
-        </div>
-        
-       <!-- <div>
+</div>
+
+<div class="client-info">
+    <span>Customer Name</span>
+    <div>
+        <span class="bold">{{object.customer}}</span>
+    </div>
+
+    <div>
+        <span>{{object.customer.address.addr_line1}}</span>
+    </div>
+
+    <div>
+        <span>{{object.customer.address.zipcode}}</span>
+    </div>
+
+    <div>
+        <span>{{object.customer.address.phone}}</span>
+    </div>
+
+    <div>
+        <span>{{object.customer.address.email}}</span>
+    </div>
+
+    <!-- <div>
           <span>{client_other}</span>
         </div>-->
-    </div>
-      
-      <div class="clearfix"></div>
-      
-      <div class="invoice-title-number">
-      
-        <span class="invoice-title-number__title">Invoice #</span>
-        <span class="invoice-title-number__number">{{object.id}}</span>
-        
-      </div>
-      
-      <div class="clearfix"></div>
-      
-      <div class="invoice-items">
-        
-        <table cellpadding="0" cellspacing="0">
-        
-          <tr>
-            <th>{item_row_number_label}</th> <!-- Dummy cell for the row number and row commands -->
-            <th>{item_description_label}</th>
-            <th>{item_quantity_label}</th>
-            <th>{item_price_label}</th>
-            <th>{item_discount_label}</th>
-            <th>{item_tax_label}</th>
-            <th>{item_line_total_label}</th>
-          </tr>
-          
-          <tr data-iterate="item">
-            <td>{item_row_number}</td> <!-- Don't remove this column as it's needed for the row commands -->
-            <td>{item_description}</td>
-            <td>{item_quantity}</td>
-            <td>{item_price}</td>
-            <td>{item_discount}</td>
-            <td>{item_tax}</td>
-            <td>{item_line_total}</td>
-          </tr>
-          
-        </table>
-        
-    </div>
+</div>
 
-      <div class="invoice-currency">
-        <span>{currency_label}</span> <span>{currency}</span>
-      </div>
-      
-      <div class="invoice-sums">
-      
-        <table cellpadding="0" cellspacing="0">
-          <tr>
-            <th>{amount_subtotal_label}</th>
-            <td>{amount_subtotal}</td>
-          </tr>
-          
-          <tr data-iterate="tax">
-            <th>{tax_name}</th>
-            <td>{tax_value}</td>
-          </tr>
-          
-          <tr class="amount-total">
-            <th>{amount_total_label}</th>
-            <td>{amount_total}</td>
-          </tr>
-          
-          <!-- You can use attribute data-hide-on-quote="true" to hide specific information on quotes.
+<div class="clearfix"></div>
+
+<div class="invoice-title-number">
+
+    <span class="invoice-title-number__title">Invoice #</span>
+    <span class="invoice-title-number__number">{{object.id}}</span>
+
+</div>
+
+<div class="clearfix"></div>
+
+<div class="invoice-items">
+
+    <table cellpadding="0" cellspacing="0">
+
+        <tr>
+            <th>#</th>
+            <!-- Dummy cell for the row number and row commands -->
+            <th>Item Description</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Taxes</th>
+            <th>Sub Total</th>
+        </tr>
+        {% for item in object.get_sale_items %}
+        <tr data-iterate="item">
+
+            <td>{{ forloop.counter }}</td>
+            <!-- Don't remove this column as it's needed for the row commands -->
+            <td>{{item.item.title}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.unit_price}}</td>
+            <td>0</td>
+            <td>0</td>
+            <td>{{item.total}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+<div class="invoice-currency">
+    <span>Currency</span> <span>USD</span>
+</div>
+
+<div class="invoice-sums">
+
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Total Price</th>
+            <td>{{object.get_total_price}}</td>
+        </tr>
+
+        <tr data-iterate="tax">
+            <th>VAT</th>
+            <td>0</td>
+        </tr>
+
+        <tr class="amount-total">
+            <th>Final Price</th>
+            <td>{{object.get_total_price}}</td>
+        </tr>
+
+        <!-- You can use attribute data-hide-on-quote="true" to hide specific information on quotes.
                For example Invoicebus doesn't need amount paid and amount due on quotes  -->
-          <tr data-hide-on-quote="true">
-            <th>{amount_paid_label}</th>
-            <td>{amount_paid}</td>
-          </tr>
-          
-          <tr data-hide-on-quote="true">
-            <th>{amount_due_label}</th>
-            <td>{amount_due}</td>
-          </tr>
-          
-        </table>
-        
-    </div>
-      
-      <div class="clearfix"></div>
-      
-      <section class="invoice-terms">
-      
-        <span>{terms_label}</span>
-        <div>{terms}</div>
-        
-      </section>
+        <tr data-hide-on-quote="true">
+            <th>Paid Amount</th>
+            <td>{{object.get_total_price}}</td>
+        </tr>
 
-      <div class="payment-info">
-        <div>{payment_info1}</div>
-        <div>{payment_info2}</div>
-        <div>{payment_info3}</div>
-        <div>{payment_info4}</div>
-        <div>{payment_info5}</div>
-      </div>
-      {% endblock main %}
+        <tr data-hide-on-quote="true">
+            <th>Customer Balance</th>
+            <td>{{object.customer.balance}}</td>
+        </tr>
+
+    </table>
+
+</div>
+
+<div class="clearfix"></div>
+
+<section class="invoice-terms">
+
+    <span>{terms_label}</span>
+    <div>{terms}</div>
+
+</section>
+
+<div class="payment-info">
+    <div>{payment_info1}</div>
+    <div>{payment_info2}</div>
+    <div>{payment_info3}</div>
+    <div>{payment_info4}</div>
+    <div>{payment_info5}</div>
+</div>
+{% endblock main %}

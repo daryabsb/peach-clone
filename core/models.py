@@ -405,7 +405,6 @@ class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
 
-    
     # sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
     # total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
 
@@ -422,10 +421,21 @@ class Invoice(models.Model):
         super(Invoice, self).__init__(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.created}'
+        return f'{self.id} - {self.customer}'
 
     def get_absolute_url(self):
         return reverse('invoice-detail', kwargs={'pk': self.pk})
+
+    @property
+    def get_sale_items(self):
+        return InvoiceItem.objects.filter(invoice=self)
+    @property
+    def get_total_price(self):
+        items = InvoiceItem.objects.filter(invoice=self)
+        total = 0
+        for item in items:
+            total += item.total
+        return total
 
     
 
