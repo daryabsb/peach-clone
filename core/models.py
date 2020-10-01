@@ -402,7 +402,7 @@ class Revenue(models.Model):
 
 
 class Invoice(models.Model):
-    account = models.ForeignKey('Company', on_delete=models.CASCADE)
+    account = models.ForeignKey('Company', on_delete=models.CASCADE, default=1)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
 
     # sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
@@ -413,7 +413,8 @@ class Invoice(models.Model):
     payment_term = models.CharField(
         max_length=60, choices=PAYMENT_METHOD, default='cash'
         )
-
+    balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    status = models.CharField(max_length=30)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

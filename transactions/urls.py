@@ -1,21 +1,8 @@
 from django.urls import path
 from .views import (
-    PurchaseList,
-    SaleList,
-    PaymentList,
-    ReceiveList,
-    CreatePurchase,
-    CreateSale,
-    CreatePayment,
-    CreateReceive,
-    InvoiceList,
-    InvoiceDetail,
-    CreateInvoice,
-    CustomerSaleView,
-    VendorPurchaseView,
-    create_invoice,
-    add_invoice_items
-)
+    PurchaseList, SaleList, PaymentList, ReceiveList, CreatePurchase, CreateSale,
+    CreatePayment, CreateReceive, InvoiceList, InvoiceDetail, CreateInvoice, 
+    CustomerSaleView, VendorPurchaseView, create_invoice, add_invoice_items,)
 
 app_name = "transactions"
 urlpatterns = [

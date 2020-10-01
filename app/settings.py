@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'statement.apps.StatementConfig',
     'company',
     'users',
+    'sales',
 ]
 
 AUTH_USER_MODEL = 'core.User'
