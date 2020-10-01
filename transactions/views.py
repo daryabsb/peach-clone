@@ -261,11 +261,11 @@ def create_invoice(request):
     return render(request, 'transactions/create_invoice2.html', {'form': form})
 
 
-def add_invoice_items(request, invoice_id):
+def add_invoice_items(request, pk):
     # if this is a POST request we need to process the form data
-    print(invoice_id)
-    invoice = Invoice.objects.get(pk=invoice_id)
-    invoice_items_formset = inlineformset_factory(Invoice, InvoiceItem, fields='__all__')
+    # print(invoice_id)
+    invoice = Invoice.objects.get(pk=pk)
+    # invoice_items_formset = inlineformset_factory(Invoice, InvoiceItem, fields='__all__')
     
     if request.method == 'POST':
         formset = invoice_items_formset(request.POST, instance=invoice)
@@ -285,4 +285,4 @@ def add_invoice_items(request, invoice_id):
     # else:
     #     form = InvoiceForm()
 
-    return render(request, 'transactions/invoice_detail.html', {'form': form})
+    return render(request, 'transactions/invoice_detail.html', {})

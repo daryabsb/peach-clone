@@ -5,13 +5,13 @@
 <div class="popup_container">
     <div class="invoice__add-items">
         <div class="invoice__add-items--inner-frame">
-            
+
             {% include 'transactions/invoice_formset.html' %}
-           
+
         </div>
-        
+
     </div>
-</div> 
+</div>
 {% endif %}
 <!-- ADD ITEMS END -->
 
@@ -90,10 +90,10 @@
 <div class="clearfix"></div>
 
 <div class="invoice-items">
-<button class="btn btn-primary"><a href="{% url 'transactions:add-items' %}">Add Items</a></button>
-  
-<a href="{% url 'transactions:add-items' object.id %}">Add Items</a>
-<table cellpadding="0" cellspacing="0">
+    <button class="btn btn-primary">
+      <a href="{% url 'transactions:add-items' object.id %}"
+      >Add Items</a></button>
+    <table cellpadding="0" cellspacing="0">
 
         <tr>
             <th>#</th>
