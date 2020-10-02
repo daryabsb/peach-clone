@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block old_base_css %}
+{% extends '_base.html' %} {% load static %} {% block old_base_css %}
 
 <link href="{% static 'assets/plugins/switchery/switchery.min.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/plugins/tagsinput/jquery.tagsinput.css' %}" rel="stylesheet" />
@@ -29,21 +29,21 @@
                         {% endif %}
 
                         <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
-<h1>Darya</h1>
+                        <h1>Darya</h1>
                         <!-- <h1>Submit your form here!</h1> -->
                         <form action="." method="post">
-                            {% csrf_token %} 
-                            
-                            
-                            
-                            
-                            
-                       
+                            {% csrf_token %}
+
+
+
+
+
+
 
                             <div class="col-lg-4 mx-auto">
                                 <h6 class="light-dark mb-2">Searchable</h6>
 
-                               
+
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

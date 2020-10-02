@@ -28,6 +28,8 @@ urlpatterns = [
     path("transactions/", include("transactions.urls", namespace="transactions")),
     path("statements/", include("statement.urls", namespace="statements")),
     path("testjs/", testjs),
+    
+    path('sales/',include('sales.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

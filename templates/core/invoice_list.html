@@ -1,0 +1,86 @@
+{% extends "_base.html" %} {% load static %} {% block main %}
+<p><a class="btn btn-default" href="{% url 'sales_invoice_list' %}">Invoice Listing</a></p>
+
+<div class="section_content">
+    <!--[if !IE]>start section content top<![endif]-->
+    <div class="sct">
+        <div class="sct_left">
+            <div class="sct_right">
+                <div class="sct_left">
+                    <div class="sct_right">
+                        <form action="#">
+                            <!--[if !IE]>start table_wrapper<![endif]-->
+                            <div class="table_wrapper">
+                                <div class="table_wrapper_inner">
+                                    <table class="table">
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Link</td>
+                                            <td>created</td>
+                                            <td>last_updated</td>
+                                            <td>rate</td>
+                                            <td>balancetype</td>
+                                            <td>paymenttype</td>
+                                            <td>balance</td>
+                                            <td>status</td>
+                                        </tr>
+                                        {% for object in object_list %}
+                                        <tr>
+                                            <td>{{object.pk}}</td>
+                                            <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+                                            <td>{{ object.created }}</td>
+                                            <td>{{ object.last_updated }}</td>
+                                            <td>{{ object.rate }}</td>
+                                            <td>{{ object.balancetype }}</td>
+                                            <td>{{ object.paymenttype }}</td>
+                                            <td>{{ object.balance }}</td>
+                                            <td>{{ object.status }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                            <!--[if !IE]>end table_wrapper<![endif]-->
+
+                            <!--[if !IE]>start table menu<![endif]-->
+                            <div class="table_menu">
+                                <ul class="left">
+                                    <li>
+                                        <a href="{% url 'sales_invoice_create' %}" class="button add_new"><span><span>ADD NEW</span></span></a
+      >
+    </li>
+  </ul>
+  <ul class="right">
+    <li>
+      <a href="#" class="button check_all"
+        ><span><span>CHECK ALL</span></span></a
+      >
+    </li>
+    <li>
+      <a href="#" class="button uncheck_all"
+        ><span><span>UNCHECK ALL</span></span></a
+      >
+    </li>
+    <li>
+      <span class="button approve"
+        ><span><span>APPROVE</span></span>
+      </span>
+    </li>
+  </ul>
+</div>
+<!--[if !IE]>end table menu<![endif]-->
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!--[if !IE]>end section content top<![endif]-->
+<!--[if !IE]>start section content bottom<![endif]-->
+<span class="scb"
+><span class="scb_left"></span><span class="scb_right"></span
+></span>
+<!--[if !IE]>end section content bottom<![endif]-->
+</div>
+<a class="btn btn-primary" href="{% url 'sales_invoice_create' %}">Create new Invoice</a> {% endblock %}

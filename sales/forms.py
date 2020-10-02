@@ -10,23 +10,26 @@ class InvoiceForm(forms.ModelForm):
     customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
     class Meta:
         model = Invoice
-        fields = ['created', 'payment_term', 'balance', 'status', 'customer']
+        fields = ['payment_term', 
+        'balance', 
+        'status', 
+        'customer']
 
 
 class InvoiceItemForm(forms.ModelForm):
-    product=forms.ModelChoiceField(queryset=ProductVariant.objects.all(),widget=Select2Widget)
+    item=forms.ModelChoiceField(queryset=Item.objects.all(),widget=Select2Widget)
 
 
     class Meta:
         model = InvoiceItem
-        fields = ['weight', 'touch', 'total', 'is_return', 'quantity', 'product', 'invoice','makingcharge']
+        fields = ('invoice', 'item', 'quantity', 'unit_price','total',)
 
 InvoiceItemFormSet=inlineformset_factory(Invoice,InvoiceItem,
-    fields=('is_return','product','quantity','weight', 'touch', 'makingcharge','total', 'invoice'),extra=1,can_delete=True)
+    fields=('invoice','item','quantity','unit_price','total',),extra=3,can_delete=True)
 
-"""
-class ReceiptForm(forms.ModelForm):
-    customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
-    class Meta:
-        model = Receipt
-        fields = ['customer','type', 'total', 'description']
+
+# class ReceiptForm(forms.ModelForm):
+#     customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
+#     class Meta:
+#         model = Receipt
+#         fields = ['customer','type', 'total', 'description']

@@ -1,0 +1,82 @@
+{% extends '_base.html' %} {% load static %} {% load widget_tweaks %} {% load bootstrap4 %} {% block main %}
+
+<p>
+    <h2 class="h3 mb-3 font-weight-normal">Add Invoice</h2>
+</p>
+<h1 class="h-color">DARYA</h1>
+<form action="." method="post">
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="customer">{{ form.customer.label }}</label> {{ form.customer.errors }} {% render_field form.customer class='invoice__customer' %}
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.created.errors }} {{ form.balance }}
+        </div>
+
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.status.errors }} {{form.status }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.paymenttype.errors }} {{form.payment_term }}
+        </div>
+
+
+    </div>
+
+
+
+
+    {{ invoiceitem_form.management_form }} {{ invoiceitem_form.non_form_errors }} {% for form in invoiceitem_form %} {%csrf_token%} {{form.id}}
+
+    <table class="table table-sm table-striped">
+        {%if forloop.first%}
+        <thead class="thead-dark">
+            <tr>
+                {% for field in form.visible_fields %}
+                <th><span>{{field.label}}</span></th>
+                {%endfor%}
+            </tr>
+        </thead>
+        {% endif %}
+        <tbody>
+            <tr class="inline {{invoiceitem_form.prefix}}">
+                {% for field in form.visible_fields %}
+                <td class="{{field.name}}">
+                    <!-- {{ field.errors.as_ul }} -->
+                    <span>{{field }}</span>
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+
+    <div class="form-group row">
+        {{ form.balance.errors }}
+        <div class="col-sm-4">{{ form.balance }}</div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save Invoice</button>
+</form>
+
+
+{% endblock %} {% block old_base_js %}
+
+<script type="text/javascript">
+    console.log('Started')
+    var invoiceCustomer = document.querySelector('#id_customer')
+    const hooray = (el) => {
+        el.preventDefault()
+        console.log(el.target.value)
+    }
+
+    invoiceCustomer.addEventListener('change', hooray);
+
+
+    console.log('Ended')
+</script>
+{% endblock old_base_js %}

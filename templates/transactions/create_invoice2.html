@@ -1,175 +1,174 @@
-{% extends 'base.html' %} {% load static %}
-
-{% block old_base_css %}
-
-{% endblock old_base_css %}
-
-{% load widget_tweaks %} {% block main %}
+{% extends '_base.html' %} {% load static %} {% block old_base_css %} {% endblock old_base_css %} {% load widget_tweaks %} {% block main %}
 
 <!-- CREATE INVOICE FIRST POPUP -->
 {% include 'transactions/transaction_partials/popup.html' %}
 
 
 
- <!-- END CREATE INVOICE -->
+<!-- END CREATE INVOICE -->
 
 
 
 
 <div class="section">
-  <div class="sct">
-    <div class="sct_left">
-      <div class="sct_right">
+    <div class="sct">
         <div class="sct_left">
-          <div class="sct_right">
-            {% if form.vendor %}
-            <h3>Create a purchase</h3>
-            {% elif form.customer %}
-            <h3>Create a sale</h3>
-            {% endif %}
-           <style>
-            .form_select {
-                  /* width:100%;*/ 
-                   border:none;
-                   background-color: none;
-                   /*height: 2rem;
+            <div class="sct_right">
+                <div class="sct_left">
+                    <div class="sct_right">
+                        {% if form.vendor %}
+                        <h3>Create a purchase</h3>
+                        {% elif form.customer %}
+                        <h3>Create a sale</h3>
+                        {% endif %}
+                        <style>
+                            .form_select {
+                                /* width:100%;*/
+                                border: none;
+                                background-color: none;
+                                /*height: 2rem;
                    margin-bottom: 1rem;
                    */
-                   width: 100%;
-                   /*font-size: 1.2rem;*/
-                   color: grey;
-               }
-               .item_2 {
-                   display: none;
-                   opacity: 0;
-               }
-           </style>
-            <form action="." method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <label for="account">Account Name:</label>
-                    <div class="inputs">
-                        
-                    </div>
-                   
-                </div>
-                
-                <div class="row">
-                    <label for="account">Customer Name:</label>
-                    <div class="inputs">
-                       
-                    </div>
-                    
-                </div>
-               
-               <div class="row">
-                <div class="section table_section">
-                    <div class="title_wrapper">
-                        <h2>Select Items</h2>
-                        <span class="title_wrapper_left"></span>
-                        
-                    <span class="title_wrapper_right" style="display: block;"></span></div>
-                    <div class="section_content">
-                        <!--[if !IE]>start section content top<![endif]-->
-                        <div class="sct">
-                            <div class="sct_left">
-                                <div class="sct_right">
-                                    <div class="sct_left">
-                                        <div class="sct_right">
-                
-                
-                                            <div id="product_list">
-                                                <!--[if !IE]>start table_wrapper<![endif]-->
-                                                <div class="table_wrapper">
-                                                    <div class="table_wrapper_inner">
-                                                        <table cellpadding="0" cellspacing="0" width="100%">
-                                                            <tbody class="table_body">
-                                                                <tr>
-                                                                    <th>No.</th>
-                                                                    <th><span>Item</span></th>
-                                                                    <th style="width: 30rem;"><a href="#" class="asc">Description</a></th>
-                
-                                                                    <th><a href="#">Unit Price</a></th>
-                                                                    <th><a href="#">Quantity</a></th>
-                                                                    <th><a href="#">Sub Total</a></th>
-                
-                                                                    <th>Actions</th>
-                                                                </tr>
-                                                               
-                                                                    <tr class="first add_row">
-                                                                    <td style="width: 16px;">1.</td>
-                                                                    <td><span>
+                                width: 100%;
+                                /*font-size: 1.2rem;*/
+                                color: grey;
+                            }
+                            
+                            .item_2 {
+                                display: none;
+                                opacity: 0;
+                            }
+                        </style>
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <label for="account">Account Name:</label>
+                                <div class="inputs">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <label for="account">Customer Name:</label>
+                                <div class="inputs">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="section table_section">
+                                    <div class="title_wrapper">
+                                        <h2>Select Items</h2>
+                                        <span class="title_wrapper_left"></span>
+
+                                        <span class="title_wrapper_right" style="display: block;"></span></div>
+                                    <div class="section_content">
+                                        <!--[if !IE]>start section content top<![endif]-->
+                                        <div class="sct">
+                                            <div class="sct_left">
+                                                <div class="sct_right">
+                                                    <div class="sct_left">
+                                                        <div class="sct_right">
+
+
+                                                            <div id="product_list">
+                                                                <!--[if !IE]>start table_wrapper<![endif]-->
+                                                                <div class="table_wrapper">
+                                                                    <div class="table_wrapper_inner">
+                                                                        <table cellpadding="0" cellspacing="0" width="100%">
+                                                                            <tbody class="table_body">
+                                                                                <tr>
+                                                                                    <th>No.</th>
+                                                                                    <th><span>Item</span></th>
+                                                                                    <th style="width: 30rem;"><a href="#" class="asc">Description</a></th>
+
+                                                                                    <th><a href="#">Unit Price</a></th>
+                                                                                    <th><a href="#">Quantity</a></th>
+                                                                                    <th><a href="#">Sub Total</a></th>
+
+                                                                                    <th>Actions</th>
+                                                                                </tr>
+
+                                                                                <tr class="first add_row">
+                                                                                    <td style="width: 16px;">1.</td>
+                                                                                    <td><span>
                                                                          {% render_field form.sale_items  class='form_select' %}
                                                                     </span>
-                    
-                     </td>
-                     <td><input  name="unit_price" type="text"  style="width:100%;" /></td>
-                     <td><input type="number"  name="quantity"  style="width:100%;" /></td>
-                     <td><span><input type="number"  style="width:100%;" /></span></td>
-                     <td><span><input type="number"  style="width:100%;" /></span></td>
-                     <td>
-                         <div class="actions_menu">
-                             <ul>
-                                 <li><a class="edit" href="#">Edit</a></li>
-                                 <li><a class="delete" href="#">Delete</a></li>
-                             </ul>
-                         </div>
-                        </td>
-                    </tr>
-                                                                
-                                                             
-                                                                
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td></td> <td></td> <td></td> <td></td>
-                            <td><label for="total_invoice"><h3>Total Discount</h3></label></td>
-                            <td><span><input type="number" name="total_invoice"  style="width:100%;" /></span></td>
-                        </tr>
-                        <tr>
-                            <td></td> <td></td> <td></td> <td></td>
-                            <td><label for="total_invoice"><h3>Total Invoice</h3></label></td>
-                            <td><span><input type="number" name="total_discount"  style="width:100%;" /></span></td>
-                        </tr>
-                    </tfoot>
-                   
-                </table>
+
+                                                                                    </td>
+                                                                                    <td><input name="unit_price" type="text" style="width:100%;" /></td>
+                                                                                    <td><input type="number" name="quantity" style="width:100%;" /></td>
+                                                                                    <td><span><input type="number"  style="width:100%;" /></span></td>
+                                                                                    <td><span><input type="number"  style="width:100%;" /></span></td>
+                                                                                    <td>
+                                                                                        <div class="actions_menu">
+                                                                                            <ul>
+                                                                                                <li><a class="edit" href="#">Edit</a></li>
+                                                                                                <li><a class="delete" href="#">Delete</a></li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+
+
+
+                                                                            </tbody>
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td><label for="total_invoice"><h3>Total Discount</h3></label></td>
+                                                                                    <td><span><input type="number" name="total_invoice"  style="width:100%;" /></span></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td><label for="total_invoice"><h3>Total Invoice</h3></label></td>
+                                                                                    <td><span><input type="number" name="total_discount"  style="width:100%;" /></span></td>
+                                                                                </tr>
+                                                                            </tfoot>
+
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <!--[if !IE]>end table_wrapper<![endif]-->
+                                                            </div>
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--[if !IE]>end section content top<![endif]-->
+                                        <!--[if !IE]>start section content bottom<![endif]-->
+                                        <span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+                                        <!--[if !IE]>end section content bottom<![endif]-->
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <input type="submit" value="Submit">
+                        </form>
+
                     </div>
                 </div>
-                <!--[if !IE]>end table_wrapper<![endif]-->
             </div>
-
-
-
-
-
         </div>
     </div>
-</div>
-</div>
-</div>
-<!--[if !IE]>end section content top<![endif]-->
-<!--[if !IE]>start section content bottom<![endif]-->
-<span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
-<!--[if !IE]>end section content bottom<![endif]-->
-
-</div>
-                </div>
-               </div>
-               
-              
-                <input type="submit" value="Submit">
-            </form>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <!--end row-->
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 
-{% endblock %} {% block old_base_js %} 
-
-{% endblock old_base_js %}
+{% endblock %} {% block old_base_js %} {% endblock old_base_js %}

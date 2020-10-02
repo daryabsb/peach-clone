@@ -1,32 +1,27 @@
-{% extends 'base.html' %} {% load static %} {% block old_base_css %}
+{% extends '_base.html' %} {% load static %} {% block old_base_css %}
 
 <style>
-  #content {
-    background-color: azure;
-  }
+    #content {
+        background-color: azure;
+    }
 </style>
 
 {% endblock old_base_css %} {% block main %}
 
 <div class="bottom">
-  <form action="." method="POST" class="add">
-    {% csrf_token %}
-    <div class="add__container">
-      <select class="add__type">
+    <form action="." method="POST" class="add">
+        {% csrf_token %}
+        <div class="add__container">
+            <select class="add__type">
         <option value="iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" selected>+</option>
         <option value="eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee">-</option>
       </select>
-      
-      <input
-        type="text"
-        class="add__description"
-        placeholder="Add description"
-      />
-      <input type="number" class="add__value" name="desc" placeholder="Value" />
-     
-    </div>
-    <button href="#" class="add__new button add_new right"
-    ><span><span>ADD NEW</span></span></button
+
+            <input type="text" class="add__description" placeholder="Add description" />
+            <input type="number" class="add__value" name="desc" placeholder="Value" />
+
+        </div>
+        <button href="#" class="add__new button add_new right"><span><span>ADD NEW</span></span></button
   >
 </form>
 
@@ -42,27 +37,27 @@
                         <div class="item__value">+ 2,100.00</div>
                         <div class="item__delete">
                             <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="item clearfix" id="income-1">
-                    <div class="item__description">Sold car</div>
-                    <div class="right clearfix">
-                        <div class="item__value">+ 1,500.00</div>
-                        <div class="item__delete">
-                            <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                        </div>
-                    </div>
-                </div>
-                -->
-      </div>
+</div>
+</div>
+</div>
+
+<div class="item clearfix" id="income-1">
+    <div class="item__description">Sold car</div>
+    <div class="right clearfix">
+        <div class="item__value">+ 1,500.00</div>
+        <div class="item__delete">
+            <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+        </div>
     </div>
+</div>
+-->
+</div>
+</div>
 
-    <div class="expenses">
-      <h2 class="expenses__title">Expenses</h2>
+<div class="expenses">
+    <h2 class="expenses__title">Expenses</h2>
 
-      <div class="expenses__list">
+    <div class="expenses__list">
         <!--
                 <div class="item clearfix" id="expense-0">
                     <div class="item__description">Apartment rent</div>
@@ -86,9 +81,9 @@
                     </div>
                 </div>
                 -->
-      </div>
     </div>
-  </div>
+</div>
+</div>
 </div>
 
 
