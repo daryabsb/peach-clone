@@ -15,6 +15,7 @@ django-crispy-forms = "*"
 django-widget-tweaks = "*"
 django-select2 = "*"
 django-bootstrap4 = "*"
+bootstrap4 = "*"
 
 [requires]
 python_version = "3.8"

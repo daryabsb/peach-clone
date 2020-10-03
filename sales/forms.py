@@ -7,7 +7,7 @@ from django.forms.models import inlineformset_factory
 
 
 class InvoiceForm(forms.ModelForm):
-    customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
+    customer=forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Invoice
         fields = ['payment_term', 
@@ -17,7 +17,11 @@ class InvoiceForm(forms.ModelForm):
 
 
 class InvoiceItemForm(forms.ModelForm):
-    item=forms.ModelChoiceField(queryset=Item.objects.all(),widget=Select2Widget)
+    item=forms.ModelChoiceField(queryset=Item.objects.all())
+    # item=forms.ModelChoiceField(
+    #     queryset=Item.objects.all(), 
+    # widget = forms.Select(
+    #     attrs = {'onchange' : "refresh();"}))
 
 
     class Meta:
@@ -25,7 +29,7 @@ class InvoiceItemForm(forms.ModelForm):
         fields = ('invoice', 'item', 'quantity', 'unit_price','total',)
 
 InvoiceItemFormSet=inlineformset_factory(Invoice,InvoiceItem,
-    fields=('invoice','item','quantity','unit_price','total',),extra=3,can_delete=True)
+    fields=('invoice','item','quantity','unit_price','total',),extra=5,can_delete=True)
 
 
 # class ReceiptForm(forms.ModelForm):

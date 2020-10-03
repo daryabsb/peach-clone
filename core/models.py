@@ -400,7 +400,11 @@ class Expense(models.Model):
 class Revenue(models.Model):
     pass
 
-
+INVOICE_STATUS = (
+    ('pending', 'PENDING'),
+    ('invoked', 'INVOKED'),
+    ('paid', 'PAID')
+)
 class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE, default=1)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
@@ -414,7 +418,7 @@ class Invoice(models.Model):
         max_length=60, choices=PAYMENT_METHOD, default='cash'
         )
     balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    status = models.CharField(max_length=30)
+    status = models.CharField(max_length=30, choices=INVOICE_STATUS, default='pending')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -437,6 +441,9 @@ class Invoice(models.Model):
         for item in items:
             total += item.total
         return total
+
+    def get_update_url(self):
+        return reverse('sales_invoice_update', args=(self.pk,))
 
     
 
