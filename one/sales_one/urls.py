@@ -7,7 +7,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'invoice', api.InvoiceViewSet)
 router.register(r'invoiceitem', api.InvoiceItemViewSet)
-router.register(r'receipt', api.ReceiptViewSet)
+router.register(r'Receive', api.ReceiveViewSet)
 
 
 urlpatterns = (
@@ -32,10 +32,10 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for Receipt
-    path('sales/receipt/', views.ReceiptListView.as_view(), name='sales_receipt_list'),
-    path('sales/receipt/create/', views.ReceiptCreateView.as_view(), name='sales_receipt_create'),
-    path('sales/receipt/detail/<slug:slug>/', views.ReceiptDetailView.as_view(), name='sales_receipt_detail'),
-    path('sales/receipt/update/<slug:slug>/', views.ReceiptUpdateView.as_view(), name='sales_receipt_update'),
+    # urls for Receive
+    path('sales/Receive/', views.ReceiveListView.as_view(), name='sales_receive_list'),
+    path('sales/Receive/create/', views.ReceiveCreateView.as_view(), name='sales_Receive_create'),
+    path('sales/Receive/detail/<slug:slug>/', views.ReceiveDetailView.as_view(), name='sales_Receive_detail'),
+    path('sales/Receive/update/<slug:slug>/', views.ReceiveUpdateView.as_view(), name='sales_Receive_update'),
 )
 

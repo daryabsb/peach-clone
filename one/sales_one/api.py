@@ -19,11 +19,11 @@ class InvoiceItemViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ReceiptViewSet(viewsets.ModelViewSet):
-    """ViewSet for the Receipt class"""
+class ReceiveViewSet(viewsets.ModelViewSet):
+    """ViewSet for the Receive class"""
 
-    queryset = models.Receipt.objects.all()
-    serializer_class = serializers.ReceiptSerializer
+    queryset = models.Receive.objects.all()
+    serializer_class = serializers.ReceiveSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Receipt',
+            name='Receive',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('slug', django_extensions.db.fields.AutoSlugField(blank=True, editable=False, populate_from='name')),

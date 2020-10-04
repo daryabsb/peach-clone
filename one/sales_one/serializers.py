@@ -33,10 +33,10 @@ class InvoiceItemSerializer(serializers.ModelSerializer):
         )
 
 
-class ReceiptSerializer(serializers.ModelSerializer):
+class ReceiveSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Receipt
+        model = models.Receive
         fields = (
             'slug', 
             'created', 

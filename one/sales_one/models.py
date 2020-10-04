@@ -90,7 +90,7 @@ class InvoiceItem(models.Model):
         return reverse('sales_invoiceitem_update', args=(self.pk,))
 
 
-class Receipt(models.Model):
+class Receive(models.Model):
 
     # Fields
     slug = extension_fields.AutoSlugField(populate_from='name', blank=True)
@@ -113,8 +113,8 @@ class Receipt(models.Model):
         return u'%s' % self.slug
 
     def get_absolute_url(self):
-        return reverse('sales_receipt_detail', args=(self.slug,))
+        return reverse('sales_Receive_detail', args=(self.slug,))
 
 
     def get_update_url(self):
-        return reverse('sales_receipt_update', args=(self.slug,))
+        return reverse('sales_Receive_update', args=(self.slug,))

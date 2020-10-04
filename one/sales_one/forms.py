@@ -1,5 +1,5 @@
 from django import forms
-from .models import Invoice, InvoiceItem, Receipt
+from .models import Invoice, InvoiceItem, Receive
 from django_select2.forms import Select2Widget,ModelSelect2Widget
 from contact.models import Customer
 from product.models import ProductVariant
@@ -24,8 +24,8 @@ class InvoiceItemForm(forms.ModelForm):
 InvoiceItemFormSet=inlineformset_factory(Invoice,InvoiceItem,
     fields=('is_return','product','quantity','weight', 'touch', 'makingcharge','total', 'invoice'),extra=1,can_delete=True)
 
-class ReceiptForm(forms.ModelForm):
+class ReceiveForm(forms.ModelForm):
     customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
     class Meta:
-        model = Receipt
+        model = Receive
         fields = ['customer','type', 'total', 'description']

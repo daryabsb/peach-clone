@@ -387,8 +387,8 @@ class Receive(models.Model):
     def get_account_sub(self):
         return self.from_account.account_type
 
-    # def get_absolute_url(self):
-    #     return reverse('company-detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('sales_receive_detail', kwargs={'pk': self.pk})
 
 # REPORTS
 

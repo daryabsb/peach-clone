@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 # Create your views here.
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from core.models import Invoice, InvoiceItem #, Receipt
-from .forms import InvoiceForm, InvoiceItemForm, InvoiceItemFormSet #, ReceiptForm,
+from core.models import Invoice, InvoiceItem, Receive
+from .forms import InvoiceForm, InvoiceItemForm, InvoiceItemFormSet, ReceiveForm
 
 
 class InvoiceListView(ListView):
@@ -134,19 +134,19 @@ class InvoiceItemUpdateView(UpdateView):
     form_class = InvoiceItemForm
 
 
-# class ReceiptListView(ListView):
-#     model = Receipt
+class ReceiveListView(ListView):
+    model = Receive
 
 
-# class ReceiptCreateView(CreateView):
-#     model = Receipt
-#     form_class = ReceiptForm
+class ReceiveCreateView(CreateView):
+    model = Receive
+    form_class = ReceiveForm
 
 
-# class ReceiptDetailView(DetailView):
-#     model = Receipt
+class ReceiveDetailView(DetailView):
+    model = Receive
 
 
-# class ReceiptUpdateView(UpdateView):
-#     model = Receipt
-#     form_class = ReceiptForm
+class ReceiveUpdateView(UpdateView):
+    model = Receive
+    form_class = ReceiveForm

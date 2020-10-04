@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Invoice, InvoiceItem, Receipt
+from .models import Invoice, InvoiceItem, Receive
 
 class InvoiceAdminForm(forms.ModelForm):
 
@@ -32,18 +32,18 @@ class InvoiceItemAdmin(admin.ModelAdmin):
 admin.site.register(InvoiceItem, InvoiceItemAdmin)
 
 
-class ReceiptAdminForm(forms.ModelForm):
+class ReceiveAdminForm(forms.ModelForm):
 
     class Meta:
-        model = Receipt
+        model = Receive
         fields = '__all__'
 
 
-class ReceiptAdmin(admin.ModelAdmin):
-    form = ReceiptAdminForm
+class ReceiveAdmin(admin.ModelAdmin):
+    form = ReceiveAdminForm
     list_display = ['slug', 'created', 'last_updated', 'type', 'total', 'description']
     readonly_fields = ['slug', 'created', 'last_updated', 'type', 'total', 'description']
 
-admin.site.register(Receipt, ReceiptAdmin)
+admin.site.register(Receive, ReceiveAdmin)
 
 

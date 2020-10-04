@@ -1,7 +1,7 @@
 import unittest
 from django.urls import reverse
 from django.test import Client
-from .models import Invoice, InvoiceItem, Receipt
+from .models import Invoice, InvoiceItem, Receive
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.contenttypes.models import ContentType
@@ -56,7 +56,7 @@ def create_invoiceitem(**kwargs):
     return InvoiceItem.objects.create(**defaults)
 
 
-def create_receipt(**kwargs):
+def create_Receive(**kwargs):
     defaults = {}
     defaults["type"] = "type"
     defaults["total"] = "total"
@@ -64,7 +64,7 @@ def create_receipt(**kwargs):
     defaults.update(**kwargs)
     if "customer" not in defaults:
         defaults["customer"] = create_django_contrib_auth_models_user()
-    return Receipt.objects.create(**defaults)
+    return Receive.objects.create(**defaults)
 
 
 class InvoiceViewTest(unittest.TestCase):
@@ -161,20 +161,20 @@ class InvoiceItemViewTest(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-class ReceiptViewTest(unittest.TestCase):
+class ReceiveViewTest(unittest.TestCase):
     '''
-    Tests for Receipt
+    Tests for Receive
     '''
     def setUp(self):
         self.client = Client()
 
-    def test_list_receipt(self):
-        url = reverse('sales_receipt_list')
+    def test_list_Receive(self):
+        url = reverse('sales_receive_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_receipt(self):
-        url = reverse('sales_receipt_create')
+    def test_create_Receive(self):
+        url = reverse('sales_Receive_create')
         data = {
             "type": "type",
             "total": "total",
@@ -184,21 +184,21 @@ class ReceiptViewTest(unittest.TestCase):
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_receipt(self):
-        receipt = create_receipt()
-        url = reverse('sales_receipt_detail', args=[receipt.slug,])
+    def test_detail_Receive(self):
+        Receive = create_Receive()
+        url = reverse('sales_Receive_detail', args=[Receive.slug,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_update_receipt(self):
-        receipt = create_receipt()
+    def test_update_Receive(self):
+        Receive = create_Receive()
         data = {
             "type": "type",
             "total": "total",
             "description": "description",
             "customer": create_django_contrib_auth_models_user().pk,
         }
-        url = reverse('sales_receipt_update', args=[receipt.slug,])
+        url = reverse('sales_Receive_update', args=[Receive.slug,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 

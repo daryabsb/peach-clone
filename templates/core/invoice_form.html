@@ -1,4 +1,4 @@
-{% extends '_base.html' %} {% load static %} {% load widget_tweaks %}  {% block main %}
+{% extends '_base.html' %} {% load static %} {% load widget_tweaks %} {% block main %}
 
 <p>
     <h2 class="h3 mb-3 font-weight-normal">Add Invoice</h2>
@@ -9,11 +9,9 @@
 
     <div class="invoice-form__row">
         <div class="invoice-form__control">
-            <label for="customer">{{ form.customer.label }}</label> 
-            {{ form.customer.errors }} 
-            {% render_field form.customer class='invoice-form__customer' %}
+            <label for="customer">{{ form.customer.label }}</label> {{ form.customer.errors }} {% render_field form.customer class='invoice-form__customer' %}
         </div>
-        
+
         <div class="invoice-form__control">
             <label for="balance">{{ form.status.label }}</label>{{ form.status.errors }} {% render_field form.status class='invoice-form__customer' %}
         </div>
@@ -36,7 +34,7 @@
         </thead>
         {% endif %}
         <tbody class="invoice-form__table-row invoice-form__table-row--tbody">
-           
+
             <tr>
                 {% for field in form.visible_fields %}
                 <td>
@@ -77,28 +75,32 @@
 
     const reloadIt = (el) => {
         el.preventDefault()
-       //location.reload();
-       console.log('submitted')
+            //location.reload();
+        console.log('submitted')
         console.log(el.target.value)
     }
 
     const totalIt = (el) => {
         el.preventDefault()
-       //location.reload();
-       const total = 0
-       console.log('total = unit * qty')
-       unit = el.target.value
-       qty = el.target.closest('[id$="quantity"]');
-       //;
-      
+            //location.reload();
+        const total = 0
+        console.log('total = unit * qty')
+        unit = el.target.value
+        qty = el.target.cells[1] //parentNode.parentNode.parentNode.children.lastChild;
+            //for (q in qty.children) {
         console.log(qty)
+            //}
+            //;
+
+
     }
 
 
     invoiceCustomer.addEventListener('change', hooray);
 
-    inlineUnit.forEach(el =>{
+    inlineUnit.forEach(el => {
         el.addEventListener('change', totalIt);
+
     })
 
     //inlineForm.addEventListener('click', totalIt);
