@@ -33,7 +33,7 @@ InvoiceItemFormSet=inlineformset_factory(Invoice,InvoiceItem,
 
 
 class ReceiveForm(forms.ModelForm):
-    customer=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
+    from_account=forms.ModelChoiceField(queryset=Customer.objects.all(),widget=Select2Widget)
     class Meta:
         model = Receive
         fields = ['from_account', 'invoice', 'payment_method', 'amount', 'description']

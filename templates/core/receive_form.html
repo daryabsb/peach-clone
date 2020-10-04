@@ -1,7 +1,65 @@
-{% extends "_base.html" %} {% load static %} {% load crispy_forms_tags %} {% block main %}
+{% extends "_base.html" %} {% load static %} {% load widget_tweaks %} {% block main %}
 <p><a class="btn btn-default" href="{% url 'sales_receive_list' %}">Receive Listing</a></p>
+{{invoice.id}}<br/>
+{{amount}}
 <form method="post">
-    {% csrf_token %} {{form|crispy}}
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="invoice-form__row">
+        <div class="invoice-form__control">
+            <label for="from_account">Customer</label> 
+            
+            {% if invoice.id %}
+            <select name="customer_select" id="">
+                <option v-bind::value="invoice.customer.id">{{invoice.customer.name}}</option>
+                {% for customer in customers %}
+                <option value="{{ customer.id }}">{{ customer.name }}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            {% else %}
+            {{ form.from_account.errors }}
+            {% render_field form.from_account initial='19' %}
+            {% endif %}
+           
+        </div>
+
+        <div class="invoice-form__control">
+            <label for="balance">Invoice</label>
+            {% if invoice.id %}
+            <select name="customer_select" id="">
+                <option v-bind::value="invoice.id">{{invoice.id}}</option>
+                {% for inv in invoices %}
+                <option value="{{ inv.id }}">{{ inv.id }}</option>
+                {% endfor %}
+            </select>
+            {% else %}
+            {{ form.from_account.errors }}
+            {% render_field form.invoice %}
+            {% endif %}
+       
+
+        </div>
+        <div class="invoice-form__control">
+            <label for="balance">{{ form.payment_method.label }}</label>{{ form.payment_term.errors }} {% render_field form.payment_method class='invoice-form__customer' %}
+        </div>
+        <div class="invoice-form__control">
+            <label for="balance">Invoice Total</label>
+            
+            {% if invoice.id %}
+            
+             <input type="number" name="invoice_total" value="{{ invoice.get_total_price }}"  />
+
+            {% else %}
+{{ form.payment_term.errors }}
+{{ form.amount }}
+{% endif %}
+
+        </div>
+
+
+    </div>
+    
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 {% endblock %}

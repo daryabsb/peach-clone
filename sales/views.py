@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 # Create your views here.
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from core.models import Invoice, InvoiceItem, Receive
+from core.models import Invoice, InvoiceItem, Receive, Customer
 from .forms import InvoiceForm, InvoiceItemForm, InvoiceItemFormSet, ReceiveForm
 
 
@@ -100,7 +100,7 @@ class InvoiceUpdateView(UpdateView):
             return self.form_invalid(form, invoiceitem_form)
 
     def form_valid(self, form, invoiceitem_form):
-        self.object = form.save()
+        self.object = form.save(commit=False)
         invoiceitem_form.instance = self.object
         invoiceitem_form.save()
 
@@ -133,6 +133,25 @@ class InvoiceItemUpdateView(UpdateView):
     model = InvoiceItem
     form_class = InvoiceItemForm
 
+
+class InvoicePayView(CreateView):
+    model = Receive
+    form_class = ReceiveForm
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(InvoicePayView, self).get_context_data(*args, **kwargs)
+        invoice = Invoice.objects.get(id=self.kwargs['pk'])
+        customers = Customer.objects.exclude(id=invoice.customer.id)
+        invoices = Invoice.objects.exclude(id=invoice.id)
+        # form = self.get_form_class(initial={'invoice':19})
+        context['invoice'] = invoice
+        context['invoices'] = invoices
+        context['customers'] = customers
+        context['amount'] = invoice.balance
+
+        print(context)
+        return context
 
 class ReceiveListView(ListView):
     model = Receive

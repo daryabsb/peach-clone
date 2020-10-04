@@ -372,7 +372,9 @@ class Receive(models.Model):
     to_account = models.ForeignKey(
         'Company', on_delete=models.CASCADE, default=1)
     from_account = models.ForeignKey('Customer', on_delete=models.CASCADE)
-    invoice = models.CharField(max_length=60, null=True, blank=True)
+    invoice = models.ForeignKey(
+        'Invoice', on_delete=models.CASCADE,  null=True, blank=True)
+    # invoice = models.CharField(max_length=60, null=True, blank=True)
     payment_method = models.CharField(
         max_length=20, choices=PAYMENT_METHOD, default='cash')
     description = models.TextField(null=True, blank=True)
@@ -381,7 +383,7 @@ class Receive(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.amount} from {self.from_account}'
+        return f'{self.pk} - {self.amount} from {self.from_account}'
 
     @property
     def get_account_sub(self):
@@ -390,6 +392,8 @@ class Receive(models.Model):
     def get_absolute_url(self):
         return reverse('sales_receive_detail', kwargs={'pk': self.pk})
 
+    def get_update_url(self):
+        return reverse('sales_receive_update', args=(self.pk,))
 # REPORTS
 
 
@@ -444,6 +448,9 @@ class Invoice(models.Model):
 
     def get_update_url(self):
         return reverse('sales_invoice_update', args=(self.pk,))
+
+    def pay(self):
+        return reverse('sales_invoice_pay', args=(self.pk,))
 
     
 

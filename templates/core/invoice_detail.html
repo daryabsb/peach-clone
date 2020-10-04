@@ -91,8 +91,14 @@
 
 <div class="invoice-items">
     <button class="btn btn-primary">
-      <a href="{% url 'transactions:add-items' object.id %}"
-      >Add Items</a></button>
+      <a href="{{ object.get_update_url }}"
+      >Edit Invoice</a></button>
+      <button class="btn btn-primary"> <span>
+          <a 
+        class="btn btn-primary" 
+        href="{{ object.pay }}">Pay Invoice</a> </button>
+    </span>
+    
     <table cellpadding="0" cellspacing="0">
 
         <tr>

@@ -21,6 +21,7 @@ urlpatterns += (
     path('invoice/create/', views.InvoiceCreateView.as_view(), name='sales_invoice_create'),
     path('invoice/detail/<int:pk>/', views.InvoiceDetailView.as_view(), name='sales_invoice_detail'),
     path('invoice/update/<int:pk>/', views.InvoiceUpdateView.as_view(), name='sales_invoice_update'),
+    path('invoice/pay/<int:pk>/', views.InvoicePayView.as_view(), name='sales_invoice_pay'),
 )
 
 urlpatterns += (
