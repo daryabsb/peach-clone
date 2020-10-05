@@ -1,14 +1,20 @@
 from django.shortcuts import render, HttpResponseRedirect
 # Create your views here.
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from core.models import Invoice, InvoiceItem, Receive, Customer
+from core.models import Invoice, Sale, Receive, Customer
 from .forms import InvoiceForm, InvoiceItemForm, InvoiceItemFormSet, ReceiveForm
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class InvoiceListView(ListView):
     model = Invoice
+    paginate_by = 10
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+    def get_context_data(self, *args, **kwargs):
+        context = super(InvoiceListView, self).get_context_data(*args, **kwargs)
+        context['model'] = 'Sale'
+        return contexts
+
+
 class InvoiceCreateView(CreateView):
     model = Invoice
     form_class = InvoiceForm
@@ -62,9 +68,14 @@ class InvoiceDetailView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(InvoiceDetailView, self).get_context_data()
-        print(context)
-        items = InvoiceItem.objects.filter(invoice=self.kwargs['pk'])
+        # print(context)
+        items = Sale.objects.filter(invoice=self.kwargs['pk'])
+        print(items)
         context['items'] = items
+        invoice_total = 0
+        for item in items:
+            invoice_total += item.total
+        context['invoice_total'] = invoice_total
         # for item in items:
         #     print(item.item)
         return context
@@ -77,7 +88,7 @@ class InvoiceUpdateView(UpdateView):
     def get(self, request, *args, **kwargs):
         
         invoice = Invoice.objects.get(id=kwargs['pk'])
-        print(invoice)
+        # print(invoice)
         self.object = invoice
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -117,20 +128,20 @@ class InvoiceUpdateView(UpdateView):
 
 
 class InvoiceItemListView(ListView):
-    model = InvoiceItem
+    model = Sale
 
 
 class InvoiceItemCreateView(CreateView):
-    model = InvoiceItem
+    model = Sale
     form_class = InvoiceItemForm
 
 
 class InvoiceItemDetailView(DetailView):
-    model = InvoiceItem
+    model = Sale
 
 
 class InvoiceItemUpdateView(UpdateView):
-    model = InvoiceItem
+    model = Sale
     form_class = InvoiceItemForm
 
 

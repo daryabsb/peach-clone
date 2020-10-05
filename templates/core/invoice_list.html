@@ -1,86 +1,146 @@
-{% extends "_base.html" %} {% load static %} {% block main %}
-<p><a class="btn btn-default" href="{% url 'sales_invoice_list' %}">Invoice Listing</a></p>
+{% extends "_base.html" %} {% load static %} {% load humanize %} {% block main %}
 
-<div class="section_content">
-    <!--[if !IE]>start section content top<![endif]-->
-    <div class="sct">
+{% include 'dashboard_icons.html' %}
+
+
+
+
+<div class="section table_section">
+
+<div class="title_wrapper">
+  
+  <span class="title_wrapper_left"></span>
+  <span class="title_wrapper_right"></span>
+  <span>
+
+  
+     <!--[if !IE]>start table menu<![endif]-->
+    
+     <div class="table_menu">
+      <ul class="left">
+        <li>
+          <h2>Sale List</h2>
+        </li>
+      </ul>
+
+      <ul class="right">
+        <li>
+          <a href="/" class="button btn-menu">
+            <span>Back</span></a>
+        </li>
+        <li>
+          <a
+            href="{% url 'sales_invoice_create' %}"
+            class="button btn-menu"
+            ><span>ADD NEW</span></a
+          >
+        </li>
+        <li>
+          <a href="#" class="button btn-menu"
+            ><span>CHECK ALL</span></a
+          >
+        </li>
+        <li>
+          <a href="#" class="button btn-menu"
+            ><span>UNCHECK ALL</span></a
+          >
+        </li>
+        <li>
+          <span class="button btn-menu"
+            ><span>APPROVE</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <!--[if !IE]>end table menu<![endif]-->
+  </span>
+</div>
+<div class="section_content table_section">
+  <!--[if !IE]>start section content top<![endif]-->
+
+  <div class="sct">
+    <div class="sct_left">
+      <div class="sct_right">
         <div class="sct_left">
-            <div class="sct_right">
-                <div class="sct_left">
-                    <div class="sct_right">
-                        <form action="#">
-                            <!--[if !IE]>start table_wrapper<![endif]-->
-                            <div class="table_wrapper">
-                                <div class="table_wrapper_inner">
-                                    <table class="table">
-                                        <tr>
-                                            <td>ID</td>
-                                            <td>Link</td>
-                                            <td>created</td>
-                                            <td>last_updated</td>
-                                            <td>rate</td>
-                                            <td>balancetype</td>
-                                            <td>paymenttype</td>
-                                            <td>balance</td>
-                                            <td>status</td>
-                                        </tr>
-                                        {% for object in object_list %}
-                                        <tr>
-                                            <td>{{object.pk}}</td>
-                                            <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-                                            <td>{{ object.created }}</td>
-                                            <td>{{ object.last_updated }}</td>
-                                            <td>{{ object.rate }}</td>
-                                            <td>{{ object.balancetype }}</td>
-                                            <td>{{ object.paymenttype }}</td>
-                                            <td>{{ object.balance }}</td>
-                                            <td>{{ object.status }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </table>
-                                </div>
-                            </div>
-                            <!--[if !IE]>end table_wrapper<![endif]-->
+          <div class="sct_right">
+            <form action="#">
+              <fieldset>
+              <!--[if !IE]>start table_wrapper<![endif]-->
+              <div class="table_wrapper">
+               
+                
+                  <table class="table__flex" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <th><span>#</span> </th>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th class="table__description">Description</th>
+                        <th>created</th>
+                       
+                        <th>balancetype</th>
+                        <th>Payment Term</th>
+                        <th>balance</th>
+                        <th>status</th>
+                        <th style="width: 96px;">Actions</th>
+                      </tr>
 
-                            <!--[if !IE]>start table menu<![endif]-->
-                            <div class="table_menu">
-                                <ul class="left">
-                                    <li>
-                                        <a href="{% url 'sales_invoice_create' %}" class="button add_new"><span><span>ADD NEW</span></span></a
-      >
-    </li>
-  </ul>
-  <ul class="right">
-    <li>
-      <a href="#" class="button check_all"
-        ><span><span>CHECK ALL</span></span></a
-      >
-    </li>
-    <li>
-      <a href="#" class="button uncheck_all"
-        ><span><span>UNCHECK ALL</span></span></a
-      >
-    </li>
-    <li>
-      <span class="button approve"
-        ><span><span>APPROVE</span></span>
-      </span>
-    </li>
-  </ul>
-</div>
-<!--[if !IE]>end table menu<![endif]-->
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
+                      {% for object in object_list %}
+                      {% if object.status == 'pending' %}
+                      <tr class="second">
+                        {% else %}
+                        <tr class="first"></tr>
+                        {% endif %}
+                        <td>{{forloop.counter}}</td>
+                        <td>{{object.pk}}</td>
+                        <td>
+                          <a href="{{object.get_absolute_url}}">{{object}}</a>
+                        </td>
+                        <td>{{ object.description }}</td>
+                        <td>{{ object.created|date }}</td>
+                        <td>{{ object.balancetype }}</td>
+                        <td>{{ object.payment_term }}</td>
+                        <td>${{ object.balance }}</td>
+                        <td><span class="{{ object.status }}">{{ object.status }}</span></td>
+                        <td>
+                          <div class="actions">
+                              <ul>
+                                  <li><a class="action1" href="#">1</a></li>
+                                  <li><a class="action2" href="#">2</a></li>
+                        
+                                  <li><a class="action4" href="#">4</a></li>
+                                  <li><input class="radio" name="" type="checkbox" value="" /></li>
+                              </ul>
+                          </div>
+                      </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                
+              </div>
+              <!--[if !IE]>end table_wrapper<![endif]-->
 
-<!--[if !IE]>end section content top<![endif]-->
-<!--[if !IE]>start section content bottom<![endif]-->
-<span class="scb"
-><span class="scb_left"></span><span class="scb_right"></span
-></span>
-<!--[if !IE]>end section content bottom<![endif]-->
+              {% include 'pagination.html' %}
+
+            </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--[if !IE]>end section content top<![endif]-->
+  <!--[if !IE]>start section content bottom<![endif]-->
+  <span class="scb"
+    ><span class="scb_left"></span><span class="scb_right"></span
+  ></span>
+  <!--[if !IE]>end section content bottom<![endif]-->
 </div>
-<a class="btn btn-primary" href="{% url 'sales_invoice_create' %}">Create new Invoice</a> {% endblock %}
+<a class="btn btn-primary" href="{% url 'sales_invoice_create' %}"
+  >Create new Invoice</a
+>
+
+</div>
+{% endblock %}

@@ -132,7 +132,21 @@
 	background:url(layout/site/tables/approved.gif) no-repeat right center;
 }
 
+.paid {
+	display: block;
+	display: inline-block;
+	padding: 0 20px 0 0;
+	background:url(layout/site/tables/approved.gif) no-repeat right center;
+}
+
 .pending {
+	display: block;
+	display: inline-block;
+	padding: 0 20px 0 0;
+	background:url(layout/site/tables/pending.gif) no-repeat right center;
+	color: #b86464;
+}
+.unpaid {
 	display: block;
 	display: inline-block;
 	padding: 0 20px 0 0;
@@ -232,8 +246,8 @@
 .table_menu {
 	width: 100%;
 	overflow: hidden;
-	padding: 5px 0 0;
-	margin: 0 0 -3px;
+	padding: 0 0;
+	margin: 0 0;
 	position: relative;
 	top: 0;
 	left: 0;

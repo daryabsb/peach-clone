@@ -111,7 +111,8 @@
             <th>Taxes</th>
             <th>Sub Total</th>
         </tr>
-        {% for item in object.get_sale_items %}
+        {% for item in items %}
+        {{item.total}}
         <tr data-iterate="item">
 
             <td>{{ forloop.counter }}</td>
@@ -138,7 +139,7 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th>Total Price</th>
-            <td>{{object.get_total_price}}</td>
+            <td>{{invoice_total}}</td>
         </tr>
 
         <tr data-iterate="tax">
@@ -148,14 +149,14 @@
 
         <tr class="amount-total">
             <th>Final Price</th>
-            <td>{{object.get_total_price}}</td>
+            <td>{{invoice_total}}</td>
         </tr>
 
         <!-- You can use attribute data-hide-on-quote="true" to hide specific information on quotes.
                For example Invoicebus doesn't need amount paid and amount due on quotes  -->
         <tr data-hide-on-quote="true">
             <th>Paid Amount</th>
-            <td>{{object.get_total_price}}</td>
+            <td>0</td>
         </tr>
 
         <tr data-hide-on-quote="true">

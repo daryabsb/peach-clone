@@ -1008,7 +1008,7 @@ p {
 }
 
 .table_wrapper_inner {
-	
+	/* margin: .5rem; */
 }
 
 .table_wrapper td, .table_wrapper th {
@@ -1138,7 +1138,7 @@ p {
 	width: 100%;
 	overflow: hidden;
 	padding: 5px 0 0;
-	margin: 0 0 -3px;
+	margin: 0 1rem;
 	position: relative;
 	top: 0;
 	left: 0;

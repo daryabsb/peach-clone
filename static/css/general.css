@@ -727,6 +727,7 @@ p {
 
 .sct {
 	background: #e7f3f8;
+	/* margin-top: 2rem; */
 }
 .sct_left {
 	background: url(layout/site/sct_left_right.gif) repeat-y;

@@ -209,7 +209,7 @@ background:url(layout/login/login_wrapper_bg.gif) repeat-x;
 }
 .invoice-form__table .invoice-form__table-row tr td .invoice-form__inline-field {
 
-    width: 100%;
+    /* width: 100%; */
     margin-right: 1.3rem;
     
 }
@@ -218,10 +218,42 @@ form table tbody tr td .invoice-form__item {
     width: 20vw;
 }
 
+.table__description {
+    width: 16.7rem;
+}
+
+.table__flex {
+    
+    
+}
+.table__flex tbody tr th {
+width: inherit;
+    
+} 
+
+
+.btn-menu {
+    background-color: rgba(0, 0, 0, 0.281);
+    padding: .2rem 1.2rem;
+    margin: .4rem .1rem;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.281, .2);;
+    
+}
+.btn-menu span {
+    color: white;
+    font-size: .8rem;
+    font-weight: 100;
+}
+
+
 /* CUSTOM CSS ENDS HERE  */
 
 .mb-0 {
 	margin-bottom: 0 !important;
+}
+.mb-0 {
+	margin-bottom: 6rem !important;
 }
 .mt-0 {
 	margin-top: 0 !important;
