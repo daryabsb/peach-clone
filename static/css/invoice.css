@@ -6,22 +6,37 @@ table {
 caption,
 th,
 td {
+<<<<<<< HEAD
     text-align: left;
     font-weight: normal;
     vertical-align: middle;
+=======
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 q,
 blockquote {
+<<<<<<< HEAD
     quotes: none;
+=======
+  quotes: none;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 q:before,
 q:after,
 blockquote:before,
 blockquote:after {
+<<<<<<< HEAD
     content: "";
     content: none;
+=======
+  content: "";
+  content: none;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 a img {
@@ -41,7 +56,11 @@ main,
 menu,
 nav,
 summary {
+<<<<<<< HEAD
     display: block;
+=======
+  display: block;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 
@@ -49,16 +68,22 @@ summary {
 
 
 /**
- * DON'T override any styles for the <html> and <body> tags, as this may break the layout.
- * Instead wrap everything in one main <div id="container"> element where you may change
- * something like the font or the background of the invoice
- */
+* DON'T override any styles for the <html> and <body> tags, as this may break the layout.
+* Instead wrap everything in one main <div id="container"> element where you may change
+* something like the font or the background of the invoice
+*/
 
 
 /** 
+<<<<<<< HEAD
  * IMPORTANT NOTICE: DON'T USE '!important' otherwise this may lead to broken print layout.
  * Some browsers may require '!important' in oder to work properly but be careful with it.
  */
+=======
+* IMPORTANT NOTICE: DON'T USE '!important' otherwise this may lead to broken print layout.
+* Some browsers may require '!important' in oder to work properly but be careful with it.
+*/
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 
 .clearfix {
     display: block;
@@ -72,7 +97,11 @@ summary {
 b,
 strong,
 .bold {
+<<<<<<< HEAD
     font-weight: bold;
+=======
+  font-weight: bold;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 #container {
@@ -81,12 +110,21 @@ strong,
     padding: 50px 40px;
     min-height: 1058px;
 }
+<<<<<<< HEAD
 
 
 /* .popup_container {
   opacity: 0;
 } */
 
+=======
+
+
+/* .popup_container {
+opacity: 0;
+} */
+
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 .invoice_memo .invoice_memo__company-name {
     background: #8BA09E url("../img/arrows.png") 560px center no-repeat;
     background-size: 100px auto;
@@ -149,6 +187,7 @@ strong,
 }
 
 .invoice-info {
+<<<<<<< HEAD
     float: left;
     margin: 2.5rem 5rem 0 2rem;
 }
@@ -170,6 +209,29 @@ strong,
 
 .invoice-info>div:last-child {
     margin-left: 20px;
+=======
+  float: left;
+  margin: 2.5rem 5rem 0 2rem;
+}
+
+.invoice-info>div {
+  float: left;
+}
+
+.invoice-info .invoice-info__name {
+  font-weight: 600;
+}
+
+.invoice-info>div>span {
+  display: block;
+  min-width: 20px;
+  min-height: 18px;
+  margin-bottom: 3px;
+}
+
+.invoice-info>div:last-child {
+  margin-left: 20px;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-info:after {
@@ -186,8 +248,13 @@ strong,
 }
 
 .client-info>div {
+<<<<<<< HEAD
     margin-bottom: 3px;
     min-width: 20px;
+=======
+  margin-bottom: 3px;
+  min-width: 20px;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .client-info span {
@@ -223,9 +290,15 @@ table {
 
 table th,
 table td {
+<<<<<<< HEAD
     vertical-align: top;
     word-break: keep-all;
     word-wrap: break-word;
+=======
+  vertical-align: top;
+  word-break: keep-all;
+  word-wrap: break-word;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-items {
@@ -235,8 +308,13 @@ table td {
 .invoice-items .first-cell,
 .invoice-items table th:first-child,
 .invoice-items table td:first-child {
+<<<<<<< HEAD
     width: 18px;
     text-align: right;
+=======
+  width: 18px;
+  text-align: right;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-items table {
@@ -303,10 +381,17 @@ table td {
 
 .invoice-sums table tr th,
 .invoice-sums table tr td {
+<<<<<<< HEAD
     min-width: 100px;
     padding: 8px 20px 8px 35px;
     text-align: right;
     font-weight: 600;
+=======
+  min-width: 100px;
+  padding: 8px 20px 8px 35px;
+  text-align: right;
+  font-weight: 600;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-sums table tr th {
@@ -320,8 +405,13 @@ table td {
 
 .invoice-sums table tr.amount-total th,
 .invoice-sums table tr.amount-total td {
+<<<<<<< HEAD
     font-size: 16px;
     font-weight: bold;
+=======
+  font-size: 16px;
+  font-weight: bold;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-sums table tr:last-child th {
@@ -330,10 +420,17 @@ table td {
 
 .invoice-sums table tr:last-child th,
 .invoice-sums table tr:last-child td {
+<<<<<<< HEAD
     font-size: 16px;
     font-weight: bold;
     padding-top: 20px !important;
     padding-bottom: 40px !important;
+=======
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 20px !important;
+  padding-bottom: 40px !important;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .invoice-terms {
@@ -341,6 +438,7 @@ table td {
 }
 
 .invoice-terms>span {
+<<<<<<< HEAD
     display: inline-block;
     min-width: 20px;
     font-weight: bold;
@@ -350,6 +448,17 @@ table td {
     margin-top: 10px;
     min-height: 50px;
     min-width: 50px;
+=======
+  display: inline-block;
+  min-width: 20px;
+  font-weight: bold;
+}
+
+.invoice-terms>div {
+  margin-top: 10px;
+  min-height: 50px;
+  min-width: 50px;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .payment-info {
@@ -373,10 +482,19 @@ table td {
 
 
 /**
+<<<<<<< HEAD
  * If the printed invoice is not looking as expected you may tune up
  * the print styles (you can use !important to override styles)
  */
 
 @media print {
     /* Here goes your print styles */
+=======
+* If the printed invoice is not looking as expected you may tune up
+* the print styles (you can use !important to override styles)
+*/
+
+@media print {
+  /* Here goes your print styles */
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }

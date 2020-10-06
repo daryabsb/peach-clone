@@ -213,8 +213,20 @@ form table tbody tr td .invoice-form__item {
 
 .table__flex {}
 
+<<<<<<< HEAD
 .table__flex tbody tr th {
     width: inherit;
+=======
+.section_inline {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 1rem;
+}
+
+.row_grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 3fr;
+>>>>>>> 2283e1d56aa0f04a34945a5f98d07f54d6b7756d
 }
 
 .btn-menu {
