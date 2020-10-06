@@ -30,6 +30,7 @@ urlpatterns = [
     path("testjs/", testjs),
     
     path('sales/',include('sales.urls')),
+    path('purchases/',include('purchase.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

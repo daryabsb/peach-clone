@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from core.models import Item, Purchase, Sale, Vendor, Customer, Payment, Receive, DSP, Journal, AccountSub
+from core.models import Item, Purchase, Sale, Invoice, Vendor, Customer, Payment, Receive, DSP, Journal, AccountSub
 # Payment,
 # Receive
 
@@ -11,8 +11,8 @@ def update_vendor_balance_on_purchase(sender, instance, created, **kwargs):
     if created:
         vendor = Vendor.objects.get(name=instance.vendor)
         print('created - Purchase')
-        print(vendor.balance)
-        print(instance.total)
+        # print(vendor.balance)
+        # print(instance.total)
         vendor.balance += instance.total
         vendor.save()
 
@@ -20,26 +20,32 @@ def update_vendor_balance_on_purchase(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Sale)
 def update_customer_balance_on_sale(sender, instance, created, **kwargs):
     if created:
+         # print('created - Sale')
+        
         customer = Customer.objects.get(name=instance.customer)
         sale_revenue = AccountSub.objects.filter(title='Sale Revenue').get()
-        print('created - Sale')
-        # print(customer.balance)
-        print(instance.total)
+        invoice = Invoice.objects.get(id=instance.invoice.id)
+        # UPDATE INVOICE TOTAL
+        invoice.total += instance.total
+        invoice.save()
+       
+        # UPDATE CUSTOMER BALANCE
         customer.balance += instance.total
-        print(sale_revenue)
-        # if sale_revenue.balance:
+        customer.save()
+       
+        # UPDATE SALE REVENUE BALANCE
         sale_revenue.balance += instance.total
         sale_revenue.save()
-        customer.save()
+        
 
 
 @receiver(post_save, sender=Payment)
 def update_vendor_balance_on_pay(sender, instance, created, **kwargs):
     if created:
-        vendor = Vendor.objects.get(name=instance.to_account)
+        vendor = Vendor.objects.get(name=instance.vendor)
         print('created - Payment')
-        print(vendor.balance)
-        print(instance.amount)
+        # print(vendor.balance)
+        # print(instance.amount)
         vendor.balance -= instance.amount
         vendor.save()
 
@@ -49,8 +55,8 @@ def update_customer_balance_on_receive(sender, instance, created, **kwargs):
     if created:
         customer = Customer.objects.get(name=instance.from_account)
         print('created - Receive')
-        print(customer.balance)
-        print(instance.amount)
+        # print(customer.balance)
+        # print(instance.amount)
         customer.balance -= instance.amount
         customer.save()
 
@@ -70,7 +76,7 @@ def add_journal_purchase(sender, instance, created, **kwargs):
     if created:
         ap = AccountSub.objects.get(title='Account Payable')
         item = Item.objects.get(title=instance.item.title)
-        print(item.title)
+        # print(item.title)
 
         debit_account = instance.get_account_sub
         credit_account = instance.vendor.get_account_sub
@@ -127,7 +133,7 @@ def add_journal_payment(sender, instance, created, **kwargs):
         if instance.payment_method == 'cash':
             cash = AccountSub.objects.get(title='Cash')
             ap = AccountSub.objects.get(title='Account Payable')
-            debit_account = instance.to_account.get_account_sub
+            debit_account = instance.vendor.get_account_sub
             credit_account = cash
             model_name = 'Payment'
             model_id = instance.pk

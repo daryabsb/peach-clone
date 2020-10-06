@@ -14,6 +14,7 @@ from core.models import (
     Payment,
     Receive,
     Invoice,
+    PurchaseInvoice,
     InvoiceItem)
 
 FOR_CONTROL_CLASS = {'class': 'form-control'}
@@ -86,21 +87,21 @@ class PaymentForm(forms.ModelForm):
 
     from_account = forms.ModelChoiceField(
         queryset=Company.objects.all(), empty_label="Select your department")
-    to_account = forms.ModelChoiceField(
+    vendor = forms.ModelChoiceField(
         queryset=Vendor.objects.all(), empty_label="Select a Vendor")
 
     class Meta:
         model = Payment
         fields = (
-            'from_account', 'to_account', 'description',
-            'invoice', 'amount',
+            'from_account', 'vendor', 'description',
+            'purchase_invoice', 'total',
         )
 
     def __init__(self, *args, **kwargs):
         super(PaymentForm, self).__init__(*args, **kwargs)
         self.fields['from_account'].widget.attrs.update(
             {'class': 'form-control'})
-        self.fields['to_account'].widget.attrs.update(
+        self.fields['vendor'].widget.attrs.update(
             {'class': 'form-control'})
         self.fields['description'].widget.attrs.update({
             'class': 'form-control',

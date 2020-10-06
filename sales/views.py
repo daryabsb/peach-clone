@@ -11,8 +11,11 @@ class InvoiceListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(InvoiceListView, self).get_context_data(*args, **kwargs)
-        context['model'] = 'Sale'
-        return contexts
+        context['model'] = 'Invoice'
+        context['module'] = 'Sales & Customers'
+        customers = Customer.objects.all()
+        context['customers'] = customers
+        return context
 
 
 class InvoiceCreateView(CreateView):
@@ -36,6 +39,7 @@ class InvoiceCreateView(CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+        # print(form.is_valid())
         invoiceitem_form = InvoiceItemFormSet(self.request.POST)
 
         if (form.is_valid() and invoiceitem_form.is_valid()):
@@ -44,6 +48,7 @@ class InvoiceCreateView(CreateView):
             return self.form_invalid(form, invoiceitem_form)
 
     def form_valid(self, form, invoiceitem_form):
+        
         self.object = form.save()
         invoiceitem_form.instance = self.object
         invoiceitem_form.save()
@@ -70,7 +75,7 @@ class InvoiceDetailView(DetailView):
         context = super(InvoiceDetailView, self).get_context_data()
         # print(context)
         items = Sale.objects.filter(invoice=self.kwargs['pk'])
-        print(items)
+        # print(items)
         context['items'] = items
         invoice_total = 0
         for item in items:

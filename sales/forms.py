@@ -12,7 +12,7 @@ class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = [
-            'payment_term', 'balance','status','customer'
+            'payment_term', 'total','status','customer'
          
         ]
 

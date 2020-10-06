@@ -62,7 +62,8 @@ class Company(models.Model):
         'Company', related_name='Parent', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     owners = models.ManyToManyField('Owner')
-    address = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
+    address = models.ForeignKey(
+        'Address', on_delete=models.CASCADE, blank=True, null=True)
     account_type = models.CharField(
         max_length=20,  default='accrual', choices=ACCOUNT_TYPE)
     created = models.DateTimeField(auto_now_add=True)
@@ -79,6 +80,7 @@ class Company(models.Model):
 
     def get_absolute_url(self):
         return reverse('company-detail', kwargs={'pk': self.pk})
+
 
 class Address(models.Model):
     addr_line1 = models.CharField(max_length=400, blank=True, null=True)
@@ -187,7 +189,7 @@ class CVbase(models.Model):
 
     address = models.ForeignKey(
         'Address', on_delete=models.CASCADE, blank=True, null=True
-        )
+    )
     phone = models.CharField(max_length=30, blank=True, null=True)
     balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     note = models.TextField(blank=True, null=True)
@@ -261,8 +263,14 @@ class Vendor(CVbase):
 
 
 class Purchase(models.Model):
-    department = models.ForeignKey('Company', on_delete=models.CASCADE)
+    department = models.ForeignKey(
+        'Company', 
+        on_delete=models.CASCADE,
+        default=1
+        )
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
+    purchase_invoice = models.ForeignKey(
+        'PurchaseInvoice', on_delete=models.CASCADE, null=True, blank=True)
     # amount = models.IntegerField(default=0)
     description = models.TextField(blank=True, null=True)
     # credit_account
@@ -303,14 +311,16 @@ class Sale(models.Model):
     department = models.ForeignKey(
         'Company', on_delete=models.CASCADE, default=1)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
-    invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE, null=True, blank=True)
+    invoice = models.ForeignKey(
+        'Invoice', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(
         max_digits=9, decimal_places=2, default=0.00)
     total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    balance = models.DecimalField(max_digits=10, decimal_places=3, default=0.00)
+    balance = models.DecimalField(
+        max_digits=10, decimal_places=3, default=0.00)
     status = models.CharField(max_length=30, default='unpaid')
     note = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -327,12 +337,14 @@ class Sale(models.Model):
     @property
     def get_account_sub(self):
         return self.item.account_sub
+
     @property
     def get_total_list_price(self, items):
         total = self.objects.all().aggregate(Sum('total'))
         # tot Purchase.objects.filter(
         #     credit_account=vendor).aggregate(Sum('total'))
         return total
+
 
     # def get_absolute_url(self):
     #     return reverse('company-detail', kwargs={'pk': self.pk})
@@ -347,21 +359,22 @@ class Payment(models.Model):
 
     from_account = models.ForeignKey(
         'Company', on_delete=models.CASCADE, default=1)
-    to_account = models.ForeignKey('Vendor', on_delete=models.CASCADE)
-    invoice = models.CharField(max_length=60, null=True, blank=True)
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
+    purchase_invoice = models.ForeignKey(
+        'PurchaseInvoice', on_delete=models.CASCADE, null=True, blank=True)
     payment_method = models.CharField(
         max_length=20, choices=PAYMENT_METHOD, default='cash')
     description = models.TextField(null=True, blank=True)
-    amount = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.amount} to {self.to_account}'
+        return f'{self.total} to {self.vendor}'
 
     @property
     def get_account_sub(self):
-        return self.to_account.account_type
+        return self.vendor.account_type
 
     def get_total_list_price(self):
         total = self.objects.all().aggregate(Sum('amount'))
@@ -409,11 +422,14 @@ class Expense(models.Model):
 class Revenue(models.Model):
     pass
 
+
 INVOICE_STATUS = (
     ('pending', 'PENDING'),
     ('invoked', 'INVOKED'),
     ('paid', 'PAID')
 )
+
+
 class Invoice(models.Model):
     account = models.ForeignKey('Company', on_delete=models.CASCADE, default=1)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
@@ -425,11 +441,15 @@ class Invoice(models.Model):
     due_date = models.DateTimeField(null=True, blank=True)
     payment_term = models.CharField(
         max_length=60, choices=PAYMENT_METHOD, default='cash'
-        )
-    balance = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    status = models.CharField(max_length=30, choices=INVOICE_STATUS, default='pending')
+    )
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    status = models.CharField(
+        max_length=30, choices=INVOICE_STATUS, default='pending')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
 
     def __init__(self, *args, **kwargs):
         super(Invoice, self).__init__(*args, **kwargs)
@@ -443,6 +463,7 @@ class Invoice(models.Model):
     @property
     def get_sale_items(self):
         return InvoiceItem.objects.filter(invoice=self)
+
     @property
     def get_total_price(self):
         items = InvoiceItem.objects.filter(invoice=self)
@@ -457,19 +478,57 @@ class Invoice(models.Model):
     def pay(self):
         return reverse('sales_invoice_pay', args=(self.pk,))
 
+
+class PurchaseInvoice(models.Model):
+
+    # Fields
+    # slug = extension_fields.AutoSlugField(populate_from='id', blank=True)
+    account = models.ForeignKey('Company', on_delete=models.CASCADE, default=1)
+    vendor = models.ForeignKey(
+        'Vendor',
+        on_delete=models.CASCADE,
+        related_name="vendors"
+    )
+    payment_term = models.CharField(
+        max_length=60, choices=PAYMENT_METHOD, default='cash'
+    )
+
+    # sale_query = models.QuerySet(Sale.objects.filter(customer=customer))
+    # total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+
+    note = models.TextField(null=True, blank=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    status = models.CharField(
+        max_length=30, choices=INVOICE_STATUS, default='pending')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    # def __unicode__(self):
+    #     return u'%s' % self.slug
+
+    def get_absolute_url(self):
+        return reverse('purchase_invoice_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('purchase_invoice_update', args=(self.pk,))
 
 
 class InvoiceItem(models.Model):
     invoice = models.ForeignKey('Invoice', on_delete=models.CASCADE)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
-    
+
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(
         max_digits=9, decimal_places=2, default=0.00)
     total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    balance = models.DecimalField(max_digits=10, decimal_places=3, default=0.00)
+    balance = models.DecimalField(
+        max_digits=10, decimal_places=3, default=0.00)
     status = models.CharField(max_length=30, default='unpaid')
     note = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -477,17 +536,17 @@ class InvoiceItem(models.Model):
 
     def __str__(self):
         return f'{self.invoice.id} - {self.item.title} ({self.pk})'
-    
+
     def save(self, *args, **kwargs):
         self.total = self.unit_price * self.quantity
         super(InvoiceItem, self).save(*args, **kwargs)
-    
+
     def get_absolute_url(self):
         return reverse(
-            'sales_invoiceitem_detail', 
+            'sales_invoiceitem_detail',
             kwargs={'pk': self.pk}
-            )
-    
+        )
+
     # def calculate_total(self):
     #     return sum(item.total for item in self.sale_items.all())
 
