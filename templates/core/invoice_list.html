@@ -1,15 +1,75 @@
 {% extends "_base.html" %} {% load static %} {% load humanize %} {% block main %} {% include 'dashboard_icons.html' %}
 
+<div class="table__container">
+
+    <ul class="responsive-table">
+        <li class="table-row table-menu">
+            <h2>{{model}} List</h2>
+            <div class="table-menu__items">
+                <a href="{% url 'sales_invoice_create' %}">Add New</a>
+                <a href="">Check All</a>
+                <a href="">Check None</a>
+            </div>
+        </li>
+        <li class="table-header">
+            <div class="col col-1">Id</div>
+            <div class="col col-2 ">Customer Name</div>
+            <div class="col col-3">Amount Due</div>
+            <div class="col col-4">Payment Status</div>
+
+        </li>
+        {% for object in object_list %}
+        <li class="table-row">
+            <div class="col col-1" data-label="Job Id">{{object.id}}</div>
+            <div class="col col-2 table-row__link" data-label="Customer Name">
+                <a href="{{object.get_absolute_url}}">{{object.customer}}</a></div>
+            <div class="col col-3" data-label="Amount">${{object.total}}</div>
+            <div class="col col-4" data-label="Payment Status">{{object.status}}</div>
+
+        </li>
+        {% endfor %}
+
+
+
+    </ul>
+
+    <hr>
+
+    <h2>Customer List</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Id</div>
+            <div class="col col-2">Customer Name</div>
+            <div class="col col-3">Balance</div>
+            <div class="col col-4">Phone</div>
+        </li>
+        {% for customer in customers %}
+        <li class="table-row">
+            <div class="col col-1" data-label="Job Id">{{customer.id}}</div>
+            <div class="col col-2" data-label="Customer Name">{{customer.name}}</div>
+            <div class="col col-3" data-label="Amount">${{customer.balance}}</div>
+            <div class="col col-4" data-label="Payment Status">{{customer.phone}}</div>
+        </li>
+        {% endfor %}
+
+    </ul>
+
+
+
+
+
+
+</div>
 
 <div class="section_inline">
 
-<div class="section table_section">
+    <div class="section table_section">
 
-    <div class="title_wrapper">
+        <div class="title_wrapper">
 
-        <span class="title_wrapper_left"></span>
-        <span class="title_wrapper_right"></span>
-        <span>
+            <span class="title_wrapper_left"></span>
+            <span class="title_wrapper_right"></span>
+            <span>
 
 
       <!--[if !IE]>start table menu<![endif]-->
@@ -25,103 +85,103 @@
           <li>
             <a href="/" class="button btn-menu">
               <span>Back</span></a>
-        </li>
-        <li>
-            <a href="{% url 'sales_invoice_create' %}" class="button btn-menu"><span>ADD NEW</span></a>
-        </li>
-        <li>
-            <a href="#" class="button btn-menu"><span>CHECK ALL</span></a>
-        </li>
-        <li>
-            <a href="#" class="button btn-menu"><span>UNCHECK ALL</span></a>
-        </li>
-        <li>
-            <span class="button btn-menu"><span>APPROVE</span>
-            </span>
-        </li>
-        </ul>
+            </li>
+            <li>
+                <a href="{% url 'sales_invoice_create' %}" class="button btn-menu"><span>ADD NEW</span></a>
+            </li>
+            <li>
+                <a href="#" class="button btn-menu"><span>CHECK ALL</span></a>
+            </li>
+            <li>
+                <a href="#" class="button btn-menu"><span>UNCHECK ALL</span></a>
+            </li>
+            <li>
+                <span class="button btn-menu"><span>APPROVE</span>
+                </span>
+            </li>
+            </ul>
+        </div>
+        <!--[if !IE]>end table menu<![endif]-->
+        </span>
     </div>
-    <!--[if !IE]>end table menu<![endif]-->
-    </span>
-</div>
-<div class="section_content table_section">
-    <!--[if !IE]>start section content top<![endif]-->
+    <div class="section_content table_section">
+        <!--[if !IE]>start section content top<![endif]-->
 
-    <div class="sct">
-        <div class="sct_left">
-            <div class="sct_right">
-                <div class="sct_left">
-                    <div class="sct_right">
-                        <form action="#">
-                            <fieldset>
-                                <!--[if !IE]>start table_wrapper<![endif]-->
-                                <div class="table_wrapper">
+        <div class="sct">
+            <div class="sct_left">
+                <div class="sct_right">
+                    <div class="sct_left">
+                        <div class="sct_right">
+                            <form action="#">
+                                <fieldset>
+                                    <!--[if !IE]>start table_wrapper<![endif]-->
+                                    <div class="table_wrapper">
 
 
-                                    <table class="table__flex" cellpadding="0" cellspacing="0" width="100%">
-                                        <tbody>
-                                            <tr>
-                                                <th><span>#</span> </th>
-                                                <th>ID</th>
-                                                <th>Item</th>
-                                                <th class="table__description">Description</th>
-                                                <th>created</th>
-                                                <th>Payment Term</th>
-                                                <th>total</th>
-                                                <th>status</th>
-                                                <th style="width: 96px;">Actions</th>
-                                            </tr>
+                                        <table class="table__flex" cellpadding="0" cellspacing="0" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <th><span>#</span> </th>
+                                                    <th>ID</th>
+                                                    <th>Item</th>
+                                                    <th class="table__description">Description</th>
+                                                    <th>created</th>
+                                                    <th>Payment Term</th>
+                                                    <th>total</th>
+                                                    <th>status</th>
+                                                    <th style="width: 96px;">Actions</th>
+                                                </tr>
 
-                                            {% for object in object_list %} {% if object.status == 'pending' %}
-                                            <tr class="second">
-                                                {% else %}
-                                                <tr class="first"></tr>
-                                                {% endif %}
-                                                <td>{{forloop.counter}}</td>
-                                                <td>{{object.pk}}</td>
-                                                <td>
-                                                    <a href="{{object.get_absolute_url}}">{{object}}</a>
-                                                </td>
-                                                <td>{{ object.description }}</td>
-                                                <td>{{ object.created|date }}</td>
-                                                <td>{{ object.payment_term }}</td>
-                                                <td>${{ object.total }}</td>
-                                                <td><span class="{{ object.status }}">{{ object.status }}</span></td>
-                                                <td>
-                                                    <div class="actions">
-                                                        <ul>
-                                                            <li><a class="action1" href="#">1</a></li>
-                                                            <li><a class="action2" href="#">2</a></li>
+                                                {% for object in object_list %} {% if object.status == 'pending' %}
+                                                <tr class="second">
+                                                    {% else %}
+                                                    <tr class="first"></tr>
+                                                    {% endif %}
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{object.pk}}</td>
+                                                    <td>
+                                                        <a href="{{object.get_absolute_url}}">{{object}}</a>
+                                                    </td>
+                                                    <td>{{ object.description }}</td>
+                                                    <td>{{ object.created|date }}</td>
+                                                    <td>{{ object.payment_term }}</td>
+                                                    <td>${{ object.total }}</td>
+                                                    <td><span class="{{ object.status }}">{{ object.status }}</span></td>
+                                                    <td>
+                                                        <div class="actions">
+                                                            <ul>
+                                                                <li><a class="action1" href="#">1</a></li>
+                                                                <li><a class="action2" href="#">2</a></li>
 
-                                                            <li><a class="action4" href="#">4</a></li>
-                                                            <li><input class="radio" name="" type="checkbox" value="" /></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
+                                                                <li><a class="action4" href="#">4</a></li>
+                                                                <li><input class="radio" name="" type="checkbox" value="" /></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
 
-                                </div>
-                                <!--[if !IE]>end table_wrapper<![endif]-->
+                                    </div>
+                                    <!--[if !IE]>end table_wrapper<![endif]-->
 
-                                {% include 'pagination.html' %}
+                                    {% include 'pagination.html' %}
 
-                            </fieldset>
-                        </form>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--[if !IE]>end section content top<![endif]-->
-    <!--[if !IE]>start section content bottom<![endif]-->
-    <span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
-    <!--[if !IE]>end section content bottom<![endif]-->
-</div>
-<a class="btn btn-primary" href="{% url 'sales_invoice_create' %}">Create new
+        <!--[if !IE]>end section content top<![endif]-->
+        <!--[if !IE]>start section content bottom<![endif]-->
+        <span class="scb"><span class="scb_left"></span><span class="scb_right"></span></span>
+        <!--[if !IE]>end section content bottom<![endif]-->
+    </div>
+    <a class="btn btn-primary" href="{% url 'sales_invoice_create' %}">Create new
     Invoice</a>
 
 </div>
@@ -154,36 +214,35 @@
                                                     <th><a href="#" class="asc">Name</a></th>
 
                                                     <th><a href="#">Price</a></th>
-                                                   
+
 
                                                     <th>Actions</th>
                                                 </tr>
 
-                                                {% for customer in customers %}
-                                                  {% if customer.balance >= 0 %}
-                                                    <tr class="first">
-                                                        <td style="width: 16px;">{{forloop.counter}}</td>
-                                                        <td><a href="#" class="product_name">{{customer.name}}</a></td>
-                                                        
-                                                        <td style="width: 65px;">${{customer.balance}}</td>
-                                                       
-                                                        <td style="width: 120px;">
-                                                            <div class="actions_menu">
-                                                                <ul>
-
-                                                                    <li><a class="edit" href="#">Edit</a></li>
-                                                                    <li><a class="delete" href="#">Delete</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                  {% else %}
-                                                  <tr class="second">
+                                                {% for customer in customers %} {% if customer.balance >= 0 %}
+                                                <tr class="first">
                                                     <td style="width: 16px;">{{forloop.counter}}</td>
                                                     <td><a href="#" class="product_name">{{customer.name}}</a></td>
-                                                    
+
+                                                    <td style="width: 65px;">${{customer.balance}}</td>
+
+                                                    <td style="width: 120px;">
+                                                        <div class="actions_menu">
+                                                            <ul>
+
+                                                                <li><a class="edit" href="#">Edit</a></li>
+                                                                <li><a class="delete" href="#">Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% else %}
+                                                <tr class="second">
+                                                    <td style="width: 16px;">{{forloop.counter}}</td>
+                                                    <td><a href="#" class="product_name">{{customer.name}}</a></td>
+
                                                     <td style="width: 65px;">(${{customer.balance|cut:"-"|intcomma}})</td>
-                                                    
+
                                                     <td style="width: 120px;">
                                                         <div class="actions_menu">
                                                             <ul>
@@ -193,8 +252,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                  {% endif %}
-                                                {% endfor %}
+                                                {% endif %} {% endfor %}
 
 
                                             </tbody>
