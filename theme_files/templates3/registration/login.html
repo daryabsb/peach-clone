@@ -1,0 +1,34 @@
+ {% extends 'auth_layout.html' %} {% load static %} {% block auth_form %}
+
+<form class="form mt-5 contact-form" action="{% url 'users:login' %}" method="post">
+    {% csrf_token %} {% comment %}<label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>{% endcomment %} {{ form.non_field_errors }} {% for field in form %}
+    <div class="form-group ">
+        <div class="col-sm-12">
+            {{ field }}
+        </div>
+    </div>
+    {{ field.errors }} {% endfor %}
+
+    <input type="hidden" name="next" value="{{ redirect_to }}">
+    <div class="form-group">
+        <div class="col-12">
+            <label class="cr-styled">
+                <input type="checkbox" checked>
+                <i class="fa"></i> 
+                Remember me
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12 mt-4">
+            <button class="btn btn-primary btn-block" type="submit">Log In</button>
+        </div>
+    </div>
+    </div>
+
+</form>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% load static %}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <title>Administration Panel</title>
+    {% block old_base_css %}{% endblock old_base_css %}
+    <link media="screen" rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/invoice.css' %}">
+    <link rel="stylesheet" href="{% static 'css/table_responsive.css' %}">
+
+
+
+    <!--[if lte IE 6]><link media="screen" rel="stylesheet" type="text/css" href="css/admin-ie.css" /><![endif]-->
+
+    <script type="text/javascript" src="{% static 'js/behaviour.js' %}"></script>
+
+</head>
+
+<body>
+    <!--[if !IE]>start wrapper<![endif]-->
+    <div id="wrapper">
+        {% include 'partials/_header.html' %}
+        <!--[if !IE]>start head<![endif]-->
+        <div id="content">
+            <div id="page">
+                <div class="inner">
+                    <!--[if !IE]>end head<![endif]-->
+                    {% block main %} {% endblock main %}
+                </div>
+            </div> {% include 'partials/_left_sidebar.html' %}
+
+        </div>
+        <!--[if !IE]>end wrapper<![endif]-->
+    </div>
+    <!--[if !IE]>start footer<![endif]-->
+    <div id="footer">
+        <div id="footer_inner">
+
+            <dl class="copy">
+                <dt><strong>HyperAdmin</strong> <em>build 26122008</em></dt>
+                <dd>&copy; 2008 Yourcompany.com All rights reserved.</dd>
+            </dl>
+
+            <dl class="quick_links">
+                <dt><strong>Quick Links :</strong></dt>
+                <dd>
+                    <ul>
+                        <li><a href="#">Dashboard </a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">General Settings</a></li>
+                        <li><a href="#">Static Pages</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li class="last"><a href="#">Log out</a></li>
+                    </ul>
+                </dd>
+            </dl>
+
+
+            <dl class="help_links">
+                <dt><strong>Need Help ?</strong></dt>
+                <dd>
+                    <ul>
+                        <li><a href="#">Live Help</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li class="last"><a href="#">Knowledgebase</a></li>
+                    </ul>
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+    <!--[if !IE]>end footer<![endif]-->
+
+    {% block old_base_js %}{% endblock old_base_js %}
+
+</body>
+
+</html>

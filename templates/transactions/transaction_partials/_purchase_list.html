@@ -1,16 +1,5 @@
-<div class="section_content">
-  <!--[if !IE]>start section content top<![endif]-->
-  <div class="sct">
-    <div class="sct_left">
-      <div class="sct_right">
-        <div class="sct_left">
-          <div class="sct_right">
-            <form action="#">
-              <fieldset>
-                <!--[if !IE]>start table_wrapper<![endif]-->
-                <div class="table_wrapper">
-                  <div class="table_wrapper_inner">
-                    <table cellpadding="0" cellspacing="0" width="100%">
+<div class="table-responsive">
+  <table class="table">
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -20,7 +9,7 @@
                           <th data-priority="1">Quantity</th>
                           <th data-priority="3">Unit Price</th>
                           <th data-priority="3">Sub Total</th>
-                          <th style="width: 96px;">Actions</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -28,7 +17,7 @@
                         <tr>
                           <td>{{item.id}}</td>
                           <th>
-                            <span class="co-name">{{item.item.title}}</span>
+                            <span>{{item.item.title}}</span>
                           </th>
                           <td>
                             {{item.description}}
@@ -36,24 +25,9 @@
                           <td>{{item.vendor}}</td>
                           <td>{{item.quantity}}</td>
                           <td>{{item.unit_price}}</td>
-                          <td><span class="approved">{{item.total}}</span></td>
-                          <td style="width: 96px;">
-                            <div class="actions">
-                              <ul>
-                                <li><a class="action1" href="#">1</a></li>
-                                <li><a class="action2" href="#">2</a></li>
-                                <li><a class="action3" href="#">3</a></li>
-                                <li><a class="action4" href="#">4</a></li>
-                                <li>
-                                  <input
-                                    class="radio"
-                                    name=""
-                                    type="checkbox"
-                                    value=""
-                                  />
-                                </li>
-                              </ul>
-                            </div>
+                          <td><span>{{item.total}}</span></td>
+                          <td>
+                          
                           </td>
                         </tr>
                         {% endfor %}
@@ -71,48 +45,4 @@
                       </tfoot>
                     </table>
                   </div>
-                </div>
-                <!--[if !IE]>end table_wrapper<![endif]-->
-
-                <!--[if !IE]>start table menu<![endif]-->
-                <div class="table_menu">
-                  <ul class="left">
-                    <li>
-                      <a href="#" class="button add_new"
-                        ><span><span>ADD NEW</span></span></a
-                      >
-                    </li>
-                  </ul>
-                  <ul class="right">
-                    <li>
-                      <a href="#" class="button check_all"
-                        ><span><span>CHECK ALL</span></span></a
-                      >
-                    </li>
-                    <li>
-                      <a href="#" class="button uncheck_all"
-                        ><span><span>UNCHECK ALL</span></span></a
-                      >
-                    </li>
-                    <li>
-                      <span class="button approve"
-                        ><span><span>APPROVE</span></span>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <!--[if !IE]>end table menu<![endif]-->
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--[if !IE]>end section content top<![endif]-->
-  <!--[if !IE]>start section content bottom<![endif]-->
-  <span class="scb"
-    ><span class="scb_left"></span><span class="scb_right"></span
-  ></span>
-  <!--[if !IE]>end section content bottom<![endif]-->
-</div>
+               

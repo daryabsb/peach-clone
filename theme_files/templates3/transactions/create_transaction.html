@@ -1,0 +1,36 @@
+{% extends '_base.html' %} {% load static %} {% block main %} {% load crispy_forms_tags %}
+<div class="container-fluid">
+    <div class="page-head">
+
+        <h4 class="mt-2 mb-2">List of Transactions</h4>
+
+    </div>
+    <div class="responsive-table">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        {% if form.vendor %}
+                        <h1>Create a purchase</h1>
+                        {% elif form.customer %}
+                        <h1>Create a sale</h1>
+                        {% endif %}
+
+                        <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
+
+                        <!-- <h1>Submit your form here!</h1> -->
+                        <form action="." method="post">
+                            {% csrf_token %} {{form|crispy}}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                        <!-- </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+    </div>
+    {% endblock %}
