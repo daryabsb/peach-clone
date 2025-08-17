@@ -332,7 +332,7 @@ class Sale(models.Model):
         super(Sale, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.item} - {self.total} to {self.customer}'
+        return f'{self.pk} | {self.item} - {self.total} to {self.customer}'
 
     @property
     def get_account_sub(self):
