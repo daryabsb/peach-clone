@@ -600,6 +600,8 @@ MODEL_CHOICES = (
     ('Receive', 'RECEIVE'),
 )
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 class Journal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -607,10 +609,12 @@ class Journal(models.Model):
         'AccountSub', on_delete=models.CASCADE, related_name='debit_account')
     cr_account = models.ForeignKey(
         'AccountSub', on_delete=models.CASCADE, related_name='credit_account')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    sender_model = models.CharField(max_length=10, null=True, blank=True)
 
-    sender_model = models.CharField(max_length=10)
-
-    model_id = models.PositiveIntegerField()
+    model_id = models.PositiveIntegerField(null=True, blank=True)
 
     description = models.TextField(blank=True, null=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)

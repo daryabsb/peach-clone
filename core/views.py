@@ -1,8 +1,13 @@
 from django.shortcuts import render, HttpResponse
 
-from .models import Company, Owner, AccountMain
+from .models import Company, Owner, AccountMain, Journal
 
 from django.views.generic import ListView, DetailView
+
+
+class Dashboard(ListView):
+    model = Journal
+    template_name = "dashboard.html"
 
 
 class Home(ListView):
