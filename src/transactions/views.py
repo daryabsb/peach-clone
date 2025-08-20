@@ -9,12 +9,50 @@ from .forms import (
     PurchaseForm, SaleForm, PaymentForm, ReceiveForm, 
     InvoiceForm, InvoiceCreateForm,)
 
-from core.models import (
-    Company, Owner, AccountMain, Item, Customer,
-    Vendor, Purchase, Sale, Payment,
-    Receive, Invoice, InvoiceItem)
+from src.company.models import (
+    Company, Owner, Item)
+from src.accounts.models import (
+    Customer, Vendor)
+from src.transactions.models import (
+   Purchase, Sale, Payment, Receive, Invoice, InvoiceItem)
 
 from django.views.generic import ListView, DetailView
+
+
+from django.shortcuts import render, HttpResponse
+
+from .models import Journal
+
+from django.views.generic import ListView, DetailView
+
+
+class Dashboard(ListView):
+    model = Journal
+    template_name = "dashboard.html"
+
+
+# class Home(ListView):
+#     model = Company
+#     template_name = "index.html"
+
+#     def get_context_data(self, **kwargs):
+#         # Call the base implementation first to get a context
+#         context = super().get_context_data(**kwargs)
+#         # Add in a QuerySet of all the books
+#         context['owners'] = Owner.objects.all()
+#         return context
+
+def testjs(request):
+    if request.POST:
+        # de = []
+        # for d in request.POST['desc']:
+        print(request.POST)
+        # print('posted')
+        # print(request.POST)
+    return render(request,'testjs.html', {})
+
+
+
 
 class CustomerSaleView(ListView):
     title = 'Customer and Sales'

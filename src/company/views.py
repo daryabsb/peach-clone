@@ -1,25 +1,17 @@
 from django.shortcuts import render
 from django.db.models import Sum
 
-from core.models import (
+from src.company.models import (
     Company,
-    Owner,
-    AccountMain,
-    AccountSub,
-    Item,
-    Purchase,
-    Customer,
-    Vendor,
-    Sale,
-    Payment,
-    Receive)
+    # Owner,
+   )
 
 from django.views.generic import ListView, DetailView
 
 
 class CompanyList(ListView):
     model = Company
-    template_name = "company/company_list.html"
+    # template_name = "company/company_list.html"
 
     # def get_queryset(self):
     #     queryset = Company.objects.
@@ -31,26 +23,26 @@ class CompanyList(ListView):
         return context
 
 
-class OwnerList(ListView):
-    model = Owner
-    template_name = "company/owners_list.html"
+# class OwnerList(ListView):
+#     model = Owner
+#     template_name = "company/owners_list.html"
 
 
-class AccountList(ListView):
-    model = AccountMain
-    template_name = "company/company_list.html"
+# class AccountList(ListView):
+#     model = AccountMain
+#     template_name = "company/company_list.html"
 
 
-class AccountList(ListView):
-    model = AccountMain
-    template_name = "company/company_list.html"
+# class AccountList(ListView):
+#     model = AccountMain
+#     template_name = "company/company_list.html"
 
 
-class AccountSubList(ListView):
-    model = AccountSub
-    template_name = "company/company_list.html"
+# class AccountSubList(ListView):
+#     model = AccountSub
+#     template_name = "company/company_list.html"
 
 
-class ItemList(ListView):
-    model = Item
-    template_name = "company/company_list.html"
+# class ItemList(ListView):
+#     model = Item
+#     template_name = "company/company_list.html"

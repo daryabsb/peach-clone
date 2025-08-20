@@ -55,7 +55,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'src.accounts',
     'src.core',
+    'src.finances',
     'src.users',
     'src.transactions',
     'src.statement',
@@ -67,13 +69,15 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -95,6 +99,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'custom_context_processor.dz_static',
             ],
         },
     },
@@ -146,7 +151,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CRISPY_TEMPLATE_PACK = 'uni_form'

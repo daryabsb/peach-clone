@@ -15,20 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from src.core.views import Dashboard, Home, testjs
+from src.core.views import Dashboard, testjs
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("accounts/", include("src.users.urls", namespace="users")),
-    path("", Home.as_view(), name="home"),
+    path("accounts/", include("src.accounts.urls", namespace="accounts")),
+    # path("", Home.as_view(), name="home"),
     path("dashboard/", Dashboard.as_view(), name="home"),
     path('admin/', admin.site.urls),
     # path("companies/", include("src.company.urls", namespace="companies")),
     # path("transactions/", include("src.transactions.urls", namespace="transactions")),
     # path("statements/", include("src.statement.urls", namespace="statements")),
     path("testjs/", testjs),
+    
+    path("__debug__/", include("debug_toolbar.urls")),
     
     # path('sales/',include('src.sales.urls')),
     # path('purchases/',include('src.purchase.urls')),
