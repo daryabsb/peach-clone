@@ -90,6 +90,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             PROJECT_PATH + "\\templates",
+            PROJECT_PATH + "\\accounts\\templates",
+            PROJECT_PATH + "\\company\\templates",
+
 
             ],
         'APP_DIRS': True,

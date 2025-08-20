@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,32 +14,32 @@
 	<meta name="author" content="Dreams Technologies">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/favicon.png' %}">
 
 	<!-- Apple Touch Icon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'app/img/apple-touch-icon.png' %}">
 
     <!-- Theme Script js -->
-    <script src="assets/js/theme-script.js"></script>
+    <script src="{% static 'app/js/theme-script.js' %}"></script>
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
 
 	<!-- Tabler Icon CSS -->
-	<link rel="stylesheet" href="assets/plugins/tabler-icons/tabler-icons.min.css">
+	<link rel="stylesheet" href="{% static 'app/plugins/tabler-icons/tabler-icons.min.css' %}">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'app/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/plugins/fontawesome/css/all.min.css' %}">
 
     <!-- Simplebar CSS -->
-    <link rel="stylesheet" href="assets/plugins/simplebar/simplebar.min.css">
+    <link rel="stylesheet" href="{% static 'app/plugins/simplebar/simplebar.min.css' %}">
 
 	<!-- Iconsax CSS -->
-	<link rel="stylesheet" href="assets/css/iconsax.css">
+	<link rel="stylesheet" href="{% static 'app/css/iconsax.css' %}">
 
 	<!-- Main CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 
 </head>
 
@@ -55,10 +55,10 @@
 				<!-- Logo -->
 				<div class="header-left">
 					<a href="index.html" class="logo">
-						<img src="assets/img/logo.svg" alt="Logo">
+						<img src="{% static 'app/img/logo.svg' %}" alt="Logo">
 					</a>
 					<a href="index.html" class="dark-logo">
-						<img src="assets/img/logo-white.svg" alt="Logo">
+						<img src="{% static 'app/img/logo-white.svg' %}" alt="Logo">
 					</a>
 				</div>
 
@@ -143,35 +143,35 @@
 							<!-- Language Dropdown -->
 							<div class="nav-item dropdown has-arrow flag-nav me-2">
 								<a class="btn btn-menubar" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
-									<img src="assets/img/flags/us.svg" alt="Language" class="img-fluid">
+									<img src="{% static 'app/img/flags/us.svg' %}" alt="Language" class="img-fluid">
 								</a>
 								<ul class="dropdown-menu p-2">
 
 									<!-- item-->
 									<li>
 										<a href="javascript:void(0);" class="dropdown-item">
-											<img src="assets/img/flags/us.svg" alt="flag" class="me-2">English
+											<img src="{% static 'app/img/flags/us.svg' %}" alt="flag" class="me-2">English
 										</a>
 									</li>
 
 									<!-- item-->
 									<li>
 										<a href="javascript:void(0);" class="dropdown-item">
-											<img src="assets/img/flags/de.svg" alt="flag" class="me-2">German
+											<img src="{% static 'app/img/flags/de.svg' %}" alt="flag" class="me-2">German
 										</a>
 									</li>
 
 									<!-- item-->
 									<li>
 										<a href="javascript:void(0);" class="dropdown-item">
-											<img src="assets/img/flags/fr.svg" alt="flag" class="me-2">French
+											<img src="{% static 'app/img/flags/fr.svg' %}" alt="flag" class="me-2">French
 										</a>
 									</li>
 
 									<!-- item-->
 									<li>
 										<a href="javascript:void(0);" class="dropdown-item">
-											<img src="assets/img/flags/ae.svg" alt="flag" class="me-2">Arabic
+											<img src="{% static 'app/img/flags/ae.svg' %}" alt="flag" class="me-2">Arabic
 										</a>
 									</li>
 
@@ -214,7 +214,7 @@
 										<div class="dropdown-item notification-item py-2 text-wrap border-bottom" id="notification-1">
 											<div class="d-flex">
 												<div class="me-2 position-relative flex-shrink-0">
-													<img src="assets/img/profiles/avatar-05.jpg" class="avatar-md rounded-circle" alt="User Img">
+													<img src="{% static 'app/img/profiles/avatar-05.jpg' %}" class="avatar-md rounded-circle" alt="User Img">
 												</div>
 												<div class="flex-grow-1">
 													<p class="mb-0 fw-semibold text-dark">John Smith</p>
@@ -266,7 +266,7 @@
 										<div class="dropdown-item notification-item py-2 text-wrap border-bottom" id="notification-3">
 											<div class="d-flex">
 												<div class="me-2 position-relative flex-shrink-0">
-													<img src="assets/img/profiles/avatar-03.jpg" class="avatar-md rounded-circle" alt="User Img">
+													<img src="{% static 'app/img/profiles/avatar-03.jpg' %}" class="avatar-md rounded-circle" alt="User Img">
 												</div>
 												<div class="flex-grow-1">
 													<p class="mb-0 fw-semibold text-dark">Robert Fox </p>
@@ -315,7 +315,7 @@
 										<div class="dropdown-item notification-item py-2 text-wrap border-bottom" id="notification-5">
 											<div class="d-flex">
 												<div class="me-2 position-relative flex-shrink-0">
-													<img src="assets/img/profiles/avatar-17.jpg" class="avatar-md rounded-circle" alt="User Img">
+													<img src="{% static 'app/img/profiles/avatar-17.jpg' %}" class="avatar-md rounded-circle" alt="User Img">
 												</div>
 												<div class="flex-grow-1">
 													<p class="mb-0 fw-semibold text-dark">Charlotte Brown</p>
@@ -365,13 +365,13 @@
 							<div class="dropdown profile-dropdown">
 								<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"  data-bs-auto-close="outside">
 									<span class="avatar online">
-										<img src="assets/img/profiles/avatar-01.jpg" alt="Img" class="img-fluid rounded-circle">
+										<img src="{% static 'app/img/profiles/avatar-01.jpg' %}" alt="Img" class="img-fluid rounded-circle">
 									</span>
 								</a>
 								<div class="dropdown-menu p-2">
 									<div class="d-flex align-items-center bg-light rounded-1 p-2 mb-2">
 										<span class="avatar avatar-lg me-2">
-											<img src="assets/img/profiles/avatar-01.jpg" alt="img" class="rounded-circle" >
+											<img src="{% static 'app/img/profiles/avatar-01.jpg' %}" alt="img" class="rounded-circle" >
 										</span>
 										<div>
 											<h6 class="fs-14 fw-medium mb-1">Jafna Cremson</h6>
@@ -412,7 +412,7 @@
 				<div class="dropdown mobile-user-menu profile-dropdown">
 					<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"  data-bs-auto-close="outside">
 						<span class="avatar avatar-md online">
-							<img src="assets/img/profiles/avatar-01.jpg" alt="Img" class="img-fluid rounded-circle">
+							<img src="{% static 'app/img/profiles/avatar-01.jpg' %}" alt="Img" class="img-fluid rounded-circle">
 						</span>
 					</a>
 					<div class="dropdown-menu p-2 mt-0">
@@ -505,16 +505,16 @@
 				<!-- Start Logo -->
 				<div class="sidebar-logo">
 					<a href="index.html" class="logo logo-normal">
-						<img src="assets/img/logo.svg" alt="Logo">
+						<img src="{% static 'app/img/logo.svg' %}" alt="Logo">
 					</a>
 					<a href="index.html" class="logo-small">
-						<img src="assets/img/logo-small.svg" alt="Logo">
+						<img src="{% static 'app/img/logo-small.svg' %}" alt="Logo">
 					</a>
 					<a href="index.html" class="dark-logo">
-						<img src="assets/img/logo-white.svg" alt="Logo">
+						<img src="{% static 'app/img/logo-white.svg' %}" alt="Logo">
 					</a>
 					<a href="index.html" class="dark-small">
-						<img src="assets/img/logo-small-white.svg" alt="Logo">
+						<img src="{% static 'app/img/logo-small-white.svg' %}" alt="Logo">
 					</a>
 					
 					<!-- Sidebar Hover Menu Toggle Button -->
@@ -1318,7 +1318,7 @@
 						<div class="sidebar-footer">
 							<div class="trial-item bg-white text-center border">
 								<div class="bg-light p-3 text-center">
-									<img src="assets/img/icons/upgrade.svg" alt="img">
+									<img src="{% static 'app/img/icons/upgrade.svg' %}" alt="img">
 								</div>
 								<div class="p-2">
 									<h6 class="fs-14 fw-semibold mb-1">Upgrade to More</h6>
@@ -1354,7 +1354,7 @@
 
 		<div class="page-wrapper">	
 			<div class="content content-two">
-              <h6 class="mb-0">Starter Page</h6>
+                {{ slot }}
 			</div>
 
 			<!-- Start Footer -->
@@ -1374,19 +1374,19 @@
 	<!-- End Wrapper -->
 
 	<!-- jQuery -->
-	<script src="assets/js/jquery-3.7.1.min.js"></script>
+	<script src="{% static 'app/js/jquery-3.7.1.min.js' %}"></script>
 
 	<!-- Feather Icon JS -->
-	<script src="assets/js/feather.min.js"></script>
+	<script src="{% static 'app/js/feather.min.js' %}"></script>
 
 	<!-- Bootstrap Core JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script> 
+	<script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script> 
 
 	<!-- Simplebar JS -->
-	<script src="assets/plugins/simplebar/simplebar.min.js"></script>
+	<script src="{% static 'app/plugins/simplebar/simplebar.min.js' %}"></script>
 
 	<!-- Custom JS -->
-	<script src="assets/js/script.js"></script>
+	<script src="{% static 'app/js/script.js' %}"></script>
 
 
 </body>

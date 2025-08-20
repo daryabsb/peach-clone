@@ -11,7 +11,7 @@ from django.views.generic import ListView, DetailView
 
 class CompanyList(ListView):
     model = Company
-    # template_name = "company/company_list.html"
+    template_name = "cotton/company/index.html"
 
     # def get_queryset(self):
     #     queryset = Company.objects.
@@ -19,7 +19,7 @@ class CompanyList(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['owners'] = Owner.objects.first()
+        # context['owners'] = Owner.objects.first()
         return context
 
 
