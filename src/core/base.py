@@ -12,6 +12,9 @@ class AccountTemplate(models.Model):
 
     def __str__(self):
         return f'{self.title} - dr: {self.dr}'
+    
+    class Meta:
+        abstract = True
 
 
 
@@ -22,3 +25,6 @@ class CVbase(models.Model):
     note = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        abstract = True
