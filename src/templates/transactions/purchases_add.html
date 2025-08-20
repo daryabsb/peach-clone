@@ -1,0 +1,36 @@
+{% extends '_base.html' %} {% load static %} {% block main %}
+
+<div class="container-fluid">
+    <div class="page-head">
+
+        <h4 class="mt-2 mb-2">List of Transactions</h4>
+
+    </div>
+    <div class="responsive-table">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        {% if form.vendor %}
+                        <h5 class="header-title">Create a purchase</h5>
+                        {% else if form.customer %}
+                        <h5 class="header-title">Create a sale</h5>
+                        {% endif %}
+
+                        <p class="text-muted">This is an experimental awesome solution for responsive tables with complex data.</p>
+
+                        <h1>Submit your form here!</h1>
+                        <form action="{% url 'transactions:purchase-add' %}" method="post">
+                            {% csrf_token %} {{form.as_p}}
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                        <!-- </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+    </div>
+    {% endblock %}

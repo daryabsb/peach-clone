@@ -1,0 +1,42 @@
+<div class="table-responsive">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th data-priority="1">Invoice Number</th>
+            <th data-priority="3">Description</th>
+            <th data-priority="3">Company Account Name</th>
+            <th data-priority="1"> Vendor Account</th>
+            <th data-priority="3">Date</th>
+            <th data-priority="3">Sub Total</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{item.id}}</td>
+            <th><span class="co-name">{{item.invoice}}</span></th>
+            <td>
+                {{item.description}}
+            </td>
+            <td>{{item.from_account}}</td>
+            <td>{{item.to_account}}</td>
+            <td>{{item.created}}</td>
+            <td>{{item.amount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Total Amount:</th>
+            <td>{{total_price.amount__sum}}</td>
+        </tr>
+    </tfoot>
+</table>
+</div>

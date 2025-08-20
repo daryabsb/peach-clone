@@ -1,0 +1,115 @@
+{% extends '_base.html' %} {% load static %} {% load widget_tweaks %} {% block main %}
+
+<p>
+    <h2 class="h3 mb-3 font-weight-normal">Add Invoice</h2>
+</p>
+<h1 class="h-color">DARYA</h1>
+<form action="." method="post">
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="invoice-form__row">
+        <div class="invoice-form__control">
+            <label for="customer">{{ form.vendor.label }}</label> {{ form.vendor.errors }} {% render_field form.vendor class='invoice-form__customer' %}
+        </div>
+
+        <div class="invoice-form__control">
+            <label for="balance">{{ form.status.label }}</label>{{ form.status.errors }} {% render_field form.status class='invoice-form__customer' %}
+        </div>
+        <div class="invoice-form__control">
+            <label for="balance">{{ form.payment_term.label }}</label>{{ form.payment_term.errors }} {% render_field form.payment_term class='invoice-form__customer' %}
+        </div>
+
+
+    </div>
+
+    {{ invoiceitem_form.management_form }} {{ invoiceitem_form.non_form_errors }} {% for form in invoiceitem_form %} {%csrf_token%} {{form.id}}
+    <table class="invoice-form__table">
+        {%if forloop.first%}
+        <thead class="invoice-form__table-row invoice__table-row--thead">
+            <tr>
+                {% for field in form.visible_fields %}
+                <th><span>{{field.label}}</span></th>
+                {%endfor%}
+            </tr>
+        </thead>
+        {% endif %}
+        <tbody class="invoice-form__table-row invoice-form__table-row--tbody">
+
+            <tr>
+                {% for field in form.visible_fields %}
+                <td>
+                    <!-- {{ field.errors.as_ul }} -->
+                    <span>{% render_field field class="invoice-form__inline-field" %}</span>
+                </td>
+                {% endfor %}
+
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+
+    <div class="invoice-form__row">
+        {{ form.total.errors }}
+        <div class="col-sm-4">{{ form.total }}</div>
+    </div>
+    <button class="btn btn-primary submit" type="submit">Save Invoice</button>
+</form>
+
+
+{% endblock %} {% block old_base_js %}
+
+<script type="text/javascript">
+    console.log('Started')
+    var invoiceCustomer = document.querySelector('#id_customer')
+    const itemSelect = document.querySelector('.invoice-form__inline-field')
+    const inlineForm = document.querySelectorAll('.invoice-form__inline-field')
+    const inlineQty = document.querySelectorAll("[id$='quantity']")
+    const inlineUnit = document.querySelectorAll("[id$='unit_price']")
+    const submitBtn = document.querySelector('.btn')
+    const hooray = (el) => {
+        el.preventDefault()
+        console.log(el.target.value)
+    }
+
+    //console.log(inlineForm)
+
+    const reloadIt = (el) => {
+        el.preventDefault()
+            //location.reload();
+        console.log('submitted')
+        console.log(el.target.value)
+    }
+
+    const totalIt = (el) => {
+        el.preventDefault()
+            //location.reload();
+        const total = 0
+        console.log('total = unit * qty')
+        unit = el.target.value
+        qty = el.target.cells[1] //parentNode.parentNode.parentNode.children.lastChild;
+            //for (q in qty.children) {
+        console.log(qty)
+            //}
+            //;
+
+
+    }
+
+
+    invoiceCustomer.addEventListener('change', hooray);
+
+    inlineUnit.forEach(el => {
+        el.addEventListener('change', totalIt);
+
+    })
+
+    //inlineForm.addEventListener('click', totalIt);
+
+    submitBtn.addEventListener('submit', reloadIt);
+
+    //itemSelect.addEventListener('change', reloadIt);
+
+
+    console.log('Ended')
+</script>
+{% endblock old_base_js %}

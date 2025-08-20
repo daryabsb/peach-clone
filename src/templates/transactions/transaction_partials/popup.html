@@ -1,0 +1,45 @@
+{% load widget_tweaks %}
+<div class="popup_container">
+    <div class="popup_wrapper">	
+          <div class="error">
+              <div class="error_inner">
+                  <strong>Access Denied</strong> | <span>user/password combination wrong</span>
+              </div>
+          </div>
+          <h1 id="logo"><a href="#">websitename Administration Panel</a></h1>
+          <form action="." method="POST">
+              {% csrf_token %}
+              <hr>
+              <fieldset>   
+                  
+                  <div class="formular">
+                      <div class="formular_inner">
+                      
+                      <label>
+                          <strong>Account:</strong>
+                          <span class="input_wrapper">
+                              {% render_field form.account %}
+                          </span>
+                      </label>
+                      <label>
+                          <strong>Customer:</strong>
+                          <span class="input_wrapper">
+                              {% render_field form.customer %}
+                          </span>
+                      </label>
+                      <label class="inline">
+                          <input class="checkbox" name="" type="checkbox" value="" />
+                          remember me on this computer
+                      </label>
+                      <div class="submit_group">
+                          <button class="button light_blue_btn btn-md">Submit</button>
+                          <div><a href="#"><span><span>Back</span></span></a></div>
+                          <div><a href="#"><span><span>Forgot Pass</span></span></a></div>
+                      </div>
+                      
+                      </div>
+                  </div>
+              </fieldset>
+          </form>
+      </div>  
+  </div>
