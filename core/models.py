@@ -561,9 +561,8 @@ DEPRECIATION_CHOICES = [
     (3, 'Supplies')
 ]
 
+
 # D = Depreciation - S = Supplies - P = Prepaid
-
-
 class DSP(models.Model):
     title = models.CharField(max_length=60, null=True, blank=True)
     depreciation_choices = models.PositiveIntegerField(
