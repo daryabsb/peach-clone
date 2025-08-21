@@ -92,6 +92,7 @@ TEMPLATES = [
             PROJECT_PATH + "\\templates",
             PROJECT_PATH + "\\accounts\\templates",
             PROJECT_PATH + "\\company\\templates",
+            PROJECT_PATH + "\\core\\templates",
 
 
             ],
