@@ -91,7 +91,8 @@ class LogoutView(View):
 
 class LoginView(FormView):
     form_class = LoginForm
-    template_name = 'registration/login.html'
+    # template_name = 'registration/login.html'
+    template_name = 'cotton/auth/login.html'
     success_url = '/'
     redirect_field_name = REDIRECT_FIELD_NAME
 
