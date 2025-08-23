@@ -24,9 +24,8 @@ except ValueError:
     else:
         DEBUG = 0
 
-# CELERY_BROKER_DB = config('CELERY_BROKER_DB', default=1)
-# CELERY_RESULT_DB = config('CELERY_RESULT_DB', default=2)
-
+CELERY_BROKER_DB = config('CELERY_BROKER_DB', default=1)
+CELERY_RESULT_DB = config('CELERY_RESULT_DB', default=2)
 
 ALLOWED_HOSTS = ['172.16.10.49']
 ALLOWED_HOST = config("ALLOWED_HOST", cast=str, default="")

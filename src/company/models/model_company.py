@@ -17,6 +17,10 @@ class Company(models.Model):
         'Address', on_delete=models.CASCADE, blank=True, null=True)
     account_type = models.CharField(
         max_length=20,  default='accrual', choices=ACCOUNT_TYPE)
+    is_active = models.BooleanField(default=True)
+    logo = models.ImageField(upload_to='company/logo/', blank=True, null=True)
+
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

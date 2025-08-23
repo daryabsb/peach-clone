@@ -4,7 +4,8 @@ from django.contrib import admin
 
 class CompanyAdmin(admin.ModelAdmin):
 
-    fields = ['title', 'parent_company', 'owners',
+    fields = ['title', 'parent_company', 'owners', 'logo', 'is_active',
+
               'description', 'address', 'account_type', ]
 
     def save_model(self, request, obj, form, change):

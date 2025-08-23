@@ -49,14 +49,37 @@ dz_array = {
         "page_level": {
             "css": {
                 "view": [
-                    # f"{app}/css/pos.css",
+                    f"{app}/css/bootstrap-datetimepicker.min.css",
+                    f"{app}/plugins/select2/css/select2.min.css",
+                    f"{app}/css/dataTables.bootstrap5.min.css",
                 ],
             },
             "js": {
+                "view": [
+                    f"{app}/plugins/select2/js/select2.min.js",
+                    f"{app}/js/moment.min.js",
+                    f"{app}/plugins/daterangepicker/daterangepicker.js",
+                    f"{app}s/js/bootstrap-datetimepicker.min.js",
+                    f"{app}/js/jquery.dataTables.min.js",
+                    f"{app}/js/dataTables.bootstrap5.min.js",
+                ]
                 # "pos_order": [
                     # f"{app}/plugins/interactjs/dist/interact.js",
                 # ],   
             },
-        }
+        },
+        "auth": {
+            "css": [
+                    f"{app}/css/bootstrap.min.css",
+                    f"{app}/plugins/tabler-icons/tabler-icons.min.css",
+                    f"{app}/css/iconsax.css",
+                    f"{app}/css/style.css",
+                ],
+            "js": [
+                    f"{app}/js/jquery-3.7.1.min.js",
+                    f"{app}/js/bootstrap.bundle.min.js",
+                    f"{app}/js/script.js",
+                ],
+            },
     }
 }

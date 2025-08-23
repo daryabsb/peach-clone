@@ -93,13 +93,14 @@ class LoginView(FormView):
     form_class = LoginForm
     # template_name = 'registration/login.html'
     template_name = 'cotton/auth/login.html'
-    success_url = '/'
+    success_url = '/companies/'
     redirect_field_name = REDIRECT_FIELD_NAME
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
+        print("Form submitted: ", request.POST)
 
         return super(LoginView, self).dispatch(request, *args, **kwargs)
 
