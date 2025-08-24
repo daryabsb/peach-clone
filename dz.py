@@ -56,6 +56,8 @@ dz_array = {
             },
             "js": {
                 "view": [
+
+                    f"{app}/js/bootstrap-datetimepicker.min.js",
                     f"{app}/plugins/select2/js/select2.min.js",
                     f"{app}/js/moment.min.js",
                     f"{app}/plugins/daterangepicker/daterangepicker.js",

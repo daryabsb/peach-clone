@@ -1,4 +1,4 @@
-                    <div id="sidebar-menu" class="sidebar-menu">
+                    <div id="sidebar-menu" class="sidebar-menu">{% load static %}
                         <ul>
                             <li>
                                 <ul>
@@ -38,7 +38,8 @@
                         <div class="sidebar-footer">
                             <div class="trial-item bg-white text-center border">
                                 <div class="bg-light p-3 text-center">
-                                    <img src="assets/img/icons/upgrade.svg" alt="img">
+                                    <img src="{% static 'app/img/icons/upgrade.svg' %}" alt="img">
+
                                 </div>
                                 <div class="p-2">
                                     <h6 class="fs-14 fw-semibold mb-1">Upgrade to More</h6>

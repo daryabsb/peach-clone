@@ -215,11 +215,12 @@
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <a href="javascript:void(0);" class="avatar avatar-sm  me-2 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#companies_details">
+                                <a href="{% url 'companies:company-detail' company.id %}" class="avatar avatar-sm  me-2 flex-shrink-0" data-bs-toggle="modal" data-bs-target="#companies_details">
+
                                     <img src="/media/{{ company.logo }}" class="" alt="img">
                                 </a>
                                 <div>
-                                    <h6 class="fs-14 fw-medium mb-0"><a href="javascript:void(0);">{{ company.title }}</a></h6>
+                                    <h6 class="fs-14 fw-medium mb-0"><a href="{% url 'companies:company-detail' company.id %}">{{ company.title }}</a></h6>
                                 </div>
                             </div>
                         </td>
