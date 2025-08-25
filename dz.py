@@ -50,6 +50,7 @@ dz_array = {
             "css": {
                 "view": [
                     f"{app}/css/bootstrap-datetimepicker.min.css",
+                    f"{app}/plugins/daterangepicker/daterangepicker.css",
                     f"{app}/plugins/select2/css/select2.min.css",
                     f"{app}/css/dataTables.bootstrap5.min.css",
                 ],
