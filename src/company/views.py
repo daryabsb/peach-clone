@@ -11,7 +11,7 @@ from django.views.generic import ListView, DetailView
 
 class CompanyList(ListView):
     model = Company
-    template_name = "cotton/company/index.html"
+    template_name = "cotton/company/list.html"
     context_object_name = "companies"
 
 

@@ -1,0 +1,176 @@
+        <!-- Start Filter -->
+        <div class="offcanvas offcanvas-offset offcanvas-end" tabindex="-1" id="customcanvas">
+            <div class="offcanvas-header d-block pb-0">
+                <div class="border-bottom d-flex align-items-center justify-content-between pb-3">
+                    <h6 class="offcanvas-title">Filter</h6>
+                    <button type="button" class="btn-close btn-close-modal custom-btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-x"></i></button>
+                </div>
+            </div>
+            <div class="offcanvas-body pt-3">
+                <form action="#">
+                    <div class="mb-3">
+                        <label class="form-label">Company</label>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-lg bg-light  d-flex align-items-center justify-content-start fs-13 fw-normal border" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true">
+								Select
+							</a>
+                            <div class="dropdown-menu shadow-lg w-100 dropdown-info">
+                                <div class="mb-3">
+                                    <div class="input-icon-start position-relative">
+                                        <span class="input-icon-addon fs-12">
+											<i class="isax isax-search-normal"></i>
+										</span>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search">
+                                    </div>
+                                </div>
+                                <ul class="mb-3">
+                                    <li class="d-flex align-items-center justify-content-between mb-3">
+                                        <label class="d-inline-flex align-items-center text-gray-9">
+                                            <input class="form-check-input select-all m-0 me-2" type="checkbox"> Select All
+                                        </label>
+                                        <a href="javascript:void(0);" class="link-danger fw-medium text-decoration-underline">Reset</a>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-01.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Trend Hive
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-02.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Quick Cart
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-03.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Tech Bazaar
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-04.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Harvest Basket
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-05.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Elite Mart
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <span class="avatar avatar-sm rounded-circle me-2"><img src="assets/img/icons/company-06.svg" class="flex-shrink-0 rounded-circle" alt="img"></span>Prime Mart
+                                        </label>
+                                    </li>
+                                </ul>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-outline-white w-100" id="close-filter">Cancel</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary w-100">Select</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date Range</label>
+                        <div class="input-group position-relative">
+                            <input type="text" class="form-control date-range bookingrange rounded-end">
+                            <span class="input-icon-addon fs-16 text-gray-9">
+								<i class="isax isax-calendar-2"></i>
+							</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Plan</label>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-lg bg-light  d-flex align-items-center justify-content-start fs-13 fw-normal border" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true">
+								Select
+							</a>
+                            <div class="dropdown-menu shadow-lg w-100 dropdown-info">
+                                <div class="mb-3">
+                                    <div class="input-icon-start position-relative">
+                                        <span class="input-icon-addon fs-12">
+											<i class="isax isax-search-normal"></i>
+										</span>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search">
+                                    </div>
+                                </div>
+                                <ul class="mb-3">
+                                    <li class="d-flex align-items-center justify-content-between mb-3">
+                                        <label class="d-inline-flex align-items-center text-gray-9">
+                                            <input class="form-check-input select-all m-0 me-2" type="checkbox"> Select All
+                                        </label>
+                                        <a href="javascript:void(0);" class="link-danger fw-medium text-decoration-underline">Reset</a>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox"> Advanced (Monthly)
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox"> Basic (Yearly)
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox"> Enterprise (Monthly)
+                                        </label>
+                                    </li>
+                                </ul>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-outline-white w-100" id="close-filter1">Cancel</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary w-100">Select</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn btn-lg bg-light  d-flex align-items-center justify-content-start fs-13 fw-normal border" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true">
+								Select
+							</a>
+                            <div class="dropdown-menu shadow-lg w-100 dropdown-info">
+                                <ul class="mb-3">
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <i class="fa-solid fa-circle fs-6 text-success me-1"></i>Active
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item px-2 d-flex align-items-center text-dark">
+                                            <input class="form-check-input m-0 me-2" type="checkbox">
+                                            <i class="fa-solid fa-circle fs-6 text-danger me-1"></i>Inactive
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offcanvas-footer">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="#" class="btn btn-outline-white w-100">Reset</a>
+                            </div>
+                            <div class="col-6">
+                                <button data-bs-dismiss="offcanvas" class="btn btn-primary w-100" id="filter-submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End Filter -->
