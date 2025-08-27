@@ -56,7 +56,9 @@ urlpatterns = [
     path('users/<int:pk>/delete/', views.UserDeleteView.as_view(), name='user_delete'),
     
     # Activity logs
-    path('activity-logs/', views.AdminActivityListView.as_view(), name='activity_logs'),
+    path('activity-logs/', views.AdminActivityListView.as_view(), name='activity_log'),
+    path('activity-list/', views.AdminActivityListView.as_view(),
+         name='activity_list'),
     
     # User management
     path('users/', user_management.UserListView.as_view(), name='user_list'),

@@ -82,7 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'src.custom_admin.middleware.AdminActivityMiddleware',
+    # 'src.custom_admin.middleware.AdminActivityMiddleware',
 ]
 
 ROOT_URLCONF = 'src.urls'

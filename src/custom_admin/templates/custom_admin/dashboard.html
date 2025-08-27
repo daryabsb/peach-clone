@@ -431,7 +431,8 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="{% url 'custom_admin:transaction_list' %}" class="btn btn-sm btn-primary">
+                    {% comment %} <a href="{% url 'custom_admin:transaction_list' %}" class="btn btn-sm btn-primary"> {% endcomment %}
+                    <a href="#" class="btn btn-sm btn-primary">
                         <i class="fas fa-list me-1"></i> View All Transactions
                     </a>
                 </div>
