@@ -26,6 +26,7 @@ urlpatterns = [
     # path("", Home.as_view(), name="home"),
     path("dashboard/", Dashboard.as_view(), name="home"),
     path('admin/', admin.site.urls),
+    path('custom-admin/', include('src.custom_admin.urls', namespace='custom_admin')),
     path("companies/", include("src.company.urls", namespace="companies")),
     # path("transactions/", include("src.transactions.urls", namespace="transactions")),
     # path("statements/", include("src.statement.urls", namespace="statements")),

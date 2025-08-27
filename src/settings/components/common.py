@@ -65,7 +65,7 @@ LOCAL_APPS = [
     'src.company',
     'src.sales',
     'src.purchase',
-
+    'src.custom_admin',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -82,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'src.custom_admin.middleware.AdminActivityMiddleware',
 ]
 
 ROOT_URLCONF = 'src.urls'
@@ -94,8 +95,7 @@ TEMPLATES = [
             PROJECT_PATH + "\\accounts\\templates",
             PROJECT_PATH + "\\company\\templates",
             PROJECT_PATH + "\\core\\templates",
-
-
+            PROJECT_PATH + "\\custom_admin\\templates",
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -105,6 +105,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'custom_context_processor.dz_static',
+                'src.custom_admin.context_processors.custom_admin_context',
             ],
         },
     },

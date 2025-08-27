@@ -15,6 +15,7 @@ base_settings = [
     # 'components/cors.py',
     'components/redis.py',
     'components/secretes.py',
+    'components/custom_admin.py',
     # 'components/pdf.py',
 ]
 

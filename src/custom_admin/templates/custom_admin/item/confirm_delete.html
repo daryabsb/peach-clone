@@ -1,0 +1,31 @@
+{% extends 'custom_admin/base.html' %}
+
+{% block title %}Delete Item - {{ item.name }} - Custom Admin{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2>Delete Item</h2>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <h5><i class="fas fa-exclamation-triangle me-2"></i>Warning!</h5>
+            <p>Are you sure you want to delete the item "{{ item.name }}"?</p>
+            <p>This action cannot be undone and may affect related data.</p>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash me-2"></i>Yes, Delete Item
+            </button>
+            <a href="{% url 'custom_admin:item_list' %}" class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-times me-2"></i>Cancel
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

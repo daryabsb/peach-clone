@@ -1,0 +1,211 @@
+{% extends 'custom_admin/base.html' %}
+
+{% block title %}Activity Log - {{ site_header }}{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Activity Log</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{% url 'custom_admin:dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Activity Log</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Admin Activity Log</h3>
+                        <div class="card-tools">
+                            <form method="get" class="form-inline">
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" name="search" class="form-control float-right" placeholder="Search by user or action" value="{{ request.GET.search|default:'' }}">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>IP Address</th>
+                                    <th>URL</th>
+                                    <th>Method</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for activity in activities %}
+                                <tr>
+                                    <td>{{ activity.timestamp|date:"Y-m-d H:i:s" }}</td>
+                                    <td>
+                                        {% if activity.user %}
+                                            <a href="{% url 'custom_admin:user_detail' activity.user.id %}">
+                                                {{ activity.user.email }}
+                                            </a>
+                                        {% else %}
+                                            Anonymous
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge {% if 'login' in activity.action %}bg-success{% elif 'logout' in activity.action %}bg-warning{% elif 'view' in activity.action %}bg-info{% elif 'create' in activity.action %}bg-primary{% elif 'update' in activity.action %}bg-secondary{% elif 'delete' in activity.action %}bg-danger{% else %}bg-dark{% endif %}">
+                                            {{ activity.action }}
+                                        </span>
+                                    </td>
+                                    <td>{{ activity.ip_address }}</td>
+                                    <td>{{ activity.url }}</td>
+                                    <td>{{ activity.method }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center">No activities found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            {% if activities.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&laquo; First</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ activities.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Previous</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">&laquo; First</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Previous</a>
+                                </li>
+                            {% endif %}
+                            
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{ activities.number }} of {{ activities.paginator.num_pages }}</a>
+                            </li>
+                            
+                            {% if activities.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ activities.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ activities.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Last &raquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Last &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Activity by Action Type</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="actionChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Activity by User</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="userChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Activity by Action Type Chart
+        var actionCtx = document.getElementById('actionChart').getContext('2d');
+        var actionChart = new Chart(actionCtx, {
+            type: 'pie',
+            data: {
+                labels: {{ action_labels|safe }},
+                datasets: [{
+                    data: {{ action_data|safe }},
+                    backgroundColor: [
+                        '#28a745', // login - success
+                        '#ffc107', // logout - warning
+                        '#17a2b8', // view - info
+                        '#007bff', // create - primary
+                        '#6c757d', // update - secondary
+                        '#dc3545', // delete - danger
+                        '#343a40'  // other - dark
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+        
+        // Activity by User Chart
+        var userCtx = document.getElementById('userChart').getContext('2d');
+        var userChart = new Chart(userCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ user_labels|safe }},
+                datasets: [{
+                    label: 'Activities',
+                    data: {{ user_data|safe }},
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'custom_admin/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Edit User{% else %}Add User{% endif %} - {{ site_header }}{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">{% if form.instance.pk %}Edit User{% else %}Add User{% endif %}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{% url 'custom_admin:dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'custom_admin:user_list' %}">Users</a></li>
+                    <li class="breadcrumb-item active">{% if form.instance.pk %}Edit User{% else %}Add User{% endif %}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{% if form.instance.pk %}Edit User: {{ form.instance.email }}{% else %}Add New User{% endif %}</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="id_email" class="form-label">Email</label>
+                                        <input type="email" name="email" id="id_email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" value="{{ form.email.value|default:'' }}" required>
+                                        {% if form.email.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.email.errors|join:", " }}
+                                            </div>
+                                        {% endif %}
+                                        {% if form.email.help_text %}
+                                            <small class="form-text text-muted">{{ form.email.help_text }}</small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="id_first_name" class="form-label">First Name</label>
+                                        <input type="text" name="first_name" id="id_first_name" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" value="{{ form.first_name.value|default:'' }}">
+                                        {% if form.first_name.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.first_name.errors|join:", " }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="id_last_name" class="form-label">Last Name</label>
+                                        <input type="text" name="last_name" id="id_last_name" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" value="{{ form.last_name.value|default:'' }}">
+                                        {% if form.last_name.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ form.last_name.errors|join:", " }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch mt-4">
+                                            <input class="form-check-input" type="checkbox" name="is_active" id="id_is_active" {% if form.is_active.value %}checked{% endif %}>
+                                            <label class="form-check-label" for="id_is_active">Active</label>
+                                            {% if form.is_active.errors %}
+                                                <div class="invalid-feedback">
+                                                    {{ form.is_active.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="is_staff" id="id_is_staff" {% if form.is_staff.value %}checked{% endif %}>
+                                            <label class="form-check-label" for="id_is_staff">Staff Status</label>
+                                            {% if form.is_staff.errors %}
+                                                <div class="invalid-feedback">
+                                                    {{ form.is_staff.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            <small class="form-text text-muted d-block">Designates whether the user can log into the admin site.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.non_field_errors|join:", " }}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> {% if form.instance.pk %}Update{% else %}Create{% endif %} User
+                                </button>
+                                <a href="{% if form.instance.pk %}{% url 'custom_admin:user_detail' form.instance.pk %}{% else %}{% url 'custom_admin:user_list' %}{% endif %}" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
