@@ -125,7 +125,7 @@ class AdminRequiredMixin(AdminPermissionMixin):
 
 class AdminDashboardView(AdminRequiredMixin, TemplateView):
     """Admin dashboard view"""
-    template_name = 'custom_admin/dashboard.html'
+    template_name = 'cotton/custom_admin/dashboard/index.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

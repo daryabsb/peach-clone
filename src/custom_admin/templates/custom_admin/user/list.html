@@ -8,7 +8,7 @@
         <h2>Users</h2>
     </div>
     <div class="col-md-6 text-end">
-        <a href="{% url 'custom_admin:user_create' %}" class="btn btn-primary">
+        <a href="{% url 'custom_admin:user_add' %}" class="btn btn-primary">
             <i class="fas fa-plus me-2"></i>Add User
         </a>
     </div>
@@ -48,7 +48,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{% url 'custom_admin:user_update' user.id %}" class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="tooltip" title="Edit">
+                                    <a href="{% url 'custom_admin:user_edit' user.id %}" class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="tooltip" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{% url 'custom_admin:user_delete' user.id %}" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
@@ -64,7 +64,7 @@
             <div class="text-center py-5">
                 <i class="fas fa-users fa-3x text-muted mb-3"></i>
                 <p>No users found.</p>
-                <a href="{% url 'custom_admin:user_create' %}" class="btn btn-primary">
+                <a href="{% url 'custom_admin:user_add' %}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Add User
                 </a>
             </div>

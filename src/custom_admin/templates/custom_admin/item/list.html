@@ -8,7 +8,7 @@
         <h2>Items</h2>
     </div>
     <div class="col-md-6 text-end">
-        <a href="{% url 'custom_admin:item_create' %}" class="btn btn-primary">
+        <a href="{% url 'custom_admin:item_add' %}" class="btn btn-primary">
             <i class="fas fa-plus me-2"></i>Add Item
         </a>
     </div>
@@ -42,7 +42,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{% url 'custom_admin:item_update' item.id %}" class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="tooltip" title="Edit">
+                                    <a href="{% url 'custom_admin:item_edit' item.id %}" class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="tooltip" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{% url 'custom_admin:item_delete' item.id %}" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
@@ -58,7 +58,7 @@
             <div class="text-center py-5">
                 <i class="fas fa-box fa-3x text-muted mb-3"></i>
                 <p>No items found.</p>
-                <a href="{% url 'custom_admin:item_create' %}" class="btn btn-primary">
+                <a href="{% url 'custom_admin:item_add' %}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Add Item
                 </a>
             </div>
