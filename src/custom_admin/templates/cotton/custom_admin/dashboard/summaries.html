@@ -1,9 +1,9 @@
  <!-- start row -->
                 <div class="row">
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-xl-3 d-flex">
                         <div class="card rounded-3 shadow-none flex-fill w-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between pb-3 border-bottom mb-3">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-3">
                                     <h6 class="fs-16 fw-semibold text-truncate">Sales</h6>
                                     <div class="dropdown flex-shrink-0">
                                         <a href="javascript:void(0);" class="btn btn-light fw-normal d-inline-flex align-items-center border" data-bs-toggle="dropdown" aria-expanded="false">This Month<i class="isax isax-calendar-2 ms-2 text-gray-9"></i></a>
@@ -20,7 +20,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="bg-light rounded-3 p-3">
+                                <div class="bg-light rounded-3 p-2">
                                     <div class="d-flex align-items-center mb-2 justify-content-between gap-2 flex-wrap flex-md-nowrap">
                                         <div class="d-flex align-items-center">
                                            
@@ -37,11 +37,11 @@
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div>
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-xl-3 d-flex">
                         <div class="card rounded-3 shadow-none flex-fill w-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between pb-3 border-bottom mb-3">
-                                    <h6 class="fs-16 fw-semibold text-truncate">Top Company with Plan</h6>
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-3">
+                                    <h6 class="fs-16 fw-semibold text-truncate">Purchases</h6>
                                     <div class="dropdown flex-shrink-0">
                                         <a href="javascript:void(0);" class="btn btn-light border fw-normal d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
                                     Today<i class="isax isax-calendar-2 ms-2 text-gray-9"></i>
@@ -59,29 +59,26 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="bg-light rounded-3 p-3">
+                                <div class="bg-light rounded-3 p-2">
                                     <div class="d-flex align-items-center mb-2 justify-content-between gap-2 flex-wrap flex-lg-nowrap">
                                         <div class="d-flex align-items-center">
-                                            <span class="avatar avatar-lg bg-white rounded-3">
-                                            <img src="assets/img/icons/company-logo-02.svg" alt="img" class="rounded-3 img-fluid w-auto h-auto">
-                                        </span>
                                             <div class="ms-2">
-                                                <p class="mb-1 fw-medium text-gray-9">Tech Bazaar</p>
-                                                <p class="mb-0 text-truncate"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26544344475c47475466435e474b564a430845494b">[email&#160;protected]</a></p>
+                                                <p class="mb-1 fw-medium text-gray-9">Enterprise (Monthly)</p>
+                                                <p class="mb-0">Total Purchase: {{ purchase_count }}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-end">
-                                        <p class="text-gray-9 flex-shrink-0">10 Plans</p>
+                                        <p class="text-gray-9">$549.00</p>
                                     </div> 
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div>
-                    <div class="col-xl-4 d-flex">
+                    <div class="col-xl-3 d-flex">
                         <div class="card rounded-3 shadow-none flex-fill w-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between pb-3 border-bottom mb-3">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-3">
                                     <h6 class="fs-16 fw-semibold text-truncate">Most Domains</h6>
                                     <div class="dropdown flex-shrink-0">
                                         <a href="javascript:void(0);" class="btn btn-light border fw-normal d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">This Week<i class="isax isax-calendar-2 ms-2 text-gray-9"></i></a>
@@ -98,7 +95,46 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="bg-light rounded-3 p-3">
+                                <div class="bg-light rounded-3 p-2">
+                                    <div class="d-flex align-items-center mb-2 justify-content-between gap-2 flex-wrap">
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-lg bg-white rounded-3">
+                                            <img src="assets/img/icons/company-logo-03.svg" alt="img" class="rounded-3 img-fluid w-auto h-auto">
+                                        </span>
+                                            <div class="ms-2">
+                                                <p class="mb-1 fw-medium text-gray-9">Quick Cart</p>
+                                                <p class="mb-0">qc.example.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <p class="text-gray-9">150 Users</p>
+                                    </div> 
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div>
+                    <div class="col-xl-3 d-flex">
+                        <div class="card rounded-3 shadow-none flex-fill w-100">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-3">
+                                    <h6 class="fs-16 fw-semibold text-truncate">Most Domains</h6>
+                                    <div class="dropdown flex-shrink-0">
+                                        <a href="javascript:void(0);" class="btn btn-light border fw-normal d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">This Week<i class="isax isax-calendar-2 ms-2 text-gray-9"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0);">This Week</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0);">This Year</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bg-light rounded-3 p-2">
                                     <div class="d-flex align-items-center mb-2 justify-content-between gap-2 flex-wrap">
                                         <div class="d-flex align-items-center">
                                             <span class="avatar avatar-lg bg-white rounded-3">

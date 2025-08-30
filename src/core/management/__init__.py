@@ -165,10 +165,10 @@ def maintain_model_initial_data(**kwargs):
             'root@root.com', 'root')
         super_user.name = 'Super Admin'
         super_user.save()
-    admin_user = user_model.objects.get(id=1)
+    # admin_user = user_model.objects.get(id=1)
 
-    admin_user_company = Company.objects.filter(
-        user=admin_user).first()
+    # admin_user_company = Company.objects.filter(
+    #     user=admin_user).first()
 
     # admin_user_store = Store.objects.filter(
     #     user=admin_user).first()
@@ -177,13 +177,13 @@ def maintain_model_initial_data(**kwargs):
     # if not default_logo:
     #     default_logo = Logo.objects.create()
 
-    if not admin_user_company: # and not admin_user_store:
-        admin_company = Company.objects.create(
-            user=admin_user,
-            title='Default_Admin_Company',
-            # logo=default_logo,
-            # is_default=True
-        )
+    # if not admin_user_company: # and not admin_user_store:
+    #     admin_company = Company.objects.create(
+    #         user=admin_user,
+    #         title='Default_Admin_Company',
+    #         # logo=default_logo,
+    #         # is_default=True
+    #     )
         # Store.objects.create(
         #     user=admin_user,
         #     company=admin_company,

@@ -27,7 +27,7 @@ class CompanyAdmin(admin.ModelAdmin):
                 company.title = com['title']
                 company.parent_company = com['parent_company']
                 company.description = com['description']
-                company.address = com['address']
+                # company.address = com['address']
                 company.account_type = com['account_type']
                 company.save(force_update=True)
                 company.owners.set(com['owners'])

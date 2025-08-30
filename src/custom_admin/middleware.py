@@ -1,6 +1,7 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.contrib.auth.models import AnonymousUser
 from django.urls import resolve
+from asgiref.sync import sync_to_async
 from django.contrib.contenttypes.models import ContentType
 from .models import AdminActivity
 import re
@@ -17,6 +18,12 @@ class AdminActivityMiddleware(MiddlewareMixin):
             r'^/static/.*$',
             r'^/media/.*$',
         ]
+
+    def __call__(self, request):
+        return self.get_response(request)
+
+    async def __call__(self, request):
+        return await self.get_response(request)
     
     def should_track(self, path):
         """Check if the request path should be tracked"""
@@ -25,7 +32,7 @@ class AdminActivityMiddleware(MiddlewareMixin):
                 return False
         return path.startswith('/custom-admin/')
     
-    def process_view(self, request, view_func, view_args, view_kwargs):
+    async def process_view(self, request, view_func, view_args, view_kwargs):
         """Process the view and log activity if needed"""
         if not self.should_track(request.path):
             return None
@@ -35,7 +42,7 @@ class AdminActivityMiddleware(MiddlewareMixin):
             
         # Get the resolved URL name
         try:
-            resolver_match = resolve(request.path)
+            resolver_match = await sync_to_async(resolve)(request.path)
             url_name = resolver_match.url_name
             namespace = resolver_match.namespace
             
@@ -77,13 +84,13 @@ class AdminActivityMiddleware(MiddlewareMixin):
                     
                     if model_name in app_models:
                         app_label = app_models[model_name]
-                        content_type = ContentType.objects.get(app_label=app_label, model=model_name)
+                        content_type = await sync_to_async(ContentType.objects.get)(app_label=app_label, model=model_name)
                         object_id = view_kwargs['pk']
                 except (ContentType.DoesNotExist, KeyError):
                     pass
             
             # Log the activity
-            AdminActivity.objects.create(
+            await sync_to_async(AdminActivity.objects.create)(
                 user=request.user,
                 action=action,
                 content_type=content_type,
