@@ -34,6 +34,24 @@ def getdata(json_data, args):
 register.filter('getdata', getdata)
 
 
+def get_menu(array, request):
+    try:
+        # myfunc, myargs, mykwargs = resolve(request)
+
+        print("user: ", request.user)
+        print("path: ", request.path)
+        # print("mykwargs: ", mykwargs)
+
+    except Resolver404:
+        logger.debug("something went wrong", feature="f-strings")
+        pass
+    return ["companies", "Owners", "Users", "Roles"]
+
+
+register.filter('get_menu', get_menu)
+
+
+
 def split(val, args):
     return val.split(args)
 
