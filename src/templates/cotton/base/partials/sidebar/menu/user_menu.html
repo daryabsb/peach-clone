@@ -4,9 +4,9 @@
                                 <ul>
 
                                     {% for menu in dz_array.app.page_level.css|get_menu:request %}
-                                    <li>
+                                    <li class="{% if menu in request.path %}active{% endif %}">
                                         <a href="super-admin-dashboard.html">
-                                            <i class="isax isax-home-25 {% if menu in request.path %}text-success{% else %}text-dark{% endif %}"
+                                            <i class="isax isax-home-25 text-dark"
                                             ></i><span>{{menu}}</span>
                                         </a>
                                     </li>
