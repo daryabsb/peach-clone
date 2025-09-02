@@ -52,17 +52,19 @@ THIRD_PARTY_APPS = [
     'django_celery_results',
     'django_filters',
     'fontawesome_5',
+    'mptt',
 ]
 
 LOCAL_APPS = [
     'src._utils',
     'src.accounts',
+    'src.company',
+    'src.configurations',
     'src.core',
     'src.finances',
     'src.users',
     'src.transactions',
     'src.statement',
-    'src.company',
     'src.sales',
     'src.purchase',
     'src.custom_admin',

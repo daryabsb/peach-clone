@@ -32,7 +32,7 @@ class CompanyAdmin(admin.ModelAdmin):
                 company.save(force_update=True)
                 company.owners.set(com['owners'])
                 company.save()
-                company.logo = com['logo']
+                # company.logo = com['logo']
                 company.save()
                 company.is_active = com['is_active']
                 company.save()
